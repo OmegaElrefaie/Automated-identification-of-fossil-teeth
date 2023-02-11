@@ -1,7 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
-import 'package:graduation_project/view/user/screens/navbar.dart';
+import 'package:graduation_project/view/user/screens/login.dart';
+import 'package:graduation_project/view/user/screens/startpage.dart';
+import 'package:graduation_project/view/user/screens/signup.dart';
 import 'view/user/screens/home.dart';
 import 'view/user/screens/library.dart';
 
@@ -9,7 +11,9 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const StartPage();
+        return const
+            // Login();
+            SafeArea(child: StartPage());
       }),
   GoRoute(
       path: '/displayresults',
@@ -20,5 +24,10 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/library',
       builder: (BuildContext context, GoRouterState state) {
         return const Library();
+      }),
+  GoRoute(
+      path: '/signup',
+      builder: (BuildContext context, GoRouterState state) {
+        return const Signup();
       })
 ]);
