@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'routes.dart';
 import 'constants.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
