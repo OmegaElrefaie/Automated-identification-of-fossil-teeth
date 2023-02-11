@@ -18,7 +18,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primaryColor: kPrimaryColor),
+      theme: ThemeData(
+        colorScheme: ThemeData().colorScheme.copyWith(
+              primary: kPrimaryColor,
+            ),
+      ),
     );
   }
 }
