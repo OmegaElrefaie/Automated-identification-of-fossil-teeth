@@ -1,5 +1,6 @@
 import 'package:graduation_project/view/user/screens/home.dart';
 import 'package:graduation_project/view/user/screens/library.dart';
+import 'package:graduation_project/view/user/widgets/drawer.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
@@ -69,32 +70,39 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      screens: _buildScreen(),
-      items: _navBarItem(),
-      confineInSafeArea: true,
-      resizeToAvoidBottomInset: true,
-      hideNavigationBarWhenKeyboardShows: true,
-      popAllScreensOnTapOfSelectedTab: true,
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 100),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: kDarkColor,
       ),
-      backgroundColor: Colors.white,
-      decoration: const NavBarDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: Color.fromARGB(29, 0, 0, 0),
-                blurRadius: 9.0,
-                spreadRadius: 0,
-                offset: Offset(0, 0))
-          ],
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-      navBarStyle: NavBarStyle.style7,
+      drawer: const SideDrawer(),
+      body: PersistentTabView(
+        context,
+        screens: _buildScreen(),
+        items: _navBarItem(),
+        confineInSafeArea: true,
+        resizeToAvoidBottomInset: true,
+        hideNavigationBarWhenKeyboardShows: true,
+        popAllScreensOnTapOfSelectedTab: true,
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          // Screen transition animation on change of selected tab.
+          animateTabTransition: true,
+          curve: Curves.ease,
+          duration: Duration(milliseconds: 100),
+        ),
+        backgroundColor: Colors.white,
+        decoration: const NavBarDecoration(
+            boxShadow: [
+              BoxShadow(
+                  color: Color.fromARGB(29, 0, 0, 0),
+                  blurRadius: 9.0,
+                  spreadRadius: 0,
+                  offset: Offset(0, 0))
+            ],
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        navBarStyle: NavBarStyle.style7,
+      ),
     );
   }
 }
