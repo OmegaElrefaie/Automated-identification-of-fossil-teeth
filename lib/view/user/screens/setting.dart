@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/view/user/screens/changepassword.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
+import '../../../constants.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -18,12 +19,20 @@ class _SettingState extends State<Setting> {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
-              const SizedBox(height: 30),
-                const  Text("Settings",
-                      style: TextStyle(
-                          fontFamily: 'Inter',fontSize: 30,
-                          color: Color.fromARGB(255, 157, 97, 0)),
-                          ),
+               Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Column(
+          children: const [
+            Center(
+              child: Text(
+                'Setting',
+                style: TextStyle(
+                    color: kTextColor, fontFamily: 'Inter', fontSize: 30),
+              ),
+            ),
+          ],
+        ),
+      ),
             Row(
                      mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -52,14 +61,6 @@ class _SettingState extends State<Setting> {
                 )
               ],
                ),   
-                      
-            //      const Padding(
-            //      padding: EdgeInsets.only(right: 250),
-            //      child: CircleAvatar(
-            //       minRadius: 40,
-            //      backgroundImage: AssetImage('assets/images/asset4.png'),
-            //    ),
-            //  ),
             const Divider(height: 20, thickness: 1),
              Container(
               padding: const EdgeInsets.only(top: 0, left: 20),
