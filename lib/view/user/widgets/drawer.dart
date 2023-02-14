@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/view/user/screens/facts.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({super.key});
@@ -66,8 +68,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 0;
                 });
-
-                Navigator.pushReplacementNamed(context, "/page0");
+               context.go('/facts');
               }),
           _createDrawerItem(
               icon: Icons.history,
@@ -78,7 +79,7 @@ class _SideDrawerState extends State<SideDrawer> {
                   selectedIndex = 1;
                 });
 
-                Navigator.pushReplacementNamed(context, "/page1");
+               context.go('/question');
               }),
           _createDrawerItem(
               icon: Icons.help,
