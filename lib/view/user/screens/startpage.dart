@@ -1,5 +1,6 @@
 import 'package:graduation_project/view/user/screens/home.dart';
 import 'package:graduation_project/view/user/screens/library.dart';
+import 'package:graduation_project/view/user/screens/setting.dart';
 import 'package:graduation_project/view/user/widgets/drawer.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _StartPageState extends State<StartPage> {
       const SafeArea(child: HomePage()),
       const SafeArea(child: Library()),
       const SafeArea(child: Text('Community')),
-      const SafeArea(child: Text('Settings')),
+      const SafeArea(child: Setting()),
     ];
   }
 
