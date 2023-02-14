@@ -18,33 +18,41 @@ class _SettingState extends State<Setting> {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
-            Row(
-                children: const [
-                  SizedBox(height: 50),
-                  Text("Settings",
+              const SizedBox(height: 30),
+                const  Text("Settings",
                       style: TextStyle(
-                          fontFamily: 'Inter',fontSize: 30,color: Color.fromARGB(255, 157, 97, 0),)),
-                ]),   
-                       Container(
-                       margin: const EdgeInsets.only(right: 250,top: 10),
-                       height: 60,
-                       width: 100,
-                       decoration: const BoxDecoration(
-                       image: DecorationImage(
-                           image: AssetImage("assets/images/asset4.png"),
-                           fit: BoxFit.contain),
-                      ),),
-                      const Padding(
-                       padding: EdgeInsets.fromLTRB(100.0, 0.0, 0.0, 10.0),
-                       child: Text(
+                          fontFamily: 'Inter',fontSize: 30,
+                          color: Color.fromARGB(255, 157, 97, 0)),
+                          ),
+            Row(
+                     mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage('assets/images/asset4.png'),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(top: 0),
+                      child: Text(
                         'Yosr Gamal',
                         style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Inter',
-                            fontSize: 17,
+                            fontSize: 15,
                             fontWeight: FontWeight.w700),
                       ),
                     ),
+                  ],
+                )
+              ],
+               ),   
+                      
             //      const Padding(
             //      padding: EdgeInsets.only(right: 250),
             //      child: CircleAvatar(
