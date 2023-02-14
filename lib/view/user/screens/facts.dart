@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../constants.dart';
+
 class Fact extends StatefulWidget {
   const Fact({super.key});
   @override
@@ -25,7 +27,7 @@ class _FactState extends State<Fact> {
               },
               child: const Icon(
                Icons.arrow_back,
-                color: Color.fromARGB(255, 207, 111, 2),
+                color: kTextColor,
                 
               )),
         ),
@@ -36,7 +38,7 @@ class _FactState extends State<Fact> {
                   height: 1.5,
                   fontFamily: 'Inter',
                   fontSize: 35.0,
-                  color: Color.fromARGB(255, 204, 122, 0)),
+                  color: kTextColor),
                 
             ),
             fact1(),
