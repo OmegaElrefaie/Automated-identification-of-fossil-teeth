@@ -90,7 +90,7 @@ class _FactState extends State<Fact> {
               children: [
                 Ink.image(
                   image: const NetworkImage(
-                    'https://cdnimgen.vietnamplus.vn/uploaded/kg1/2022_03_25/sand1.jpg',
+                    'https://image.cnbcfm.com/api/v1/image/106849039-1614858338482-gettyimages-634465411-dsgf001080.jpeg?v=1614858433&w=1600&h=900',
                   ),
 
                   height: 240,
