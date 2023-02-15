@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/view/Admin/screens/homeadmin.dart';
+import 'package:graduation_project/view/Admin/screens/homeadmin.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
 import 'package:graduation_project/view/user/screens/login.dart';
@@ -13,9 +15,9 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const
+        return
             // Login();
-            SafeArea(child: StartPage());
+            Headerr();
       }),
   GoRoute(
       path: '/displayresults',
