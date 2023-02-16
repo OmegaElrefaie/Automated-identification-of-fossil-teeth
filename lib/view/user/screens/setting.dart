@@ -119,10 +119,10 @@ class _SettingState extends State<Setting> {
   GestureDetector BuildAccountOption(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        if (title == 'Edit Profile') {
+        if (title == 'Edit profile') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const EditProfile()),
+            MaterialPageRoute(builder: (context) =>  EditProfile()),
           );
         } 
         else if (title == 'Change password') {
