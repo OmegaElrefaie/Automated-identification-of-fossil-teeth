@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/view/user/screens/changepassword.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
+import '../../../constants.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -18,40 +19,48 @@ class _SettingState extends State<Setting> {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
+               Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Column(
+          children: const [
+            Center(
+              child: Text(
+                'Setting',
+                style: TextStyle(
+                    color: kTextColor, fontFamily: 'Inter', fontSize: 30),
+              ),
+            ),
+          ],
+        ),
+      ),
             Row(
-                children: const [
-                  SizedBox(height: 50),
-                  Text("Settings",
-                      style: TextStyle(
-                          fontFamily: 'Inter',fontSize: 30,color: Color.fromARGB(255, 157, 97, 0),)),
-                ]),   
-                       Container(
-                       margin: const EdgeInsets.only(right: 250,top: 10),
-                       height: 60,
-                       width: 100,
-                       decoration: const BoxDecoration(
-                       image: DecorationImage(
-                           image: AssetImage("assets/images/asset4.png"),
-                           fit: BoxFit.contain),
-                      ),),
-                      const Padding(
-                       padding: EdgeInsets.fromLTRB(100.0, 0.0, 0.0, 10.0),
-                       child: Text(
+                     mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage('assets/images/asset4.png'),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(top: 0),
+                      child: Text(
                         'Yosr Gamal',
                         style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Inter',
-                            fontSize: 17,
+                            fontSize: 15,
                             fontWeight: FontWeight.w700),
                       ),
                     ),
-            //      const Padding(
-            //      padding: EdgeInsets.only(right: 250),
-            //      child: CircleAvatar(
-            //       minRadius: 40,
-            //      backgroundImage: AssetImage('assets/images/asset4.png'),
-            //    ),
-            //  ),
+                  ],
+                )
+              ],
+               ),   
             const Divider(height: 20, thickness: 1),
              Container(
               padding: const EdgeInsets.only(top: 0, left: 20),
@@ -110,10 +119,10 @@ class _SettingState extends State<Setting> {
   GestureDetector BuildAccountOption(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        if (title == 'Edit Profile') {
+        if (title == 'Edit profile') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const EditProfile()),
+            MaterialPageRoute(builder: (context) =>  EditProfile()),
           );
         } 
         else if (title == 'Change password') {

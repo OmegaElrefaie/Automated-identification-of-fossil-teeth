@@ -1,54 +1,113 @@
 import 'package:flutter/material.dart';
-
-
-// import 'footer_edit_profile.dart';
-// import 'header_edit_profile.dart';
-
+import 'package:graduation_project/constants.dart';
+import 'package:image_picker/image_picker.dart';
+const double profileHeight = 155;
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
-
   @override
   State<EditProfile> createState() => _EditProfileState();
 }
-
 class _EditProfileState extends State<EditProfile> {
+  final _picker = ImagePicker();
+  Future<void> _openImagePicker() async {
+    final XFile? pickedImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+      });
+    }
+  }
+  // ignore: non_constant_identifier_names
   bool isHiddenPassword_TFF1 = true;
-
-  final _formKey = GlobalKey<FormState>();
-  final newNickname = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.topCenter,
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Stack(
         children: [
-          //EditProfileHeader(),
-          Positioned(
+          Container(
+            height: size.height * 0.25,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(47),
+                    bottomRight: Radius.circular(47)),
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [kDarkColor, kLightColor])),
+          ),
+       Positioned(
+          top: 20,
+          left: -20,
+          child: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(left: 50),
+                child: Text(
+                  'Settings',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontFamily: 'Inter',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )),
+        ),
+           Positioned(
+          top: 20,
+          left: 240,
+          child: InkWell(
+              onTap: () {},
+              child: const Padding(
+                padding: EdgeInsets.only(left: 50),
+                child: Text(
+                  'Logout',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontFamily: 'Inter',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )),
+        ),
+         Positioned(top: 90, right: 120, child: buildProfileImage()),
+          Padding(
+            padding: const EdgeInsets.only(left: 240, top: 170),
+            child: FloatingActionButton(
+                  onPressed: () {
+                    _openImagePicker();
+                  },
+                  tooltip: 'Select Image',
+                  backgroundColor: Colors.white,
+                  child: const Icon(Icons.photo_camera,
+                      size: 25, color: kPrimaryColor)),
+          ),
+         Positioned(
               child: Row(
             children: const [
               SizedBox(height: 100), 
-              SizedBox(width: 100), 
+              SizedBox(width: 100),
             ],
           )),
           Container(
-            margin: const EdgeInsets.only(top: 80),
-            child: const Text('Edit Profile',
+            margin: const EdgeInsets.only(top: 255, left: 90),
+            child: const Text('Change Avatar',
                 style: TextStyle(
                   fontSize: 30,
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: Color.fromARGB(255, 11, 11, 11),
                   fontFamily: 'Inter',
-                  fontWeight: FontWeight.bold,
                 )),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 380),
+            Container(
+            margin: const EdgeInsets.only(top: 300),
             child: Padding(
-              padding:const EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               child: TextFormField(
-                controller: newNickname,
+               // controller: newNickname,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Please enter some text';
@@ -61,15 +120,15 @@ class _EditProfileState extends State<EditProfile> {
                     borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  hintText: 'New Username',
+                  hintText: 'Change Nickname',
                 ),
               ),
             ),
           ),
-          Container(
-            margin:const EdgeInsets.only(top: 450),
+            Container(
+            margin: const EdgeInsets.only(top: 380),
             child: Padding(
-              padding:const EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
               child: TextFormField(
                 obscureText: isHiddenPassword_TFF1,
                 validator: (value) {
@@ -94,37 +153,24 @@ class _EditProfileState extends State<EditProfile> {
                         ? Icons.visibility_off
                         : Icons.visibility),
                   ),
-                  hintText: 'Enter Password',
+                  hintText: 'Confirm Password',
                 ),
               ),
             ),
           ),
-          // EditProfileFooter(
-          //   newNickname: newNickname,
-          //   formKey: _formKey,
-          // ),
-          // Positioned(
-          //   top: 640,
-          //   left: 0,
-          //   child: Image.asset('assets/images/Plant down left.png'),
-          // ),
-          Container(
-            margin: const EdgeInsets.only(top: 600),
-            width: 170,
-            height: 50,
+           Container(
+            margin: const EdgeInsets.only(top: 500, left: 115),
+            width: 160,
+            height: 55,
             child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  //when valiadted
-                }
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 // ignore: deprecated_member_use
-                primary: const Color(0XFF588157),
+                primary: const Color.fromRGBO(216, 139, 74, 1),
                 // ignore: deprecated_member_use
                 onPrimary: Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+                    borderRadius: BorderRadius.circular(35)),
               ),
               child: const Text(
                 'Save',
@@ -137,3 +183,23 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 }
+Widget buildProfileImage() => Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(blurRadius: 10, color: Color.fromARGB(255, 253, 245, 245), spreadRadius: 10)
+        ],
+      ),
+      child: const CircleAvatar(
+        radius: profileHeight / 2,
+        backgroundColor: Color.fromARGB(255, 231, 220, 220),
+        backgroundImage: AssetImage(
+          'assets/images/asset4.png',
+        ),
+      ),
+    );
+// ignore: non_constant_identifier_names
+Widget Background() => const CircleAvatar(
+    radius: 70, backgroundColor: Color.fromRGBO(255, 255, 255, 0.863));
+// ignore: non_constant_identifier_names

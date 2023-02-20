@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../../constants.dart';
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
 
@@ -45,7 +47,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               child: const Text(
                 'Settings',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 185, 117, 0),
+                    color: kTextColor,
                     fontFamily: 'Inter',
                     fontSize: 18,),
               )),
@@ -54,7 +56,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   const Text('Change Password',
                   style: TextStyle(
                   fontSize: 30,
-                  color: Color.fromARGB(255, 185, 106, 2),
+                  color: kTextColor,
                   fontFamily: 'Inter',)),
         const SizedBox(height: 35),
                 TextFormField(
@@ -159,7 +161,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                     style: ElevatedButton.styleFrom(
                       padding:const EdgeInsets.symmetric(
                           horizontal: 50.0, vertical: 15.0),
-                      primary: Color.fromARGB(255, 220, 110, 0),
+                      // ignore: deprecated_member_use
+                      primary: const Color.fromRGBO(216, 139, 74, 1),
                       shape: const StadiumBorder(),
                     ),
                     child:const Text(
@@ -175,7 +178,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         child: const Text(
                             'Forgot your password?',
                         style: TextStyle(
-                        color: Color.fromARGB(255, 167, 89, 0),
+                        color: kTextColor,
                         fontSize: 17,
                         fontFamily: 'Inter',),
                     )),

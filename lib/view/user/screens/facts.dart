@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../constants.dart';
+
 class Fact extends StatefulWidget {
   const Fact({super.key});
   @override
@@ -25,7 +27,7 @@ class _FactState extends State<Fact> {
               },
               child: const Icon(
                Icons.arrow_back,
-                color: Color.fromARGB(255, 207, 111, 2),
+                color: kTextColor,
                 
               )),
         ),
@@ -36,7 +38,7 @@ class _FactState extends State<Fact> {
                   height: 1.5,
                   fontFamily: 'Inter',
                   fontSize: 35.0,
-                  color: Color.fromARGB(255, 204, 122, 0)),
+                  color: kTextColor),
                 
             ),
             fact1(),
@@ -88,7 +90,7 @@ class _FactState extends State<Fact> {
               children: [
                 Ink.image(
                   image: const NetworkImage(
-                    'https://cdnimgen.vietnamplus.vn/uploaded/kg1/2022_03_25/sand1.jpg',
+                    'https://image.cnbcfm.com/api/v1/image/106849039-1614858338482-gettyimages-634465411-dsgf001080.jpeg?v=1614858433&w=1600&h=900',
                   ),
 
                   height: 240,

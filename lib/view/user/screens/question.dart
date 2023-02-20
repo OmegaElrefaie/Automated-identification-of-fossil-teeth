@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../constants.dart';
 
 class Question extends StatefulWidget {
   const Question({super.key});
@@ -25,7 +26,7 @@ class _QuestionState extends State<Question> {
               },
               child: const Icon(
                Icons.arrow_back,
-                color: Color.fromARGB(255, 207, 111, 2),
+               color: kTextColor,
                 
               )),
         ),
@@ -36,14 +37,41 @@ class _QuestionState extends State<Question> {
                   height: 2.5,
                   fontFamily: 'Inter',
                   fontSize: 30.0,
-                  color: Color.fromARGB(255, 204, 122, 0)),
-                
+                  color: kTextColor), 
             ),
-           
-          ],
-          
-        ), 
+            const SizedBox(height: 35), 
+          SizedBox( 
+                  width: MediaQuery.of(context).size.width,
+                  height: 80,
+                  child: ElevatedButton(
+                  onPressed: () {},
+                   style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromARGB(255, 251, 252, 251),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                  child: Row(
+                     mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [ 
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: AssetImage('assets/images/asset4.png'),
+                  ),
+                   Text(
+                 "Dr. Hesham Sallam",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 20.0,
+                      color: Color.fromARGB(255, 0, 0, 0)),
+                ),    
+               ],
+             ),
+           ),
+          ),
+        ],   
+      ), 
     );
   }
-
 }
