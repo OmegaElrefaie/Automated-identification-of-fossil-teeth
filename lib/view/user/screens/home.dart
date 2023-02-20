@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/view/user/screens/startpage.dart';
-import 'package:graduation_project/view/user/widgets/drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -52,6 +50,18 @@ class HomePage extends StatelessWidget {
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: const Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Text(
+                        'The first dinosaur fossil was found around 1815',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Inter',
+                            fontSize: 15),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 80,
