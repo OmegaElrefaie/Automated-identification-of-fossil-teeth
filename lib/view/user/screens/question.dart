@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/view/user/screens/question2.dart';
 import '../../../constants.dart';
 
 class Question extends StatefulWidget {
@@ -44,7 +45,9 @@ class _QuestionState extends State<Question> {
                   width: MediaQuery.of(context).size.width,
                   height: 80,
                   child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go('/question2');
+                  },
                    style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: const Color.fromARGB(255, 251, 252, 251),
@@ -56,16 +59,20 @@ class _QuestionState extends State<Question> {
                   children: const [ 
                   CircleAvatar(
                     radius: 30,
-                    backgroundImage: AssetImage('assets/images/asset4.png'),
+                    backgroundImage: AssetImage('assets/images/asset1.png'),
                   ),
-                   Text(
+                
+                   Padding(
+                     padding: EdgeInsets.all(8.0),
+                     child: Text(
                  "Dr. Hesham Sallam",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 20.0,
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                ),    
+                        fontFamily: 'Inter',
+                        fontSize: 20.0,
+                        color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+                   ),    
                ],
              ),
            ),
