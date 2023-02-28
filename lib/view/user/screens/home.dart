@@ -27,7 +27,9 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 270),
             child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () { 
+                  context.go('/userprofile');
+                  },
                 backgroundColor: kPrimaryColor,
                 child: const CircleAvatar(
                   radius: 50,
