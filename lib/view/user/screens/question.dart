@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graduation_project/view/user/screens/question2.dart';
 import '../../../constants.dart';
 
 class Question extends StatefulWidget {

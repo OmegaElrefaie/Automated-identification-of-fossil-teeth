@@ -46,16 +46,13 @@ class _SettingState extends State<Setting> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Padding(
-                      padding: EdgeInsets.only(top: 0),
-                      child: Text(
-                        'Yosr Gamal',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Inter',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700),
-                      ),
+                    Text(
+                      'Yosr Gamal',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Inter',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700),
                     ),
                   ],
                 )
