@@ -56,24 +56,6 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               )),
         ),
-           Positioned(
-          top: 20,
-          left: 240,
-          child: InkWell(
-              onTap: () {},
-              child: const Padding(
-                padding: EdgeInsets.only(left: 50),
-                child: Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontFamily: 'Inter',
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )),
-        ),
          Positioned(top: 90, right: 120, child: buildProfileImage()),
           Padding(
             padding: const EdgeInsets.only(left: 240, top: 170),

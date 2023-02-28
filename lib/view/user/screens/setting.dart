@@ -107,6 +107,7 @@ class _SettingState extends State<Setting> {
             BuildAccountOption(context, "About us"),
             BuildAccountOption(context, "Privacy policy"),
             BuildAccountOption(context, "Terms and conditions"),
+            
           ],
         ),
       ),
