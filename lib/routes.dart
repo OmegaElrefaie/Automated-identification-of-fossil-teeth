@@ -19,7 +19,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         return
             // Login();
-            StartPage();
+             const StartPage();
       }),
   GoRoute(
       path: '/displayresults',

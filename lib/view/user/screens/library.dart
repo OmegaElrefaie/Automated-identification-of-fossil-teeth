@@ -13,34 +13,34 @@ class _LibraryState extends State<Library> {
   final List<Map<String, dynamic>> images = [
     {
       'id': 'i1',
-      'title': 'One',
-      'url': 'https://www.kindacode.com/wp-content/uploads/2022/08/1.png'
+      'title': 'Shark',
+      'url':
+          'https://www.fossils-uk.com/images/3-5-inch-miocene-megalodon-fossil-shark-tooth-from-south-carolina-usa-sku-v2865-otodus-carcharocles-megalodon-p5349-15096_zoom.jpg'
     },
     {
       'id': 'i2',
-      'title': 'Two',
-      'url': 'https://www.kindacode.com/wp-content/uploads/2022/08/2.png'
+      'title': 'Shark',
+      'url':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiLHojdSIUwnmrneOVpTxs3AgTf0-4YgS8ELxfWw5NWEi5yny-MRGeX8tsv_9PKKiU0ok&usqp=CAU'
     },
     {
       'id': 'i3',
-      'title': 'Three',
-      'url': 'https://www.kindacode.com/wp-content/uploads/2022/08/3.jpg'
+      'title': 'Crocodile',
+      'url':
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN98ngDvflsdyXn2hI1wHR9w5rPSqLyggqdQ&usqp=CAU'
     },
     {
       'id': 'i4',
-      'title': 'Four',
-      'url': 'https://www.kindacode.com/wp-content/uploads/2022/08/4.jpg'
+      'title': 'Crocodile',
+      'url':
+          'https://i.pinimg.com/originals/d3/7c/f0/d37cf044ed9aa78dba995aeba9d5030e.jpg'
     },
     {
       'id': 'i5',
-      'title': 'Five',
-      'url': 'https://www.kindacode.com/wp-content/uploads/2022/08/5.jpg'
+      'title': 'Elephant',
+      'url':
+          'https://paleoenterprises.com/wp-content/uploads/2021/8855/2021-09-04-23.33.32.jpg'
     },
-    {
-      'id': 'i6',
-      'title': 'Six',
-      'url': 'https://www.kindacode.com/wp-content/uploads/2022/08/6.jpg'
-    }
   ];
 
   @override
@@ -60,7 +60,7 @@ class _LibraryState extends State<Library> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(40),
               border: Border.all(
-                  width: 2, color: Color.fromARGB(255, 199, 198, 198))),
+                  width: 2, color: const Color.fromARGB(255, 199, 198, 198))),
           child: TextField(
             decoration: InputDecoration(
                 hintText: "Search",
