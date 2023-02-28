@@ -23,7 +23,7 @@ class UserProfile extends StatelessWidget {
                     colors: [kDarkColor, kLightColor])),
           ),  
              Padding(
-               padding: const EdgeInsets.all(40.0),
+               padding: const EdgeInsets.only(left: 30,top: 100),
                child: Align(          
                     alignment: Alignment.topLeft,
                     child: InkWell(
@@ -35,6 +35,75 @@ class UserProfile extends StatelessWidget {
                  color: kTextColor,
                 )),
             ),
+          ),
+           Row(
+            children: [
+              const Padding(
+              padding:  EdgeInsets.only(left: 115.0,top:550),
+              child: Icon(
+                   Icons.person,
+                   color: kTextColor,
+                  ),
+            ),
+              Padding(
+              padding: const EdgeInsets.only(left: 20.0,top:550),
+              child: InkWell(
+                onTap: () {},
+                child: const Text(
+                  "My Profile",
+                  style: TextStyle(
+                      fontSize: 25,
+                      ),
+                ),
+              ),
+            ),
+            ],
+          ),
+           Row(
+            children: [
+              const Padding(
+              padding:  EdgeInsets.only(left: 115.0,top:600),
+              child: Icon(
+                   Icons.settings,
+                   color: kTextColor,
+                  ),
+            ),
+              Padding(
+              padding: const EdgeInsets.only(left: 20.0,top:600),
+              child: InkWell(
+                onTap: () {},
+                child: const Text(
+                  "Settings",
+                  style: TextStyle(
+                      fontSize: 25,
+                      ),
+                ),
+              ),
+            ),
+            ],
+          ),
+          Row(
+            children: [
+              const Padding(
+              padding:  EdgeInsets.only(left: 115.0,top:650),
+              child: Icon(
+                   Icons.logout,
+                   color: kTextColor,
+                  ),
+            ),
+              Padding(
+              padding: const EdgeInsets.only(left: 20.0,top:650),
+              child: InkWell(
+                onTap: () {},
+                child: const Text(
+                  "LogOut",
+                  style: TextStyle(
+                      fontSize: 25,
+                      ),
+                ),
+              ),
+            ),
+            ],
           ),
         ],
       ),

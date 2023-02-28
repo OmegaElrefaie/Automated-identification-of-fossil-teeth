@@ -103,12 +103,28 @@ class _SettingState extends State<Setting> {
                     color: Color.fromARGB(255, 168, 179, 171)),
               ),
             ),
+
             const SizedBox(height: 3),
             BuildAccountOption(context, "About us"),
             BuildAccountOption(context, "Privacy policy"),
             BuildAccountOption(context, "Terms and conditions"),
-            
+            const SizedBox(height: 15),
+             Padding(
+              padding: const EdgeInsets.only(left: 25.0),
+              child: InkWell(
+                onTap: () {},
+                child: const Text(
+                  "LogOut",
+                  style: TextStyle(
+                      fontSize: 20,
+                       fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 25),
           ],
+            
         ),
       ),
     );
