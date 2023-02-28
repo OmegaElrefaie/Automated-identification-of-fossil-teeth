@@ -12,7 +12,7 @@ class UserProfile extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            height: size.height * 0.55,
+            height: size.height * 0.40,
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(47),
@@ -22,6 +22,33 @@ class UserProfile extends StatelessWidget {
                     end: Alignment.bottomCenter,
                     colors: [kDarkColor, kLightColor])),
           ),  
+            Padding(
+              padding: const EdgeInsets.only(left: 90,top: 160),
+              child: Row(
+                       mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  CircleAvatar(
+                    radius: 110,
+                    backgroundImage: AssetImage('assets/images/asset4.png'),
+                  ),
+                ],
+              ),
+            ),     Padding(
+                    padding: const EdgeInsets.only(top: 410,left: 140),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Yosr Gamal',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Inter',
+                              fontSize: 23,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                  ),
              Padding(
                padding: const EdgeInsets.only(left: 30,top: 100),
                child: Align(          
@@ -39,14 +66,14 @@ class UserProfile extends StatelessWidget {
            Row(
             children: [
               const Padding(
-              padding:  EdgeInsets.only(left: 115.0,top:550),
+              padding:  EdgeInsets.only(left: 30.0,top:500),
               child: Icon(
                    Icons.person,
                    color: kTextColor,
                   ),
             ),
               Padding(
-              padding: const EdgeInsets.only(left: 20.0,top:550),
+              padding: const EdgeInsets.only(left: 20.0,top:500),
               child: InkWell(
                 onTap: () {},
                 child: const Text(
@@ -62,14 +89,14 @@ class UserProfile extends StatelessWidget {
            Row(
             children: [
               const Padding(
-              padding:  EdgeInsets.only(left: 115.0,top:600),
+              padding:  EdgeInsets.only(left: 30.0,top:560),
               child: Icon(
                    Icons.settings,
                    color: kTextColor,
                   ),
             ),
               Padding(
-              padding: const EdgeInsets.only(left: 20.0,top:600),
+              padding: const EdgeInsets.only(left: 20.0,top:560),
               child: InkWell(
                 onTap: () {},
                 child: const Text(
@@ -85,14 +112,14 @@ class UserProfile extends StatelessWidget {
           Row(
             children: [
               const Padding(
-              padding:  EdgeInsets.only(left: 115.0,top:650),
+              padding:  EdgeInsets.only(left: 30.0,top:620),
               child: Icon(
                    Icons.logout,
                    color: kTextColor,
                   ),
             ),
               Padding(
-              padding: const EdgeInsets.only(left: 20.0,top:650),
+              padding: const EdgeInsets.only(left: 20.0,top:620),
               child: InkWell(
                 onTap: () {},
                 child: const Text(
