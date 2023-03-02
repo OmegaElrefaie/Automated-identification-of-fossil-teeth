@@ -3,11 +3,8 @@ import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'dart:io';
-import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
-import 'package:image_picker/image_picker.dart';
-// import 'package:tflite_flutter/tflite_flutter.dart';
 
 class DisplayResults extends StatefulWidget {
   const DisplayResults({super.key});
@@ -29,9 +26,8 @@ class _DisplayResultsState extends State<DisplayResults> {
     super.initState();
   }
 
-  Future<void> _openImagePicker() async {
-    final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
+  Future<void> _openImagePicker({required ImageSource imageSource}) async {
+    final XFile? pickedImage = await _picker.pickImage(source: imageSource);
     if (pickedImage != null) {
       setState(() {
         _imageFile = File(pickedImage.path);
@@ -57,34 +53,73 @@ class _DisplayResultsState extends State<DisplayResults> {
         child: Column(
           children: [
             Container(
-                height: 300,
-                width: 280,
-                margin: const EdgeInsets.all(15),
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(Radius.circular(15)),
-                    border: Border.all(color: Colors.white),
-                    // ignore: prefer_const_literals_to_create_immutables
-                    boxShadow: [
-                      const BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(2, 2),
-                          spreadRadius: 2,
-                          blurRadius: 1)
-                    ]),
-                child: (_imageFile != null)
-                    ? Image.file(
-                        _imageFile!,
-                        fit: BoxFit.cover,
-                      )
-                    : const Icon(
-                        Icons.photo_camera_back,
-                        size: 50,
-                      )),
+              height: 300,
+              width: 280,
+              margin: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  border: Border.all(color: Colors.white),
+                  // ignore: prefer_const_literals_to_create_immutables
+                  boxShadow: [
+                    const BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(2, 2),
+                        spreadRadius: 2,
+                        blurRadius: 1)
+                  ]),
+              // child: Obx(() => imageController.imagePath.value == ''
+              //     ? const Icon(
+              //         Icons.photo_camera_back,
+              //         size: 50,
+              //       )
+              //     : Image.file(
+              //         File(imageController.imagePath.value),
+              //         fit: BoxFit.cover,
+              //       ))),
+              child: (_imageFile != null)
+                  ? Image.file(
+                      File(_imageFile!.path),
+                      fit: BoxFit.cover,
+                    )
+                  : Container(),
+            ),
             FloatingActionButton(
                 onPressed: () {
-                  _openImagePicker();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      actions: [
+                        Center(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      _openImagePicker(
+                                          imageSource: ImageSource.gallery);
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Gallery')),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      _openImagePicker(
+                                          imageSource: ImageSource.camera);
+
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Camera')),
+                              ]),
+                        ),
+                      ],
+                    ),
+                  );
                 },
                 tooltip: 'Select Image',
                 backgroundColor: Colors.white,
@@ -96,18 +131,17 @@ class _DisplayResultsState extends State<DisplayResults> {
             ////
             ///   Testing Widget
             ///
-            Text(
-              resolutions != null
-                  ? 'Confidence: ${resolutions.toString()}'
-                  : '',
-              style: TextStyle(fontSize: 16),
-            ),
 
             const Text(
               'Name',
               style: TextStyle(
                   color: kDarkColor, fontFamily: 'Inter', fontSize: 30),
             ),
+            if (resolutions.isNotEmpty)
+              Text(
+                resolutions.first['label'],
+                style: TextStyle(fontSize: 16),
+              ),
             const SizedBox(
               height: 80,
             ),
@@ -135,7 +169,7 @@ class _DisplayResultsState extends State<DisplayResults> {
     int startTime = new DateTime.now().millisecondsSinceEpoch;
     var recognitions = await Tflite.runModelOnImage(
       path: image.path,
-      numResults: 1,
+      numResults: 5,
       threshold: 0.05,
       imageMean: 127.5,
       imageStd: 127.5,
