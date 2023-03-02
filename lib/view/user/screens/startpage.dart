@@ -19,7 +19,6 @@ class _StartPageState extends State<StartPage> {
     return [
       const SafeArea(child: HomePage()),
       const SafeArea(child: Library()),
-      const SafeArea(child: Text('Community')),
       const SafeArea(child: Setting()),
     ];
   }
@@ -45,16 +44,6 @@ class _StartPageState extends State<StartPage> {
         activeColorPrimary: kPrimaryColor,
         activeColorSecondary: Colors.white,
         inactiveIcon: const Icon(Icons.photo, color: Colors.grey),
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(
-          Icons.people_alt,
-          color: Colors.white,
-        ),
-        title: "Community",
-        activeColorPrimary: kPrimaryColor,
-        activeColorSecondary: Colors.white,
-        inactiveIcon: const Icon(Icons.people_alt, color: Colors.grey),
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(

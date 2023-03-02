@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'dart:io';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
+import '../widgets/image_helper.dart';
+
+final imageController = ImageController();
 
 class DisplayResults extends StatefulWidget {
   const DisplayResults({super.key});
@@ -13,20 +17,6 @@ class DisplayResults extends StatefulWidget {
 }
 
 class _DisplayResultsState extends State<DisplayResults> {
-  File? _imageFile;
-
-  final _picker = ImagePicker();
-
-  Future<void> _openImagePicker() async {
-    final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        _imageFile = File(pickedImage.path);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,18 +50,50 @@ class _DisplayResultsState extends State<DisplayResults> {
                           spreadRadius: 2,
                           blurRadius: 1)
                     ]),
-                child: (_imageFile != null)
-                    ? Image.file(
-                        _imageFile!,
-                        fit: BoxFit.cover,
-                      )
-                    : const Icon(
+                child: Obx(() => imageController.imagePath.value == ''
+                    ? const Icon(
                         Icons.photo_camera_back,
                         size: 50,
-                      )),
+                      )
+                    : Image.file(
+                        File(imageController.imagePath.value),
+                        fit: BoxFit.cover,
+                      ))),
             FloatingActionButton(
                 onPressed: () {
-                  _openImagePicker();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      actions: [
+                        Center(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      imageController
+                                          .getImage(ImageSource.gallery);
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Gallery')),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      imageController
+                                          .getImage(ImageSource.camera);
+
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Camera')),
+                              ]),
+                        ),
+                      ],
+                    ),
+                  );
                 },
                 tooltip: 'Select Image',
                 backgroundColor: Colors.white,

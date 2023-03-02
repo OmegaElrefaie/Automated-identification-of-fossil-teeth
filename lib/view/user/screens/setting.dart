@@ -46,16 +46,13 @@ class _SettingState extends State<Setting> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Padding(
-                      padding: EdgeInsets.only(top: 0),
-                      child: Text(
-                        'Yosr Gamal',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Inter',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700),
-                      ),
+                    Text(
+                      'Yosr Gamal',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Inter',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700),
                     ),
                   ],
                 )
@@ -106,11 +103,28 @@ class _SettingState extends State<Setting> {
                     color: Color.fromARGB(255, 168, 179, 171)),
               ),
             ),
+
             const SizedBox(height: 3),
             BuildAccountOption(context, "About us"),
             BuildAccountOption(context, "Privacy policy"),
             BuildAccountOption(context, "Terms and conditions"),
+            const SizedBox(height: 15),
+             Padding(
+              padding: const EdgeInsets.only(left: 25.0),
+              child: InkWell(
+                onTap: () {},
+                child: const Text(
+                  "LogOut",
+                  style: TextStyle(
+                      fontSize: 20,
+                       fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 25),
           ],
+            
         ),
       ),
     );
@@ -119,10 +133,10 @@ class _SettingState extends State<Setting> {
   GestureDetector BuildAccountOption(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        if (title == 'Edit Profile') {
+        if (title == 'Edit profile') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const EditProfile()),
+            MaterialPageRoute(builder: (context) =>  EditProfile()),
           );
         } 
         else if (title == 'Change password') {

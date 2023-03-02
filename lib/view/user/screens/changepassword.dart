@@ -162,7 +162,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       padding:const EdgeInsets.symmetric(
                           horizontal: 50.0, vertical: 15.0),
                       // ignore: deprecated_member_use
-                      primary: Color.fromARGB(255, 204, 102, 0),
+                      primary: const Color.fromRGBO(216, 139, 74, 1),
                       shape: const StadiumBorder(),
                     ),
                     child:const Text(
