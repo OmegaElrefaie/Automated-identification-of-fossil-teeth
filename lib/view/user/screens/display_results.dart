@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'dart:io';
+import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
+import 'package:image_picker/image_picker.dart';
+// import 'package:tflite_flutter/tflite_flutter.dart';
 
 class DisplayResults extends StatefulWidget {
   const DisplayResults({super.key});
@@ -16,6 +20,14 @@ class _DisplayResultsState extends State<DisplayResults> {
   File? _imageFile;
 
   final _picker = ImagePicker();
+  List resolutions = [];
+
+  final picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Future<void> _openImagePicker() async {
     final XFile? pickedImage =
@@ -23,6 +35,7 @@ class _DisplayResultsState extends State<DisplayResults> {
     if (pickedImage != null) {
       setState(() {
         _imageFile = File(pickedImage.path);
+        _predict();
       });
     }
   }
@@ -80,6 +93,16 @@ class _DisplayResultsState extends State<DisplayResults> {
             const SizedBox(
               height: 50,
             ),
+            ////
+            ///   Testing Widget
+            ///
+            Text(
+              resolutions != null
+                  ? 'Confidence: ${resolutions.toString()}'
+                  : '',
+              style: TextStyle(fontSize: 16),
+            ),
+
             const Text(
               'Name',
               style: TextStyle(
@@ -106,5 +129,31 @@ class _DisplayResultsState extends State<DisplayResults> {
         ),
       ),
     );
+  }
+
+  Future recognizeImage(File image) async {
+    int startTime = new DateTime.now().millisecondsSinceEpoch;
+    var recognitions = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 1,
+      threshold: 0.05,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    setState(() {
+      resolutions = recognitions ?? [];
+      print(recognitions);
+    });
+    int endTime = new DateTime.now().millisecondsSinceEpoch;
+    print("Inference took ${endTime - startTime}ms");
+  }
+
+  _predict() async {
+    final res = await Tflite.loadModel(
+      model: "assets/tensorflow/model_unquant.tflite",
+      labels: "assets/tensorflow/labels.txt",
+      // useGpuDelegate: true,
+    );
+    recognizeImage(_imageFile!);
   }
 }
