@@ -52,7 +52,6 @@ dependencies:
   flutter_riverpod: ^2.3.0
   equatable: ^2.0.5
   flutter_session_manager: ^1.0.3
-  tflite_flutter: ^0.9.0
 
 flutter_native_splash:
   color: "#ffffff"
