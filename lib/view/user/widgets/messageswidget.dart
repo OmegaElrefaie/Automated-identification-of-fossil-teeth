@@ -107,8 +107,8 @@ class _MessageState extends State<Message> {
       );
       AndroidNotificationDetails androidPlatformChannelSpecifics =
           AndroidNotificationDetails(
-        'bfeed',
-        'abfged',
+        '',
+        '',
         importance: Importance.high,
         styleInformation: bigTextStyleInformation,
         priority: Priority.high,
