@@ -9,8 +9,9 @@ class Setting extends StatefulWidget {
   @override
   State<Setting> createState() => _SettingState();
 }
+
 class _SettingState extends State<Setting> {
- bool s1 = false;
+  bool s1 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,22 +20,22 @@ class _SettingState extends State<Setting> {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
-               Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: Column(
-          children: const [
-            Center(
-              child: Text(
-                'Setting',
-                style: TextStyle(
-                    color: kTextColor, fontFamily: 'Inter', fontSize: 30),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Column(
+                children: const [
+                  Center(
+                    child: Text(
+                      'Setting',
+                      style: TextStyle(
+                          color: kTextColor, fontFamily: 'Inter', fontSize: 30),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
             Row(
-                     mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const CircleAvatar(
                   radius: 30,
@@ -57,9 +58,9 @@ class _SettingState extends State<Setting> {
                   ],
                 )
               ],
-               ),   
+            ),
             const Divider(height: 20, thickness: 1),
-             Container(
+            Container(
               padding: const EdgeInsets.only(top: 0, left: 20),
               width: double.infinity,
               child: const Text(
@@ -89,8 +90,7 @@ class _SettingState extends State<Setting> {
               ),
             ),
             const Divider(height: 2, thickness: 1),
-            
-             Container(
+            Container(
               padding: const EdgeInsets.only(top: 0, left: 20),
               width: double.infinity,
               child: const Text(
@@ -103,32 +103,31 @@ class _SettingState extends State<Setting> {
                     color: Color.fromARGB(255, 168, 179, 171)),
               ),
             ),
-
             const SizedBox(height: 3),
             BuildAccountOption(context, "About us"),
             BuildAccountOption(context, "Privacy policy"),
             BuildAccountOption(context, "Terms and conditions"),
             const SizedBox(height: 15),
-             Padding(
+            Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: InkWell(
                 onTap: () {},
                 child: const Text(
                   "LogOut",
                   style: TextStyle(
-                      fontSize: 20,
-                       fontWeight: FontWeight.bold,
-                      ),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 25),
           ],
-            
         ),
       ),
     );
   }
+
   // ignore: non_constant_identifier_names
   GestureDetector BuildAccountOption(BuildContext context, String title) {
     return GestureDetector(
@@ -136,13 +135,13 @@ class _SettingState extends State<Setting> {
         if (title == 'Edit profile') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>  EditProfile()),
+            MaterialPageRoute(builder: (context) => EditProfile()),
           );
-        } 
-        else if (title == 'Change password') {
+        } else if (title == 'Change password') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>const ChangePassword()),
+            MaterialPageRoute(
+                builder: (context) => const ChangePasswordScreen()),
           );
         }
       },
@@ -154,9 +153,9 @@ class _SettingState extends State<Setting> {
             Text(
               title,
               style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  ),
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const Icon(Icons.arrow_forward_ios, color: Colors.grey)
           ],
