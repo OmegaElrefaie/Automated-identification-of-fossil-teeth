@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'routes.dart';
 import 'constants.dart';
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:tflite_flutter/tflite_flutter.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
+  await FirebaseMessaging.instance.getInitialMessage();
   FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
