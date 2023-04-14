@@ -141,16 +141,7 @@ class _SettingState extends State<Setting> {
         if (title == 'Edit profile') {
           context.go('/editprofile');
         } else if (title == 'Change password') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => EditProfile()),
-          );
-        } else if (title == 'Change password') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const ChangePasswordScreen()),
-          );
+          context.go('/change-password');
         }
       },
       child: Padding(

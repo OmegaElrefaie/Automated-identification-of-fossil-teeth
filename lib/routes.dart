@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/view/Admin/screens/homeadmin.dart';
+import 'package:graduation_project/view/user/screens/changepassword.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
@@ -74,5 +75,10 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/settings',
       builder: (BuildContext context, GoRouterState state) {
         return const Setting();
+      }),
+  GoRoute(
+      path: '/change-password',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ChangePasswordScreen();
       })
 ]);
