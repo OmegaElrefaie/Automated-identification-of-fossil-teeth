@@ -65,6 +65,7 @@ class _EditProfileState extends State<EditProfile> {
                     InkWell(
                         onTap: () {
                           Auth().logout();
+                          context.go('/');
                         },
                         child: const Text(
                           'Logout',
