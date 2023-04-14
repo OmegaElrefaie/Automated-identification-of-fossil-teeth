@@ -54,6 +54,10 @@ dependencies:
   flutter_session_manager: ^1.0.3
   firebase_database: ^10.1.0
   awesome_snackbar_content: ^0.1.2
+  firebase_messaging: ^14.4.0
+  flutter_local_notifications: ^13.0.0
+  cloud_firestore: ^4.5.0
+  firebase_auth: ^4.4.0
 
 flutter_native_splash:
   color: "#ffffff"

@@ -143,7 +143,13 @@ class _SettingState extends State<Setting> {
         } else if (title == 'Change password') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const ChangePassword()),
+            MaterialPageRoute(builder: (context) => EditProfile()),
+          );
+        } else if (title == 'Change password') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ChangePasswordScreen()),
           );
         }
       },
