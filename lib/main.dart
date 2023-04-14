@@ -3,15 +3,16 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:graduation_project/view/user/widgets/notifications.dart';
 import 'routes.dart';
 import 'constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 //import 'package:image_picker/image_picker.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:tflite_flutter/tflite_flutter.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
+  await Firebase.initializeApp();
   // await FirebaseMessaging.instance.getInitialMessage();
-  // FlutterNativeSplash.remove();
+  FlutterNativeSplash.remove();
   final x = App_Notification();
   x.notifications();
   runApp(const MyApp());
