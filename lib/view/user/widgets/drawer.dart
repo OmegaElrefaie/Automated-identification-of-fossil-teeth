@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/view/user/screens/facts.dart';
+import 'package:get/get.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
+
+UserRepository userRepo = UserRepository.instance;
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({super.key});
@@ -13,6 +15,27 @@ class SideDrawer extends StatefulWidget {
 int selectedIndex = 0;
 
 class _SideDrawerState extends State<SideDrawer> {
+  String name = '';
+  String email = '';
+  bool isloaded = false;
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    name = await userRepo.getUserName();
+    email = await userRepo.getUserEmail();
+    if (name.isNotEmpty) {
+      // ignore: avoid_print
+      print('name is $name');
+      setState(() {
+        isloaded = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -32,23 +55,34 @@ class _SideDrawerState extends State<SideDrawer> {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      child: Text(
-                        'Yosr Gamal',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Inter',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700),
+                      padding: const EdgeInsets.only(top: 50),
+                      child: InkWell(
+                        onTap: () {
+                          // print(usercontroller.myuser.value.username);
+                        },
+                        child: Text(
+                          name,
+                          // usercontroller.myuser.value.username == null
+                          //     ? "Sara"
+                          //     : usercontroller.myuser.value.username!,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Inter',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 8.0),
+                      padding: const EdgeInsets.only(top: 8.0),
                       child: Text(
-                        'yosrgamal@gmail.com',
-                        style: TextStyle(
+                        email,
+                        // usercontroller.myuser.value.email == null
+                        //     ? "Sara@gmail"
+                        //     : usercontroller.myuser.value.email!,
+                        style: const TextStyle(
                             color: Colors.black,
                             fontFamily: 'Inter',
                             fontSize: 10,
@@ -68,7 +102,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 0;
                 });
-               context.go('/facts');
+                Get.toNamed('/facts');
               }),
           _createDrawerItem(
               icon: Icons.history,
@@ -78,8 +112,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 1;
                 });
-
-               context.go('/question');
+                Get.toNamed('/questions');
               }),
           _createDrawerItem(
               icon: Icons.help,
