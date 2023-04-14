@@ -1,7 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/constants.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/domain/user_model.dart';
+import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
+import 'package:graduation_project/data/repositories/authentication.dart';
+
+UserRepository userRepo = UserRepository.instance;
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -11,23 +19,46 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  TextEditingController email = TextEditingController();
-  TextEditingController username = TextEditingController();
-  TextEditingController password = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _passwordcontroller = TextEditingController();
+  final TextEditingController _usernamecontroller = TextEditingController();
   bool isHiddenPassword = true;
   final formKey = GlobalKey<FormState>();
 
+  Future handleSignUp() async {
+    if (!formKey.currentState!.validate()) return;
+    final email = _emailcontroller.text.trim();
+    final password = _passwordcontroller.text.trim();
+    try {
+      await Auth()
+          .registerUsingEmailPassword(
+              context: context, email: email, password: password)
+          .then((authUser) {
+        final user = UserModel(
+            email: _emailcontroller.text.trim(),
+            username: _usernamecontroller.text.trim(),
+            profilepic: '',
+            type: 'User');
+
+        if (authUser != null) {
+          print('user created');
+          userRepo.createUser(user, authUser.uid);
+          context.go('/');
+        }
+      });
+    } on FirebaseAuthException catch (e) {
+      context.go('/signup');
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // final controller = Get.put(SignUpController());
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: CloseButton(
-          onPressed: () {
-            context.go('/');
-          },
-          color: Colors.grey,
-        ),
         elevation: 0,
         backgroundColor: Colors.white,
         title: const Text(
@@ -71,7 +102,13 @@ class _SignupState extends State<Signup> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFormField(
-                      controller: username,
+                      controller: _usernamecontroller,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your username";
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -93,7 +130,13 @@ class _SignupState extends State<Signup> {
                       height: 20.0,
                     ),
                     TextFormField(
-                      controller: email,
+                      controller: _emailcontroller,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your email";
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -115,7 +158,13 @@ class _SignupState extends State<Signup> {
                       height: 20.0,
                     ),
                     TextFormField(
-                      controller: password,
+                      controller: _passwordcontroller,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your email";
+                        }
+                        return null;
+                      },
                       obscureText: isHiddenPassword,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -151,7 +200,9 @@ class _SignupState extends State<Signup> {
                       height: 40,
                       width: 400,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          handleSignUp();
+                        },
                         style: ButtonStyle(
                             backgroundColor:
                                 getColor(kPrimaryColor, kTextColor),

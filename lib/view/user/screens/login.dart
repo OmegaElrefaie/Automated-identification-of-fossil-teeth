@@ -1,7 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/constants.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/data/repositories/authentication.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
+import 'package:graduation_project/view/user/screens/signup.dart';
+import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:graduation_project/domain/user_model.dart';
+
+UserRepository userRepo = UserRepository.instance;
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -11,22 +20,41 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _passwordcontroller = TextEditingController();
   bool isHiddenPassword = true;
   final formKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> formKey = GlobalKey();
+
+  Future handleLogIn() async {
+    final email = _emailcontroller.text.trim();
+    final password = _passwordcontroller.text.trim();
+    print('object');
+    Auth()
+        .signInUsingEmailPassword(
+            context: context, email: email, password: password)
+        .then((authUser) {
+      initializeUser(authUser);
+    });
+  }
+
+  Future<void> initializeUser(User? authUser) async {
+    if (authUser == null) {
+      print('user is signed out');
+      context.go('/');
+    } else {
+      context.go('/startpage');
+      print('user is signed in');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    // final controller = Get.put(LogInController());
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: CloseButton(
-          onPressed: () {
-            context.go('/');
-          },
-          color: Colors.grey,
-        ),
         elevation: 0,
         backgroundColor: Colors.white,
         title: const Text(
@@ -40,6 +68,7 @@ class _LoginState extends State<Login> {
         actions: [
           InkWell(
             onTap: () {
+              // Get.toNamed('/signup');
               context.go('/signup');
             },
             child: const Padding(
@@ -70,7 +99,14 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFormField(
-                      controller: email,
+                      controller: _emailcontroller,
+                      // controller.email,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -92,8 +128,15 @@ class _LoginState extends State<Login> {
                       height: 20.0,
                     ),
                     TextFormField(
-                      controller: password,
+                      controller: _passwordcontroller,
+                      // controller.password,
                       obscureText: isHiddenPassword,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -128,7 +171,26 @@ class _LoginState extends State<Login> {
                       height: 40,
                       width: 400,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            await handleLogIn();
+                          }
+
+                          // StreamBuilder<User?>(
+                          //   stream: FirebaseAuth.instance.authStateChanges(),
+                          //   builder: (context, snapshot) {
+                          //     if (snapshot.hasData) {
+                          //       return const StartPage();
+                          //     } else {
+                          //       return const Signup();
+                          //     }
+                          //   },
+                          // );
+
+                          // LogInController.instance.logInUser(
+                          //     controller.email.text.trim(),
+                          //     controller.password.text.trim());
+                        },
                         style: ButtonStyle(
                             backgroundColor:
                                 getColor(kPrimaryColor, kTextColor),
