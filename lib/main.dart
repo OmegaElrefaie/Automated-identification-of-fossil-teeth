@@ -3,10 +3,11 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'routes.dart';
 import 'constants.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:tflite_flutter/tflite_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
