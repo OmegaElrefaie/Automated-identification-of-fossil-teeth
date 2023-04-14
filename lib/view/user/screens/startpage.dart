@@ -65,7 +65,7 @@ class _StartPageState extends State<StartPage> {
         elevation: 0,
         backgroundColor: kDarkColor,
       ),
-      drawer: const SideDrawer(),
+      drawer: SideDrawer(),
       body: PersistentTabView(
         context,
         screens: _buildScreen(),
