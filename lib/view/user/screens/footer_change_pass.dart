@@ -20,7 +20,7 @@ class Footer extends StatelessWidget {
             onPressed: () {
               print(newPass.text);
               print(confirmPass.text);
-              if (newPass.text.length > 6 || confirmPass.text.length > 6) {
+              if (newPass.text.length >= 6 || confirmPass.text.length >= 6) {
                 if (newPass.text == confirmPass.text) {
                   _changePassword(newPass.text);
                 } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HeaderChangePass extends StatelessWidget {
   const HeaderChangePass({super.key});
@@ -13,7 +14,7 @@ class HeaderChangePass extends StatelessWidget {
           child: InkWell(
               //instead of Textbutton
               onTap: () {
-                Navigator.of(context).pop();
+                context.go('/settings');
               },
               child: const Text(
                 'Settings',
