@@ -42,7 +42,7 @@ class _DisplayResultsState extends State<DisplayResults> {
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
-            context.go('/');
+            context.go('/startpage');
           },
           color: Colors.white,
         ),
