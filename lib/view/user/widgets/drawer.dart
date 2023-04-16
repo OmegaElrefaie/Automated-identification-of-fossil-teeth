@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
 
 UserRepository userRepo = UserRepository.instance;
@@ -102,7 +103,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 0;
                 });
-                Get.toNamed('/facts');
+                 context.go('/facts');
               }),
           _createDrawerItem(
               icon: Icons.history,
@@ -112,7 +113,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 1;
                 });
-                Get.toNamed('/questions');
+                 context.go('/question');
               }),
           _createDrawerItem(
               icon: Icons.help,
@@ -122,7 +123,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 2;
                 });
-
+               
                 Navigator.pushReplacementNamed(context, "/page2");
               }),
         ],
