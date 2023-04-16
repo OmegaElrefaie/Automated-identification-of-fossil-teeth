@@ -1,6 +1,6 @@
 class Fossil {
-  final String? id;
-  final String? name;
+   String? id;
+   String? name;
   final String? imageUrl;
 
   Fossil({
@@ -20,6 +20,13 @@ class Fossil {
       'id': id,
       'name': name,
       'imageurl': imageUrl,
+    };
+  }
+  toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'imageUrl': imageUrl,
     };
   }
 
