@@ -4,11 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
-import 'package:graduation_project/view/user/screens/signup.dart';
-import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
-import 'package:graduation_project/domain/user_model.dart';
 
 UserRepository userRepo = UserRepository.instance;
 
@@ -20,20 +17,42 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  // User? authUser;
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passwordcontroller = TextEditingController();
   bool isHiddenPassword = true;
   final formKey = GlobalKey<FormState>();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   FirebaseAuth.instance.authStateChanges().listen((event) {
+  //     updateUserState(event);
+  //   });
+  // }
+
+  // updateUserState(event) {
+  //   setState(() {
+  //     authUser = event;
+  //   });
+  // }
+
   // final GlobalKey<FormState> formKey = GlobalKey();
 
   Future handleLogIn() async {
     final email = _emailcontroller.text.trim();
     final password = _passwordcontroller.text.trim();
-    print('object');
     Auth()
         .signInUsingEmailPassword(
             context: context, email: email, password: password)
         .then((authUser) {
+      initializeUser(authUser);
+    });
+  }
+
+  Future googleLogIn() async {
+    Auth().googleSignIn(context: context).then((authUser) {
       initializeUser(authUser);
     });
   }
@@ -175,21 +194,6 @@ class _LoginState extends State<Login> {
                           if (formKey.currentState!.validate()) {
                             await handleLogIn();
                           }
-
-                          // StreamBuilder<User?>(
-                          //   stream: FirebaseAuth.instance.authStateChanges(),
-                          //   builder: (context, snapshot) {
-                          //     if (snapshot.hasData) {
-                          //       return const StartPage();
-                          //     } else {
-                          //       return const Signup();
-                          //     }
-                          //   },
-                          // );
-
-                          // LogInController.instance.logInUser(
-                          //     controller.email.text.trim(),
-                          //     controller.password.text.trim());
                         },
                         style: ButtonStyle(
                             backgroundColor:
@@ -203,6 +207,44 @@ class _LoginState extends State<Login> {
                               color: Colors.white,
                               fontFamily: 'Inter',
                               fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 40,
+                      width: 400,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          // if (formKey.currentState!.validate()) {}
+                          googleLogIn();
+                        },
+                        style: ButtonStyle(
+                            backgroundColor: getColor(Colors.white, kTextColor),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)))),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Ink.image(
+                              image:
+                                  AssetImage('assets/images/google-logo.png'),
+                              height: 25,
+                              width: 25,
+                              fit: BoxFit.cover,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            const Text(
+                              'Sign in with Google',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Inter',
+                                  fontSize: 15),
+                            ),
+                          ],
                         ),
                       ),
                     )
