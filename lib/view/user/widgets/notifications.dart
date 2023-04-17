@@ -47,8 +47,8 @@ class App_Notification {
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       0,
-      "app title",
-      "body",
+      "Fossil capture",
+      "title",
       tz.TZDateTime.from(scheduledDateTime, tz.local),
       generalNotificationDetails,
       androidAllowWhileIdle: true,
