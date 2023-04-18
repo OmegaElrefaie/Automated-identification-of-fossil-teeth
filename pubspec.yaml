@@ -56,6 +56,7 @@ dependencies:
   awesome_snackbar_content: ^0.1.2
   firebase_messaging: ^14.4.0
   flutter_local_notifications: ^13.0.0
+  google_sign_in: ^6.1.0
 
 
 flutter_native_splash:
@@ -95,6 +96,7 @@ flutter:
     - assets/images/asset3.png
     - assets/images/asset4.png
     - assets/tensorflow/
+    - assets/images/google-logo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

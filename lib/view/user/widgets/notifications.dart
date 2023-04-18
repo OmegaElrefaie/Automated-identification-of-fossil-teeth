@@ -22,9 +22,15 @@ class App_Notification {
 
     tz.initializeTimeZones();
 
-    final detroit = tz.getLocation('America/Detroit');
-    var currentDateTime =
-        tz.TZDateTime.now(detroit).add(const Duration(seconds: 24));
+    var scheduledTime = Time(2, 0, 0); // 8:00 AM
+    var now = DateTime.now();
+    var scheduledDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      scheduledTime.hour,
+      scheduledTime.minute,
+    );
 
     var androidDetails = const AndroidNotificationDetails(
       "notification 1",
@@ -35,18 +41,20 @@ class App_Notification {
       playSound: true,
       // timeoutAfter: 5000,
     );
-    var generalNotificationDetails =
-        NotificationDetails(android: androidDetails);
+    var generalNotificationDetails = NotificationDetails(
+      android: androidDetails,
+    );
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       0,
-      "app title",
-      "body",
-      currentDateTime,
+      "Fossil capture",
+      "title",
+      tz.TZDateTime.from(scheduledDateTime, tz.local),
       generalNotificationDetails,
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.wallClockTime,
+          UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time,
     );
   }
 }
