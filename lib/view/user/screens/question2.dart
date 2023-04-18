@@ -88,7 +88,7 @@ Question2({
                    if(snapshot.hasData){
                      if(snapshot.data.docs.length < 1){
                        return const Center(
-                         child: Text("Say Hi"),
+                         child: Text("No questions yet"),
                        );
                      }
                      return ListView.builder(
