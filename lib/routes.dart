@@ -10,6 +10,7 @@ import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/screens/question2.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
+import 'package:graduation_project/domain/user_model.dart';
 import 'package:graduation_project/view/user/screens/userprofile.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
@@ -18,8 +19,8 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const Login();
-        // const StartPage();
+        //return const Login();
+        return const StartPage();
       }),
   GoRoute(
       path: '/displayresults',
@@ -46,11 +47,35 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         return const Question();
       }),
-  GoRoute(
-      path: '/question2',
-      builder: (BuildContext context, GoRouterState state) {
-        return const Question2();
-      }),
+// GoRoute(
+//   path: '/question2',
+//   builder: (BuildContext context, GoRouterState state) {
+//     return  Question2(
+//       currentUser: currentUser,
+//       friendId: 'friendId',
+//       friendImage: 'friendImage',
+//       friendName: 'friendName',
+//     );
+//   }
+// ),
+ GoRoute(
+            path: '/question2',
+            builder: (BuildContext context, GoRouterState state) {
+              return Question2(
+                currentUser: UserModel(
+                  id: '1',
+                  username: 'John Doe',
+                  email: 'john.doe@example.com',
+                  profilepic: 'https://example.com/john_doe.png',
+                ),
+                friendId: '2',
+                friendName: 'Jane Doe',
+                friendImage: 'https://example.com/jane_doe.png',
+              );
+            },
+          ),
+
+
   GoRoute(
       path: '/userprofile',
       builder: (BuildContext context, GoRouterState state) {
