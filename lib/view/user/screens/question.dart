@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/view/user/screens/question2.dart';
 import '../../../constants.dart';
 
 class Question extends StatefulWidget {
@@ -45,7 +46,11 @@ class _QuestionState extends State<Question> {
                   height: 80,
                   child: ElevatedButton(
                   onPressed: () {
-                    context.go('/question2');
+            //         Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => Question2(currentUser: null, friendId: '', friendImage: '', friendName: '',)),
+            // );
+             context.go('/question2');
                   },
                    style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
