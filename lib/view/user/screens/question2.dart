@@ -77,7 +77,7 @@ Question2({
              
              child: StreamBuilder(
               stream: FirebaseFirestore.instance
-                    .collection("users")
+                    .collection("chat")
                     .doc(currentUser.id)
                     .collection('messages')
                     .doc(friendId)
