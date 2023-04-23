@@ -16,40 +16,35 @@ class _FactState extends State<Fact> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-          padding: const EdgeInsets.all(17),
-          children: [  
-             const SizedBox(height: 55),
-              Align(          
-                  alignment: Alignment.topLeft,
-                  child: InkWell(
-                  onTap: () {
-                context.go('/');
-              },
-              child: const Icon(
-               Icons.arrow_back,
-                color: kTextColor,
-                
-              )),
-        ),
-            const Text(
-              "Facts ",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  height: 1.5,
-                  fontFamily: 'Inter',
-                  fontSize: 35.0,
-                  color: kTextColor),
-                
-            ),
-            fact1(),
-            fact2(),
-            fact3(),
-            fact4(),
-            
-          
-          ],
-          
-        ), 
+        padding: const EdgeInsets.all(17),
+        children: [
+          const SizedBox(height: 55),
+          Align(
+            alignment: Alignment.topLeft,
+            child: InkWell(
+                onTap: () {
+                  context.go('/startpage');
+                },
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: kTextColor,
+                )),
+          ),
+          const Text(
+            "Facts ",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                height: 1.5,
+                fontFamily: 'Inter',
+                fontSize: 35.0,
+                color: kTextColor),
+          ),
+          fact1(),
+          fact2(),
+          fact3(),
+          fact4(),
+        ],
+      ),
     );
   }
 
@@ -73,7 +68,6 @@ class _FactState extends State<Fact> {
               //   'This card is rounded',
               //   style: TextStyle(fontSize: 20),
               // ),
-              
             ],
           ),
         ),
@@ -83,7 +77,6 @@ class _FactState extends State<Fact> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        
         child: Column(
           children: [
             Stack(
@@ -92,13 +85,12 @@ class _FactState extends State<Fact> {
                   image: const NetworkImage(
                     'https://image.cnbcfm.com/api/v1/image/106849039-1614858338482-gettyimages-634465411-dsgf001080.jpeg?v=1614858433&w=1600&h=900',
                   ),
-
                   height: 240,
                   fit: BoxFit.cover,
                 ),
               ],
             ),
-             const SizedBox(height: 4),
+            const SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.all(16).copyWith(bottom: 0),
               child: const Text(
@@ -110,12 +102,11 @@ class _FactState extends State<Fact> {
           ],
         ),
       );
-      
-Widget fact3() => Card(
+
+  Widget fact3() => Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        
         child: Column(
           children: [
             Stack(
@@ -129,7 +120,7 @@ Widget fact3() => Card(
                 ),
               ],
             ),
-               const SizedBox(height: 4),
+            const SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.all(16).copyWith(bottom: 0),
               child: const Text(
@@ -137,12 +128,12 @@ Widget fact3() => Card(
                 style: TextStyle(fontSize: 20),
               ),
             ),
-             const SizedBox(height: 15),
+            const SizedBox(height: 15),
           ],
         ),
       );
 
-Widget fact4() => Card(
+  Widget fact4() => Card(
         child: Container(
           padding: const EdgeInsets.all(16),
           child: Column(
