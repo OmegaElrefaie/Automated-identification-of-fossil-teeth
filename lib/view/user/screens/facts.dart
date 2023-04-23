@@ -23,7 +23,7 @@ class _FactState extends State<Fact> {
                   alignment: Alignment.topLeft,
                   child: InkWell(
                   onTap: () {
-                context.go('/');
+                context.go('/startpage');
               },
               child: const Icon(
                Icons.arrow_back,

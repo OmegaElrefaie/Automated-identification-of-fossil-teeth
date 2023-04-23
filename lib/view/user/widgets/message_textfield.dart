@@ -40,19 +40,19 @@ class _MessageTextFieldState extends State<MessageTextField> {
              onTap: ()async{
                String message = _controller.text;
                _controller.clear();
-               await FirebaseFirestore.instance.collection('chat').doc(widget.currentId).collection('messages').doc(widget.friendId).collection('chats').add({
+               await FirebaseFirestore.instance.collection('Users').doc(widget.currentId).collection('messages').doc(widget.friendId).collection('chats').add({
                   "senderId":widget.currentId,
                   "receiverId":widget.friendId,
                   "message":message,
                   "type":"text",
                   "date":DateTime.now(),
                }).then((value) {
-                 FirebaseFirestore.instance.collection('chat').doc(widget.currentId).collection('messages').doc(widget.friendId).set({
+                 FirebaseFirestore.instance.collection('Users').doc(widget.currentId).collection('messages').doc(widget.friendId).set({
                      'last_msg':message,
                  });
                });
 
-               await FirebaseFirestore.instance.collection('chat').doc(widget.friendId).collection('messages').doc(widget.currentId).collection("chats").add({
+               await FirebaseFirestore.instance.collection('Users').doc(widget.friendId).collection('messages').doc(widget.currentId).collection("chats").add({
                  "senderId":widget.currentId,
                  "receiverId":widget.friendId,
                  "message":message,
@@ -60,7 +60,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
                  "date":DateTime.now(),
 
                }).then((value){
-                 FirebaseFirestore.instance.collection('chat').doc(widget.friendId).collection('messages').doc(widget.currentId).set({
+                 FirebaseFirestore.instance.collection('Users').doc(widget.friendId).collection('messages').doc(widget.currentId).set({
                    "last_msg":message
                  });
                });
@@ -76,7 +76,6 @@ class _MessageTextFieldState extends State<MessageTextField> {
            )
          ],
        ),
-      
     );
   }
 }
