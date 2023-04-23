@@ -6,14 +6,14 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({Key? key});
+class FossilMap extends StatefulWidget {
+  const FossilMap({Key? key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<FossilMap> createState() => _FossilMapState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _FossilMapState extends State<FossilMap> {
   var myMarkers = HashSet<Marker>(); //array of type marker
 
   @override
