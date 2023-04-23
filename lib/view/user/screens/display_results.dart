@@ -139,11 +139,15 @@ class _DisplayResultsState extends State<DisplayResults> {
             //   style: TextStyle(
             //       color: kDarkColor, fontFamily: 'Inter', fontSize: 30),
             // ),
+            Text(
+              'This tooth belongs to the following specie:\n',
+              style: TextStyle(fontSize: 18),
+            ),
             resolutions.isNotEmpty
                 ? Text(
                     resolutions.first['label'],
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
                       color: kDarkColor,
                       fontFamily: 'Inter',
                     ),
@@ -152,7 +156,7 @@ class _DisplayResultsState extends State<DisplayResults> {
                     color: kPrimaryColor, size: 30),
 
             const SizedBox(
-              height: 80,
+              height: 30,
             ),
             SizedBox(
               height: 40,
