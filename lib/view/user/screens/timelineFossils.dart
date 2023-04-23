@@ -16,11 +16,20 @@ class TimeLine_fossils extends StatefulWidget {
 }
 
 class _TimeLine_fossilsState extends State<TimeLine_fossils> {
-  int _currentStep = 0;
+  final List<String> images = [
+    'MUVP_logo.jpg',
+    'asset4.png',
+    'asset2.png',
+  ];
 
+  int _currentStep = 0;
+  String image = 'MUVP_logo.jpg';
   void _onNextPressed() {
     if (_currentStep < 9) {
       setState(() {
+        image = images[_currentStep];
+        print(image);
+        print(_currentStep);
         _currentStep++;
       });
     }
@@ -46,17 +55,16 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
       ),
       body: Stack(children: [
         Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/dinasourBackground.jpg',
-              ),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5),
-                  BlendMode.lighten), // set low opacity
+            decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/images/$image',
             ),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5),
+                BlendMode.lighten), // set low opacity
           ),
-        ),
+        )),
         Column(
           children: <Widget>[
             Expanded(
