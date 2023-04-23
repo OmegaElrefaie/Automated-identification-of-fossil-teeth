@@ -59,6 +59,7 @@ dependencies:
   google_sign_in: ^6.1.0
   google_maps_flutter: ^2.2.5
   loading_animation_widget: ^1.2.0+4
+  timelines: ^0.1.0
 
 
 flutter_native_splash:
@@ -100,6 +101,7 @@ flutter:
     - assets/tensorflow/
     - assets/images/google-logo.png
     - assets/images/MUVP_logo.jpg
+    - assets/images/monkey.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
