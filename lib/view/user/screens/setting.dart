@@ -1,10 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/view/user/screens/changepassword.dart';
-import 'package:graduation_project/view/user/screens/editprofile.dart';
 import '../../../constants.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
+
+UserRepository userRepo = UserRepository.instance;
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -15,6 +15,23 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   bool s1 = false;
+
+  String name = '';
+  bool isloaded = false;
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    name = await userRepo.getUserName();
+    if (name.isNotEmpty) {
+      setState(() {
+        isloaded = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +66,10 @@ class _SettingState extends State<Setting> {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      'Yosr Gamal',
-                      style: TextStyle(
+                      name,
+                      style: const TextStyle(
                           color: Colors.black,
                           fontFamily: 'Inter',
                           fontSize: 15,

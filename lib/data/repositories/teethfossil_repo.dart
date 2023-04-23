@@ -10,7 +10,7 @@ class FosssilRepository {
   FosssilRepository._();
 
   Future createFossil(Fossil fossil, String uid) async {
-    final docFossil= db.collection('Fossils');
+    final docFossil = db.collection('Fossils');
 
     fossil.id = uid;
     final json = fossil.toJson();
@@ -55,7 +55,7 @@ class FosssilRepository {
         .doc(fossilid)
         .get();
 
-    fossilname = fossil.get('fossilname');
+    fossilname = fossil.get('Name');
     return fossilname;
   }
 
@@ -67,7 +67,7 @@ class FosssilRepository {
         .doc(fossilid)
         .get();
 
-    imageUrl = fossil.get('Image');
+    imageUrl = fossil.get('ImageUrl');
     return imageUrl;
   }
 

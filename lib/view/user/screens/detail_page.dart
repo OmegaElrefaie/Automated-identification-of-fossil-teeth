@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/domain/fossil_model.dart';
 
-class DetailPage extends StatelessWidget {
-  final Map? image;
-  const DetailPage({required this.image, super.key});
+class DetailPage extends StatefulWidget {
+  // final Map? image;
+  final Fossil fossil;
+  const DetailPage({required this.fossil, super.key});
 
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +27,7 @@ class DetailPage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
-              child: Hero(
-                tag: image!['id'],
-                child: Image.network(image!['url']),
-              ),
+              child: Image.network(widget.fossil.imageUrl!),
             ),
           ),
           const SizedBox(
@@ -31,7 +35,7 @@ class DetailPage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              image!['title'],
+              widget.fossil.name!,
               style: const TextStyle(
                   color: kTextColor, fontFamily: 'Inter', fontSize: 30),
             ),

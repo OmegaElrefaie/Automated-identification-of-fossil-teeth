@@ -1,10 +1,10 @@
 import 'dart:io';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
-//import 'package:flutter_tflite/flutter_tflite.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
 
@@ -33,7 +33,8 @@ class _DisplayResultsState extends State<DisplayResults> {
     if (pickedImage != null) {
       setState(() {
         _imageFile = File(pickedImage.path);
-        // _predict();
+        _predict();
+        resolutions = [];
       });
     }
   }
@@ -128,24 +129,40 @@ class _DisplayResultsState extends State<DisplayResults> {
                 child: const Icon(Icons.add_a_photo_outlined,
                     size: 25, color: kPrimaryColor)),
             const SizedBox(
-              height: 50,
+              height: 30,
             ),
             ////
             ///   Testing Widget
             ///
 
-            const Text(
-              'Name',
-              style: TextStyle(
-                  color: kDarkColor, fontFamily: 'Inter', fontSize: 30),
-            ),
-            if (resolutions.isNotEmpty)
-              Text(
-                resolutions.first['label'],
-                style: const TextStyle(fontSize: 16),
+            // const Text(
+            //   'Name',
+            //   style: TextStyle(
+            //       color: kDarkColor, fontFamily: 'Inter', fontSize: 30),
+            // ),
+            const Center(
+              child: Text(
+                'Specie:',
+                style: TextStyle(fontSize: 18),
               ),
+            ),
             const SizedBox(
-              height: 80,
+              height: 20,
+            ),
+            resolutions.isEmpty
+                ? LoadingAnimationWidget.staggeredDotsWave(
+                    color: kPrimaryColor, size: 30)
+                : Text(
+                    resolutions.first['label'],
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: kDarkColor,
+                      fontFamily: 'Inter',
+                    ),
+                  ),
+
+            const SizedBox(
+              height: 50,
             ),
             SizedBox(
               height: 40,
@@ -167,29 +184,31 @@ class _DisplayResultsState extends State<DisplayResults> {
     );
   }
 
-//   Future recognizeImage(File image) async {
-//     int startTime = DateTime.now().millisecondsSinceEpoch;
-//     var recognitions = await Tflite.runModelOnImage(
-//       path: image.path,
-//       numResults: 5,
-//       threshold: 0.05,
-//       imageMean: 127.5,
-//       imageStd: 127.5,
-//     );
-//     setState(() {
-//       resolutions = recognitions ?? [];
-//       print(recognitions);
-//     });
-//     int endTime = new DateTime.now().millisecondsSinceEpoch;
-//     print("Inference took ${endTime - startTime}ms");
-//   }
+  Future recognizeImage(File image) async {
+    int startTime = DateTime.now().millisecondsSinceEpoch;
+    var recognitions = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 5,
+      threshold: 0.05,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        resolutions = recognitions ?? [];
+      });
+    });
 
-//   _predict() async {
-//     final res = await Tflite.loadModel(
-//       model: "assets/tensorflow/model_unquant.tflite",
-//       labels: "assets/tensorflow/labels.txt",
-//       // useGpuDelegate: true,
-//     );
-//     recognizeImage(_imageFile!);
-//   }
+    int endTime = new DateTime.now().millisecondsSinceEpoch;
+    print("Inference took ${endTime - startTime}ms");
+  }
+
+  _predict() async {
+    final res = await Tflite.loadModel(
+      model: "assets/tensorflow/model_unquant.tflite",
+      labels: "assets/tensorflow/labels.txt",
+      // useGpuDelegate: true,
+    );
+    recognizeImage(_imageFile!);
+  }
 }
