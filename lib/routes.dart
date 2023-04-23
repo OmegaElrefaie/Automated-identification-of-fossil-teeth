@@ -19,7 +19,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        //return const Login();
+        //return const FossilMap();
         return const StartPage();
       }),
   GoRoute(
@@ -58,23 +58,22 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
 //     );
 //   }
 // ),
- GoRoute(
-            path: '/question2',
-            builder: (BuildContext context, GoRouterState state) {
-              return Question2(
-                currentUser: UserModel(
-                  id: '1',
-                  username: 'John Doe',
-                  email: 'john.doe@example.com',
-                  profilepic: 'https://example.com/john_doe.png',
-                ),
-                friendId: '2',
-                friendName: 'Jane Doe',
-                friendImage: 'https://example.com/jane_doe.png',
-              );
-            },
-          ),
-
+  GoRoute(
+    path: '/question2',
+    builder: (BuildContext context, GoRouterState state) {
+      return Question2(
+        currentUser: UserModel(
+          id: '1',
+          username: 'John Doe',
+          email: 'john.doe@example.com',
+          profilepic: 'https://example.com/john_doe.png',
+        ),
+        friendId: '2',
+        friendName: 'Jane Doe',
+        friendImage: 'https://example.com/jane_doe.png',
+      );
+    },
+  ),
 
   GoRoute(
       path: '/userprofile',
