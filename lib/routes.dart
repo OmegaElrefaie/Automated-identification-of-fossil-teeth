@@ -7,12 +7,15 @@ import 'package:graduation_project/view/user/screens/detail_page.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
+import 'package:graduation_project/view/user/screens/fossilMap.dart';
 import 'package:graduation_project/view/user/screens/login.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/screens/question2.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
+import 'package:graduation_project/view/user/screens/time1.dart';
+import 'package:graduation_project/view/user/screens/timelineFossils.dart';
 import 'package:graduation_project/view/user/screens/userprofile.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
@@ -21,8 +24,9 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        //return const FossilMap();
         return const StartPage();
+        // return const FossilMap();
+        // return const TimeLine_fossils();
       }),
   GoRoute(
       path: '/displayresults',
@@ -77,6 +81,23 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
     },
   ),
 
+  GoRoute(
+      path: '/fossilMap',
+      builder: (BuildContext context, GoRouterState state) {
+        return const FossilMap();
+      }),
+
+  GoRoute(
+      path: '/timelineFossils',
+      builder: (BuildContext context, GoRouterState state) {
+        return const TimeLine_fossils();
+      }),
+
+  GoRoute(
+      path: '/time1',
+      builder: (BuildContext context, GoRouterState state) {
+        return const time1();
+      }),
   GoRoute(
       path: '/userprofile',
       builder: (BuildContext context, GoRouterState state) {
