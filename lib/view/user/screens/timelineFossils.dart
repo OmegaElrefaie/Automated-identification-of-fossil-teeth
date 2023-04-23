@@ -44,129 +44,142 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
           onPressed: () => context.go('/startpage'),
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              color: Colors.white,
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: CustomPaint(
-                      painter: TimelinePainter(
-                        lineColor: Colors.grey,
+      body: Stack(children: [
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/dinasourBackground.jpg',
+              ),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5),
+                  BlendMode.lighten), // set low opacity
+            ),
+          ),
+        ),
+        Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                child: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: CustomPaint(
+                        painter: TimelinePainter(
+                          lineColor: Colors.grey,
+                        ),
                       ),
                     ),
-                  ),
-                  Timeline.tileBuilder(
-                    theme: TimelineThemeData(
-                      direction: Axis.horizontal,
-                      connectorTheme: ConnectorThemeData(
-                        space: 30.0,
-                        thickness: 5.0,
+                    Timeline.tileBuilder(
+                      theme: TimelineThemeData(
+                        direction: Axis.horizontal,
+                        connectorTheme: ConnectorThemeData(
+                          space: 30.0,
+                          thickness: 5.0,
+                        ),
                       ),
-                    ),
-                    builder: TimelineTileBuilder.connected(
-                      connectionDirection: ConnectionDirection.before,
-                      itemCount: 10,
-                      contentsBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Step ${index + 1}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                      builder: TimelineTileBuilder.connected(
+                        connectionDirection: ConnectionDirection.before,
+                        itemCount: 10,
+                        contentsBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Step ${index + 1}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      connectorBuilder: (_, index, __) {
-                        //Line
-                        return DecoratedLineConnector(
-                          decoration: BoxDecoration(
-                            color: index <= _currentStep
-                                ? Color.fromRGBO(110, 77, 14, 1)
-                                : Colors.grey,
-                          ),
-                        );
-                      },
-                      indicatorBuilder: (_, index) {
-                        return Stack(
-                          children: <Widget>[
-                            Container(
-                              width: 25.0,
-                              height: 25.0,
-                              child: GestureDetector(
-                                onTap: () {
-                                  context.go('/time1');
-                                },
-                                child: Container(
-                                  width: 25.0,
-                                  height: 25.0,
-                                  decoration: BoxDecoration(
-                                    //Circles
-                                    shape: BoxShape.circle,
-                                    color: index <= _currentStep
-                                        ? Color((0xFFD88B4A))
-                                        : Colors.grey,
+                          );
+                        },
+                        connectorBuilder: (_, index, __) {
+                          //Line
+                          return DecoratedLineConnector(
+                            decoration: BoxDecoration(
+                              color: index <= _currentStep
+                                  ? Color.fromRGBO(110, 77, 14, 1)
+                                  : Colors.grey,
+                            ),
+                          );
+                        },
+                        indicatorBuilder: (_, index) {
+                          return Stack(
+                            children: <Widget>[
+                              Container(
+                                width: 25.0,
+                                height: 25.0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    context.go('/time1');
+                                  },
+                                  child: Container(
+                                    width: 25.0,
+                                    height: 25.0,
+                                    decoration: BoxDecoration(
+                                      //Circles
+                                      shape: BoxShape.circle,
+                                      color: index <= _currentStep
+                                          ? Color((0xFFD88B4A))
+                                          : Colors.grey,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              child: Center(),
-                            ),
-                          ],
-                        );
-                      },
+                              Container(
+                                child: Center(),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: _onPrevPressed,
-                  child: Text('Prev'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    primary: Color(0xFFD88B4A),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _onPrevPressed,
+                    child: Text('Prev'),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      primary: Color(0xFFD88B4A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: _onNextPressed,
-                  child: Text('Next'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    primary: Color((0xFFD88B4A)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _onNextPressed,
+                    child: Text('Next'),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      primary: Color((0xFFD88B4A)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 16,
-              ),
-            ],
-          ),
-        ],
-      ),
+                SizedBox(
+                  width: 16,
+                ),
+              ],
+            ),
+          ],
+        )
+      ]),
     );
   }
 }
