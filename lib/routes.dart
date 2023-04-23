@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/view/Expert/screens/homeexpert.dart';
@@ -42,35 +43,24 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         return const Fact();
       }),
-  GoRoute(
-      path: '/question',
-      builder: (BuildContext context, GoRouterState state) {
-        return const Question();
-      }),
-// GoRoute(
-//   path: '/question2',
-//   builder: (BuildContext context, GoRouterState state) {
-//     return  Question2(
-//       currentUser: currentUser,
-//       friendId: 'friendId',
-//       friendImage: 'friendImage',
-//       friendName: 'friendName',
-//     );
-//   }
-// ),
+  // GoRoute(
+  //     path: '/question',
+  //     builder: (BuildContext context, GoRouterState state) {
+  //        return Question();
+  //     }),
  GoRoute(
             path: '/question2',
             builder: (BuildContext context, GoRouterState state) {
               return Question2(
                 currentUser: UserModel(
-                  id: '1',
-                  username: 'John Doe',
-                  email: 'john.doe@example.com',
-                  profilepic: 'https://example.com/john_doe.png',
+                  id: 'C6rjeHZUimSKyBqUHqV0LChtbBg2',
+                  username: 'Hagar',
+                  email: 'hagar@gmail.com',
+                  //profilepic: 'assets/images/asset3.png',
                 ),
-                friendId: '2',
-                friendName: 'Jane Doe',
-                friendImage: 'https://example.com/jane_doe.png',
+                friendId: 'z4bQLoimq8a99z2SW6kkslUHd4g1',
+                friendName: 'Sara',
+               // friendImage: 'assets/images/asset3.png',
               );
             },
           ),
