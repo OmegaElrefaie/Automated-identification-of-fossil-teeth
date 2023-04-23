@@ -24,7 +24,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const StartPage();
+        return const Login();
         // return const FossilMap();
         // return const TimeLine_fossils();
       }),
