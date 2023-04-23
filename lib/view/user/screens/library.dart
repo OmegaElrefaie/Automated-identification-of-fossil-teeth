@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
-import 'detail_page.dart';
+import 'package:graduation_project/domain/fossil_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 
 class Library extends StatefulWidget {
   const Library({super.key});
@@ -75,61 +78,86 @@ class _LibraryState extends State<Library> {
       ),
       Padding(
         padding: const EdgeInsets.only(top: 120.0),
-        child: GridView.builder(
-            padding: const EdgeInsets.all(10),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.8,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 15),
-            itemCount: images.length,
-            itemBuilder: (BuildContext ctx, index) {
-              return Card(
-                shape: const RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: Colors.black12,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 5.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 16,
-                          child: InkWell(
-                            key: ValueKey(images[index]['id']),
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => DetailPage(
-                                        image: images[index],
-                                      )));
-                            },
-                            child: Hero(
-                              tag: images[index]['id'],
-                              child: Image.network(
-                                images[index]['url'],
-                                fit: BoxFit.cover,
+        child: FutureBuilder(
+            future: FirebaseFirestore.instance.collection('Fossils').get(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return GridView.builder(
+                    padding: const EdgeInsets.all(10),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.8,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 15),
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (BuildContext ctx, index) {
+                      QueryDocumentSnapshot<Map<String, dynamic>> document =
+                          snapshot.data!.docs[index];
+                      Fossil myFossil = Fossil(
+                          id: document.id,
+                          name: document['Name'],
+                          imageUrl: document['ImageUrl']);
+                      return Card(
+                        shape: const RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Colors.black12,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 16,
+                                  child: InkWell(
+                                    key: ValueKey(myFossil.id),
+                                    onTap: () {
+                                      GoRouter.of(context).push("/detail_page",
+                                          extra: myFossil);
+                                      // Navigator.of(context)
+                                      //     .push(MaterialPageRoute(
+                                      //         builder: (context) => DetailPage(
+                                      //               image: getdoc['id'],
+                                      //             )));
+                                    },
+                                    // child: Hero(
+                                    //   tag: myFossil.id,
+                                    child: Image.network(
+                                      myFossil.imageUrl!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    // ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Center(
+                                child: Text(
+                                  myFossil.name!,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: Center(
-                        child: Text(
-                          images[index]['title'],
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Inter',
-                              fontSize: 14),
-                        ),
-                      ),
-                    )
+                      );
+                    });
+              }
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 200, left: 150),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    CircularProgressIndicator(color: Colors.orange),
                   ],
                 ),
               );

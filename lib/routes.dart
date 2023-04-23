@@ -1,7 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:graduation_project/view/Expert/screens/homeexpert.dart';
 import 'package:graduation_project/view/user/screens/changepassword.dart';
+import 'package:graduation_project/view/user/screens/detail_page.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
@@ -104,5 +106,13 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/change-password',
       builder: (BuildContext context, GoRouterState state) {
         return const ChangePasswordScreen();
-      })
+      }),
+  GoRoute(
+    path: '/detail_page',
+    builder: (BuildContext context, GoRouterState state) {
+      return DetailPage(
+        fossil: state.extra as Fossil,
+      );
+    },
+  ),
 ]);
