@@ -34,6 +34,7 @@ class _DisplayResultsState extends State<DisplayResults> {
       setState(() {
         _imageFile = File(pickedImage.path);
         _predict();
+        resolutions = [];
       });
     }
   }
@@ -128,7 +129,7 @@ class _DisplayResultsState extends State<DisplayResults> {
                 child: const Icon(Icons.add_a_photo_outlined,
                     size: 25, color: kPrimaryColor)),
             const SizedBox(
-              height: 50,
+              height: 30,
             ),
             ////
             ///   Testing Widget
@@ -139,24 +140,29 @@ class _DisplayResultsState extends State<DisplayResults> {
             //   style: TextStyle(
             //       color: kDarkColor, fontFamily: 'Inter', fontSize: 30),
             // ),
-            Text(
-              'This tooth belongs to the following specie:\n',
-              style: TextStyle(fontSize: 18),
+            const Center(
+              child: Text(
+                'Specie:',
+                style: TextStyle(fontSize: 18),
+              ),
             ),
-            resolutions.isNotEmpty
-                ? Text(
+            const SizedBox(
+              height: 20,
+            ),
+            resolutions.isEmpty
+                ? LoadingAnimationWidget.staggeredDotsWave(
+                    color: kPrimaryColor, size: 30)
+                : Text(
                     resolutions.first['label'],
                     style: const TextStyle(
                       fontSize: 20,
                       color: kDarkColor,
                       fontFamily: 'Inter',
                     ),
-                  )
-                : LoadingAnimationWidget.inkDrop(
-                    color: kPrimaryColor, size: 30),
+                  ),
 
             const SizedBox(
-              height: 30,
+              height: 50,
             ),
             SizedBox(
               height: 40,
@@ -190,9 +196,9 @@ class _DisplayResultsState extends State<DisplayResults> {
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         resolutions = recognitions ?? [];
-        print(recognitions);
       });
     });
+
     int endTime = new DateTime.now().millisecondsSinceEpoch;
     print("Inference took ${endTime - startTime}ms");
   }
