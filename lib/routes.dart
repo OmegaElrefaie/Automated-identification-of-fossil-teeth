@@ -82,13 +82,13 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   ),
 
   GoRoute(
-      path: '/fossilMap',
+      path: '/fossil_map',
       builder: (BuildContext context, GoRouterState state) {
         return const FossilMap();
       }),
 
   GoRoute(
-      path: '/timelineFossils',
+      path: '/timeline_fossils',
       builder: (BuildContext context, GoRouterState state) {
         return const TimeLine_fossils();
       }),

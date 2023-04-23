@@ -103,7 +103,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 0;
                 });
-                 context.go('/facts');
+                context.go('/facts');
               }),
           _createDrawerItem(
               icon: Icons.history,
@@ -113,18 +113,29 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 1;
                 });
-                 context.go('/question');
+                context.go('/question');
               }),
           _createDrawerItem(
-              icon: Icons.help,
-              text: 'Help & Support',
+              icon: Icons.map_rounded,
+              text: 'Map',
               isSelected: selectedIndex == 2,
               onTap: () {
                 setState(() {
                   selectedIndex = 2;
                 });
-               
-                Navigator.pushReplacementNamed(context, "/page2");
+
+                context.go('/fossil_map');
+              }),
+          _createDrawerItem(
+              icon: Icons.timeline_rounded,
+              text: 'Timeline',
+              isSelected: selectedIndex == 3,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 3;
+                });
+
+                context.go('/timeline_fossils');
               }),
         ],
       ),
