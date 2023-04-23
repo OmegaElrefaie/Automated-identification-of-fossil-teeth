@@ -68,37 +68,14 @@ class UserProfile extends StatelessWidget {
           Row(
             children: [
               const Padding(
-                padding: EdgeInsets.only(left: 30.0, top: 500),
-                child: Icon(
-                  Icons.person,
-                  color: kTextColor,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 500),
-                child: InkWell(
-                  onTap: () {},
-                  child: const Text(
-                    "My Profile",
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 30.0, top: 560),
+                padding: EdgeInsets.only(left: 30.0, top: 490),
                 child: Icon(
                   Icons.settings,
                   color: kTextColor,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 560),
+                padding: const EdgeInsets.only(left: 20.0, top: 490),
                 child: InkWell(
                   onTap: () {},
                   child: const Text(
@@ -114,14 +91,14 @@ class UserProfile extends StatelessWidget {
           Row(
             children: [
               const Padding(
-                padding: EdgeInsets.only(left: 30.0, top: 620),
+                padding: EdgeInsets.only(left: 30.0, top: 550),
                 child: Icon(
                   Icons.logout,
                   color: kTextColor,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 620),
+                padding: const EdgeInsets.only(left: 20.0, top: 550),
                 child: InkWell(
                   onTap: () {
                     FirebaseAuth.instance.signOut();
