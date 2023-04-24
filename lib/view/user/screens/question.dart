@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graduation_project/view/user/screens/question2.dart';
+import 'package:graduation_project/view/user/screens/chat.dart';
 import '../../../constants.dart';
 import '../../../domain/user_model.dart';
 
@@ -102,7 +102,7 @@ class _QuestionState extends State<Question> {
               height: 80,
               child: ElevatedButton(
                 onPressed: () {
-                  context.go('/question2');  
+                  context.go('/chat');  
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -155,7 +155,7 @@ class _QuestionState extends State<Question> {
                                friendId: searchResult[index]['id'],
                                 friendName: searchResult[index]['Username'])));
                             //      friendImage: searchResult[index]['Profilepic'])));
-                                   context.go('/question2');  
+                                   context.go('/chat');  
                       }, icon: const Icon(Icons.message_rounded)),
                     );
                   }))

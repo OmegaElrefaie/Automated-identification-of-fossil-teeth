@@ -8,7 +8,7 @@ import 'package:graduation_project/view/user/screens/editprofile.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
 import 'package:graduation_project/view/user/screens/login.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
-import 'package:graduation_project/view/user/screens/question2.dart';
+import 'package:graduation_project/view/user/screens/chat.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
@@ -49,7 +49,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   //        return Question();
   //     }),
  GoRoute(
-            path: '/question2',
+            path: '/chat',
             builder: (BuildContext context, GoRouterState state) {
               return Question2(
                 currentUser: UserModel(
