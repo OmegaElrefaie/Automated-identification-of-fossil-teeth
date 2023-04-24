@@ -103,6 +103,19 @@ flutter:
     - assets/images/MUVP_logo.jpg
     - assets/images/monkey.jpg
     - assets/images/dinasourBackground.jpg
+    - assets/images/Decomposition.png
+    - assets/images/Burial.png
+    - assets/images/Permineralization.png
+    - assets/images/Recrystallization.png
+    - assets/images/Replacement.png
+    - assets/images/Mold_and_Cast_Formation.png
+    - assets/images/Exposure.png
+    - assets/images/test.png
+    
+
+    
+
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
