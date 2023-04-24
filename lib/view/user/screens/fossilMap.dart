@@ -74,6 +74,190 @@ class _FossilMapState extends State<FossilMap> {
                 },
               ),
             ));
+
+            myMarkers.add(Marker(
+              markerId: MarkerId('2'),
+              position: LatLng(29.2692, 30.0397),
+              infoWindow: InfoWindow(
+                title: 'Ariid catfish',
+                snippet: 'See more',
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Ariid catfish'),
+                      content: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Container(
+                          height: 500, // adjust the height to fit your content
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    120, // adjust the dimensions of the image to fit your image
+                                width:
+                                    300, // adjust the dimensions of the image to fit your image
+                                child: Image.asset(
+                                  'assets/images/Ariid_catfish.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('\n'),
+                              Text(
+                                  'Qarmoutus hitanensis is an extinct ariid catfish whose fossils were first discovered in Wadi Al-Hitan, Egypt. It lived during the Eocene period around 37 million years ago, and its body length is estimated to be about 6.5 feet long.'),
+                            ],
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Close'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ));
+
+            myMarkers.add(Marker(
+              markerId: MarkerId('3'),
+              position: LatLng(25.456188, 30.546968),
+              infoWindow: InfoWindow(
+                title: 'Qatranimys safroutus',
+                snippet: 'See more',
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Qatranimys safroutus'),
+                      content: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Container(
+                          height: 500, // adjust the height to fit your content
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    120, // adjust the dimensions of the image to fit your image
+                                width:
+                                    300, // adjust the dimensions of the image to fit your image
+                                child: Image.asset(
+                                  'assets/images/Qatranimys_safroutus.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('\n'),
+                              Text(
+                                  'Wahasuchus is a genus of extinct mesoeucrocodylian of the Middle Campanian age found in the Quseir Formation, Egypt.'),
+                            ],
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Close'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ));
+
+            myMarkers.add(Marker(
+              markerId: MarkerId('4'),
+              position: LatLng(29.414, 30.852),
+              infoWindow: InfoWindow(
+                title: 'Wahasuchus egyptensis',
+                snippet: 'See more',
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Wahasuchus egyptensis'),
+                      content: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Container(
+                          height: 500, // adjust the height to fit your content
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    120, // adjust the dimensions of the image to fit your image
+                                width:
+                                    300, // adjust the dimensions of the image to fit your image
+                                child: Image.asset(
+                                  'assets/images/Wahasuchus_egyptensis.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('\n'),
+                              Text(
+                                  'According to the new study, published in PeerJ on October 19, the new mouse was named Qatranimys safroutus. The mouse took this name in relation to the Qatranimys region, as well as because of its very small size, as it was a fingertip (safroutus) with a weight of only about 40 grams, and “safrout” in Egyptian colloquial means small or dwarf.'),
+                            ],
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Close'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ));
+
+            myMarkers.add(Marker(
+              markerId: MarkerId('5'),
+              position: LatLng(27.000092, 28.000068),
+              infoWindow: InfoWindow(
+                title: 'Mansourasaurus shahinae ',
+                snippet: 'See more',
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Mansourasaurus shahinae'),
+                      content: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Container(
+                          height: 500, // adjust the height to fit your content
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    120, // adjust the dimensions of the image to fit your image
+                                width:
+                                    300, // adjust the dimensions of the image to fit your image
+                                child: Image.asset(
+                                  'assets/images/Mansourasaurus.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('\n'),
+                              Text(
+                                  'Mansourasaurus represents the best-known continental African (i.e. excluding Madagascar) titanosaur of the Upper Cretaceous from the time period after the Cenomanian. Its existence would show that the continent was far less isolated from the various Eurasian landmasses than had been assumed.'),
+                            ],
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Close'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ));
           });
         },
         markers: myMarkers,
