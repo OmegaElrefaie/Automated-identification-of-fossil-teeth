@@ -17,20 +17,34 @@ class TimeLine_fossils extends StatefulWidget {
 
 class _TimeLine_fossilsState extends State<TimeLine_fossils> {
   final List<String> images = [
-    'MUVP_logo.jpg',
-    'asset4.png',
-    'asset2.png',
+    'Decomposition.png',
+    'Burial.png',
+    'Permineralization.png',
+    'Recrystallization.png',
+    'Replacement.png',
+    'Mold_and_Cast_Formation.png',
+    'Exposure.png',
+  ];
+  final List<String> phases = [
+    'Decomposition',
+    'Burial',
+    'Permineralization',
+    'Recrystallization',
+    'Replacement',
+    'Mold and Cast Formation',
+    'Exposure',
   ];
 
   int _currentStep = 0;
-  String image = 'MUVP_logo.jpg';
+  String image = 'Decomposition.png';
+
   void _onNextPressed() {
-    if (_currentStep < 9) {
+    if (_currentStep < 10) {
       setState(() {
-        image = images[_currentStep];
         print(image);
         print(_currentStep);
         _currentStep++;
+        image = images[_currentStep];
       });
     }
   }
@@ -39,6 +53,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
     if (_currentStep > 0) {
       setState(() {
         _currentStep--;
+        image = images[_currentStep];
       });
     }
   }
@@ -47,7 +62,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fossils Time Line'),
+        title: Text('The process of fossilization'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => context.go('/startpage'),
@@ -61,7 +76,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
               'assets/images/$image',
             ),
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5),
+            colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.2),
                 BlendMode.lighten), // set low opacity
           ),
         )),
@@ -93,7 +108,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
                           return Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'Step ${index + 1}',
+                              '   ${index + 1}:${phases[index]}   ',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
