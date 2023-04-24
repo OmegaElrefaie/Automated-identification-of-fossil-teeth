@@ -70,4 +70,15 @@ class FosssilRepository {
     imageUrl = fossil.get('ImageUrl');
     return imageUrl;
   }
+
+  Future fetchAllFosssil() async {
+    FirebaseFirestore.instance.collection('Fossils').get();
+  }
+
+  Future removeFosssil(String id) async {
+    DocumentReference documentReference =
+      FirebaseFirestore.instance.collection('Fossils').doc(id);
+
+  await documentReference.delete();
+  }
 }

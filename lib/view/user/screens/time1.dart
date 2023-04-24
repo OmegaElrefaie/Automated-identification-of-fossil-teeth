@@ -16,7 +16,7 @@ class _time1State extends State<time1> {
         title: Text('Time1'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () => context.go('/timeLineFossils'),
+          onPressed: () => context.go('/timeline_fossils'),
         ),
       ),
       body: Column(

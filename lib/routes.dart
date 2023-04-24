@@ -1,21 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:graduation_project/view/Expert/screens/homeexpert.dart';
 import 'package:graduation_project/view/user/screens/changepassword.dart';
-import 'package:graduation_project/view/user/screens/detail_page.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
-import 'package:graduation_project/view/user/screens/fossilMap.dart';
 import 'package:graduation_project/view/user/screens/login.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/screens/question2.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
-import 'package:graduation_project/view/user/screens/time1.dart';
-import 'package:graduation_project/view/user/screens/timelineFossils.dart';
 import 'package:graduation_project/view/user/screens/userprofile.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
@@ -24,9 +20,8 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
+        //return const Login();
         return const StartPage();
-        // return const FossilMap();
-        // return const TimeLine_fossils();
       }),
   GoRoute(
       path: '/displayresults',
@@ -48,56 +43,29 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         return const Fact();
       }),
-  GoRoute(
-      path: '/question',
-      builder: (BuildContext context, GoRouterState state) {
-        return const Question();
-      }),
-// GoRoute(
-//   path: '/question2',
-//   builder: (BuildContext context, GoRouterState state) {
-//     return  Question2(
-//       currentUser: currentUser,
-//       friendId: 'friendId',
-//       friendImage: 'friendImage',
-//       friendName: 'friendName',
-//     );
-//   }
-// ),
-  GoRoute(
-    path: '/question2',
-    builder: (BuildContext context, GoRouterState state) {
-      return Question2(
-        currentUser: UserModel(
-          id: '1',
-          username: 'John Doe',
-          email: 'john.doe@example.com',
-          profilepic: 'https://example.com/john_doe.png',
-        ),
-        friendId: '2',
-        friendName: 'Jane Doe',
-        friendImage: 'https://example.com/jane_doe.png',
-      );
-    },
-  ),
+  // GoRoute(
+  //     path: '/question',
+  //     builder: (BuildContext context, GoRouterState state) {
+  //        return Question();
+  //     }),
+ GoRoute(
+            path: '/question2',
+            builder: (BuildContext context, GoRouterState state) {
+              return Question2(
+                currentUser: UserModel(
+                  id: 'C6rjeHZUimSKyBqUHqV0LChtbBg2',
+                  username: 'Hagar',
+                  email: 'hagar@gmail.com',
+                  //profilepic: 'assets/images/asset3.png',
+                ),
+                friendId: 'z4bQLoimq8a99z2SW6kkslUHd4g1',
+                friendName: 'Sara',
+               // friendImage: 'assets/images/asset3.png',
+              );
+            },
+          ),
 
-  GoRoute(
-      path: '/fossilMap',
-      builder: (BuildContext context, GoRouterState state) {
-        return const FossilMap();
-      }),
 
-  GoRoute(
-      path: '/timelineFossils',
-      builder: (BuildContext context, GoRouterState state) {
-        return const TimeLine_fossils();
-      }),
-
-  GoRoute(
-      path: '/time1',
-      builder: (BuildContext context, GoRouterState state) {
-        return const time1();
-      }),
   GoRoute(
       path: '/userprofile',
       builder: (BuildContext context, GoRouterState state) {
@@ -127,13 +95,5 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/change-password',
       builder: (BuildContext context, GoRouterState state) {
         return const ChangePasswordScreen();
-      }),
-  GoRoute(
-    path: '/detail_page',
-    builder: (BuildContext context, GoRouterState state) {
-      return DetailPage(
-        fossil: state.extra as Fossil,
-      );
-    },
-  ),
+      })
 ]);
