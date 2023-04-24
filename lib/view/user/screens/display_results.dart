@@ -161,13 +161,20 @@ class _DisplayResultsState extends State<DisplayResults> {
                 ? const SizedBox(
                     height: 50,
                   )
-                : Text(
-                    resolutions.first['label'],
-                    style: const TextStyle(
-                      fontSize: 20,
-                      color: kDarkColor,
-                      fontFamily: 'Inter',
-                    ),
+                : Column(
+                    children: [
+                      Text(
+                        resolutions.first['label'],
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: kDarkColor,
+                          fontFamily: 'Inter',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
                   ),
             SizedBox(
               height: 40,
