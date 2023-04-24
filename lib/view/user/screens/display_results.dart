@@ -20,6 +20,7 @@ class _DisplayResultsState extends State<DisplayResults> {
 
   final _picker = ImagePicker();
   List resolutions = [];
+  bool isLoading = false;
 
   final picker = ImagePicker();
 
@@ -89,8 +90,8 @@ class _DisplayResultsState extends State<DisplayResults> {
                   : Container(),
             ),
             FloatingActionButton(
-                onPressed: () {
-                  showDialog(
+                onPressed: () async {
+                  await showDialog(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
                       shape: const RoundedRectangleBorder(
@@ -101,9 +102,10 @@ class _DisplayResultsState extends State<DisplayResults> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ElevatedButton(
-                                    onPressed: () {
+                                    onPressed: () async {
                                       _openImagePicker(
                                           imageSource: ImageSource.gallery);
+
                                       Navigator.pop(context);
                                     },
                                     child: const Text('Gallery')),
@@ -123,6 +125,9 @@ class _DisplayResultsState extends State<DisplayResults> {
                       ],
                     ),
                   );
+                  setState(() {
+                    isLoading = true;
+                  });
                 },
                 tooltip: 'Select Image',
                 backgroundColor: Colors.white,
@@ -149,9 +154,13 @@ class _DisplayResultsState extends State<DisplayResults> {
             const SizedBox(
               height: 20,
             ),
-            resolutions.isEmpty
-                ? LoadingAnimationWidget.staggeredDotsWave(
-                    color: kPrimaryColor, size: 30)
+            if (isLoading)
+              LoadingAnimationWidget.staggeredDotsWave(
+                  color: kPrimaryColor, size: 30),
+            (resolutions.isEmpty)
+                ? const SizedBox(
+                    height: 50,
+                  )
                 : Text(
                     resolutions.first['label'],
                     style: const TextStyle(
@@ -160,10 +169,6 @@ class _DisplayResultsState extends State<DisplayResults> {
                       fontFamily: 'Inter',
                     ),
                   ),
-
-            const SizedBox(
-              height: 50,
-            ),
             SizedBox(
               height: 40,
               width: 100,
@@ -195,11 +200,12 @@ class _DisplayResultsState extends State<DisplayResults> {
     );
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
+        isLoading = false;
         resolutions = recognitions ?? [];
       });
     });
 
-    int endTime = new DateTime.now().millisecondsSinceEpoch;
+    int endTime = DateTime.now().millisecondsSinceEpoch;
     print("Inference took ${endTime - startTime}ms");
   }
 
