@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:go_router/go_router.dart';
 import 'package:timelines/timelines.dart';
 
-import 'fossilMap.dart';
+import 'fossil_map.dart';
 
 class TimeLine_fossils extends StatefulWidget {
   const TimeLine_fossils({Key? key}) : super(key: key);
