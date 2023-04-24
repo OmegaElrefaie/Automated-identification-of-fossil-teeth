@@ -49,9 +49,9 @@ class _UserProfileState extends State<UserProfile> {
                     colors: [kDarkColor, kLightColor])),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 90, top: 160),
+            padding: const EdgeInsets.only(top: 160),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 CircleAvatar(
                   radius: 110,
@@ -60,20 +60,15 @@ class _UserProfileState extends State<UserProfile> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 410, left: 163),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Inter',
-                      fontSize: 23,
-                      fontWeight: FontWeight.w700),
-                ),
-              ],
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              name,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Inter',
+                  fontSize: 23,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Padding(
