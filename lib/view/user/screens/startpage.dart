@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:graduation_project/view/user/screens/home.dart';
 import 'package:graduation_project/view/user/screens/library.dart';
 import 'package:graduation_project/view/user/screens/setting.dart';
@@ -5,6 +8,8 @@ import 'package:graduation_project/view/user/widgets/drawer.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -21,6 +26,35 @@ class _StartPageState extends State<StartPage> {
       const SafeArea(child: Library()),
       const SafeArea(child: Setting()),
     ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    saveMessagingToken();
+  }
+
+// Function to get the messaging token and save it to the user's document
+  Future<void> saveMessagingToken() async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    // Get the messaging token for the user
+    final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? messagingToken = await messaging.getToken();
+
+    if (messagingToken != null && userId != null) {
+      try {
+        // Get a reference to the user's document in Firestore
+        final userRef =
+            FirebaseFirestore.instance.collection('Users').doc(userId);
+
+        // Update the user's document with the new messaging token
+        await userRef.update({
+          'messagingTokens': FieldValue.arrayUnion([messagingToken])
+        });
+      } catch (e) {
+        log(e.toString());
+      }
+    }
   }
 
   List<PersistentBottomNavBarItem> _navBarItem() {
