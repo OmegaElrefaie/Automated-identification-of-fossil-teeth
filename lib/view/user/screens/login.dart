@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 UserRepository userRepo = UserRepository.instance;
 
@@ -59,11 +59,15 @@ class _LoginState extends State<Login> {
 
   Future<void> initializeUser(User? authUser) async {
     if (authUser == null) {
-      print('user is signed out');
+      if (kDebugMode) {
+        print('user is signed out');
+      }
       context.go('/');
     } else {
       context.go('/startpage');
-      print('user is signed in');
+      if (kDebugMode) {
+        print('user is signed in');
+      }
     }
   }
 

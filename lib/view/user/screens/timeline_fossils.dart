@@ -1,8 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:go_router/go_router.dart';
 import 'package:timelines/timelines.dart';
 
@@ -62,9 +58,9 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('The process of fossilization'),
+        title: const Text('The process of fossilization'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => context.go('/startpage'),
         ),
       ),
@@ -96,7 +92,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
                     Timeline.tileBuilder(
                       theme: TimelineThemeData(
                         direction: Axis.horizontal,
-                        connectorTheme: ConnectorThemeData(
+                        connectorTheme: const ConnectorThemeData(
                           space: 30.0,
                           thickness: 5.0,
                         ),
@@ -106,10 +102,10 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
                         itemCount: 10,
                         contentsBuilder: (BuildContext context, int index) {
                           return Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               '   ${index + 1}:${phases[index]}   ',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -120,7 +116,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
                           return DecoratedLineConnector(
                             decoration: BoxDecoration(
                               color: index <= _currentStep
-                                  ? Color.fromRGBO(110, 77, 14, 1)
+                                  ? const Color.fromRGBO(110, 77, 14, 1)
                                   : Colors.grey,
                             ),
                           );
@@ -142,14 +138,14 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
                                       //Circles
                                       shape: BoxShape.circle,
                                       color: index <= _currentStep
-                                          ? Color((0xFFD88B4A))
+                                          ? const Color((0xFFD88B4A))
                                           : Colors.grey,
                                     ),
                                   ),
                                 ),
                               ),
                               Container(
-                                child: Center(),
+                                child: const Center(),
                               ),
                             ],
                           );
@@ -163,39 +159,39 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _onPrevPressed,
-                    child: Text('Prev'),
+                    child: const Text('Prev'),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      primary: Color(0xFFD88B4A),
+                      primary: const Color(0xFFD88B4A),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _onNextPressed,
-                    child: Text('Next'),
+                    child: const Text('Next'),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      primary: Color((0xFFD88B4A)),
+                      primary: const Color((0xFFD88B4A)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
               ],

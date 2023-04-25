@@ -30,8 +30,8 @@ class _FossilMapState extends State<FossilMap> {
         onMapCreated: (GoogleMapController googleMapController) {
           setState(() {
             myMarkers.add(Marker(
-              markerId: MarkerId('1'),
-              position: LatLng(31.042701965148268, 31.353450854621194),
+              markerId: const MarkerId('1'),
+              position: const LatLng(31.042701965148268, 31.353450854621194),
               infoWindow: InfoWindow(
                 title: 'MUVP',
                 snippet: 'See more',
@@ -39,10 +39,10 @@ class _FossilMapState extends State<FossilMap> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text('MUVP'),
+                      title: const Text('MUVP'),
                       content: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        child: Container(
+                        child: SizedBox(
                           height: 500, // adjust the height to fit your content
                           child: Column(
                             children: [
@@ -56,8 +56,8 @@ class _FossilMapState extends State<FossilMap> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Text('\n'),
-                              Text(
+                              const Text('\n'),
+                              const Text(
                                   'A research unit for vertebrate fossil \n preparation and training, was created in 2010. MUVP is dedicated to educating Egyptian vertebrate paleontologists, expanding awareness of Egypt vertebrate paleontological resources, and undertaking collection, preparation, study and curation of Egypt fossil vertebrates.'),
                             ],
                           ),
@@ -66,7 +66,7 @@ class _FossilMapState extends State<FossilMap> {
                       actions: [
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: Text('Close'),
+                          child: const Text('Close'),
                         ),
                       ],
                     ),
@@ -76,8 +76,8 @@ class _FossilMapState extends State<FossilMap> {
             ));
 
             myMarkers.add(Marker(
-              markerId: MarkerId('2'),
-              position: LatLng(29.2692, 30.0397),
+              markerId: const MarkerId('2'),
+              position: const LatLng(29.2692, 30.0397),
               infoWindow: InfoWindow(
                 title: 'Ariid catfish',
                 snippet: 'See more',
@@ -85,10 +85,10 @@ class _FossilMapState extends State<FossilMap> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text('Ariid catfish'),
+                      title: const Text('Ariid catfish'),
                       content: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        child: Container(
+                        child: SizedBox(
                           height: 500, // adjust the height to fit your content
                           child: Column(
                             children: [
@@ -102,8 +102,8 @@ class _FossilMapState extends State<FossilMap> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Text('\n'),
-                              Text(
+                              const Text('\n'),
+                              const Text(
                                   'Qarmoutus hitanensis is an extinct ariid catfish whose fossils were first discovered in Wadi Al-Hitan, Egypt. It lived during the Eocene period around 37 million years ago, and its body length is estimated to be about 6.5 feet long.'),
                             ],
                           ),
@@ -112,7 +112,7 @@ class _FossilMapState extends State<FossilMap> {
                       actions: [
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: Text('Close'),
+                          child: const Text('Close'),
                         ),
                       ],
                     ),
@@ -122,8 +122,8 @@ class _FossilMapState extends State<FossilMap> {
             ));
 
             myMarkers.add(Marker(
-              markerId: MarkerId('3'),
-              position: LatLng(25.456188, 30.546968),
+              markerId: const MarkerId('3'),
+              position: const LatLng(25.456188, 30.546968),
               infoWindow: InfoWindow(
                 title: 'Qatranimys safroutus',
                 snippet: 'See more',
@@ -131,10 +131,10 @@ class _FossilMapState extends State<FossilMap> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text('Qatranimys safroutus'),
+                      title: const Text('Qatranimys safroutus'),
                       content: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        child: Container(
+                        child: SizedBox(
                           height: 500, // adjust the height to fit your content
                           child: Column(
                             children: [
@@ -148,8 +148,8 @@ class _FossilMapState extends State<FossilMap> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Text('\n'),
-                              Text(
+                              const Text('\n'),
+                              const Text(
                                   'Wahasuchus is a genus of extinct mesoeucrocodylian of the Middle Campanian age found in the Quseir Formation, Egypt.'),
                             ],
                           ),
@@ -158,7 +158,7 @@ class _FossilMapState extends State<FossilMap> {
                       actions: [
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: Text('Close'),
+                          child: const Text('Close'),
                         ),
                       ],
                     ),
@@ -168,8 +168,8 @@ class _FossilMapState extends State<FossilMap> {
             ));
 
             myMarkers.add(Marker(
-              markerId: MarkerId('4'),
-              position: LatLng(29.414, 30.852),
+              markerId: const MarkerId('4'),
+              position: const LatLng(29.414, 30.852),
               infoWindow: InfoWindow(
                 title: 'Wahasuchus egyptensis',
                 snippet: 'See more',
@@ -177,10 +177,10 @@ class _FossilMapState extends State<FossilMap> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text('Wahasuchus egyptensis'),
+                      title: const Text('Wahasuchus egyptensis'),
                       content: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        child: Container(
+                        child: SizedBox(
                           height: 500, // adjust the height to fit your content
                           child: Column(
                             children: [
@@ -194,8 +194,8 @@ class _FossilMapState extends State<FossilMap> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Text('\n'),
-                              Text(
+                              const Text('\n'),
+                              const Text(
                                   'According to the new study, published in PeerJ on October 19, the new mouse was named Qatranimys safroutus. The mouse took this name in relation to the Qatranimys region, as well as because of its very small size, as it was a fingertip (safroutus) with a weight of only about 40 grams, and “safrout” in Egyptian colloquial means small or dwarf.'),
                             ],
                           ),
@@ -204,7 +204,7 @@ class _FossilMapState extends State<FossilMap> {
                       actions: [
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: Text('Close'),
+                          child: const Text('Close'),
                         ),
                       ],
                     ),
@@ -214,8 +214,8 @@ class _FossilMapState extends State<FossilMap> {
             ));
 
             myMarkers.add(Marker(
-              markerId: MarkerId('5'),
-              position: LatLng(27.000092, 28.000068),
+              markerId: const MarkerId('5'),
+              position: const LatLng(27.000092, 28.000068),
               infoWindow: InfoWindow(
                 title: 'Mansourasaurus shahinae ',
                 snippet: 'See more',
@@ -223,10 +223,10 @@ class _FossilMapState extends State<FossilMap> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text('Mansourasaurus shahinae'),
+                      title: const Text('Mansourasaurus shahinae'),
                       content: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
-                        child: Container(
+                        child: SizedBox(
                           height: 500, // adjust the height to fit your content
                           child: Column(
                             children: [
@@ -240,8 +240,8 @@ class _FossilMapState extends State<FossilMap> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Text('\n'),
-                              Text(
+                              const Text('\n'),
+                              const Text(
                                   'Mansourasaurus represents the best-known continental African (i.e. excluding Madagascar) titanosaur of the Upper Cretaceous from the time period after the Cenomanian. Its existence would show that the continent was far less isolated from the various Eurasian landmasses than had been assumed.'),
                             ],
                           ),
@@ -250,7 +250,7 @@ class _FossilMapState extends State<FossilMap> {
                       actions: [
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(),
-                          child: Text('Close'),
+                          child: const Text('Close'),
                         ),
                       ],
                     ),
