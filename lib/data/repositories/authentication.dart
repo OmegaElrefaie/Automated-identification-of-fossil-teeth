@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/foundation.dart';
 
 class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -50,8 +50,9 @@ class Auth {
                   'It appears you have entered an invalid email format. Please try again.',
               contentType: ContentType.failure),
         ));
-      } else
+      } else if (kDebugMode) {
         print(e);
+      }
     }
     return user;
   }
@@ -106,7 +107,9 @@ class Auth {
               contentType: ContentType.failure),
         ));
       } else {
-        print(e);
+        if (kDebugMode) {
+          print(e);
+        }
       }
     }
     return user;
@@ -161,7 +164,9 @@ class Auth {
                 contentType: ContentType.failure),
           ));
         } else {
-          print(e);
+          if (kDebugMode) {
+            print(e);
+          }
         }
       }
     }

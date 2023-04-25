@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -22,7 +20,7 @@ class App_Notification {
 
     tz.initializeTimeZones();
 
-    var scheduledTime = Time(2, 0, 0); // 8:00 AM
+    var scheduledTime = const Time(2, 0, 0); // 8:00 AM
     var now = DateTime.now();
     var scheduledDateTime = DateTime(
       now.year,

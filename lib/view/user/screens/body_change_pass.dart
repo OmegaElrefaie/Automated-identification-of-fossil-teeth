@@ -104,11 +104,11 @@ class _ChangePassBodyState extends State<ChangePassBody> {
                             hide1 ? Icons.visibility_off : Icons.visibility),
                       ),
                       hintText: 'new Password',
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.bold,
                           color: Colors.grey),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey))),
                 ),
                 const SizedBox(height: 15),

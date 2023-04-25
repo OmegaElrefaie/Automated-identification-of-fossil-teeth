@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/view/Expert/screens/homeexpert.dart';
@@ -7,8 +6,6 @@ import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
 import 'package:graduation_project/view/user/screens/fossil_map.dart';
-import 'package:graduation_project/view/user/screens/login.dart';
-import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
