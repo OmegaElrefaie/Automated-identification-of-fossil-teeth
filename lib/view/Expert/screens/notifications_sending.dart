@@ -26,7 +26,7 @@ class _CustomNotificationState extends State<CustomNotification> {
           alignment: Alignment.topLeft,
           child: InkWell(
             onTap: () {
-              context.go('/startpage');
+              context.go('/home_expert');
             },
             child: const Icon(
               Icons.arrow_back,
