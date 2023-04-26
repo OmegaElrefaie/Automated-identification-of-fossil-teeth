@@ -69,11 +69,11 @@ class _DrawerrState extends State<Drawerr> {
                 setState(() {
                   selectedIndex = 0;
                 });
-                context.go('/settings');
+                context.go('/settings_expert');
               }),
           _createDrawerrItem(
-              icon: Icons.phone,
-              text: 'Notifications Sending',
+              icon: Icons.notifications,
+              text: 'Notifications Editing',
               isSelected: selectedIndex == 2,
               onTap: () {
                 setState(() {
