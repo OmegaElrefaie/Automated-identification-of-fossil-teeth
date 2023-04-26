@@ -3,6 +3,9 @@ import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/data/repositories/teethfossil_repo.dart';
+
+FosssilRepository fossilRepo = FosssilRepository.instance;
 
 class Library extends StatefulWidget {
   const Library({super.key});
@@ -78,7 +81,9 @@ class _LibraryState extends State<Library> {
       Padding(
         padding: const EdgeInsets.only(top: 120.0),
         child: FutureBuilder(
-            future: FirebaseFirestore.instance.collection('Fossils').get(),
+            future:
+                //  fossilRepo.fetchAllFosssil(),
+                FirebaseFirestore.instance.collection('Fossils').get(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return GridView.builder(
