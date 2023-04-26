@@ -49,26 +49,28 @@ class _UserProfileState extends State<UserProfile> {
                     colors: [kDarkColor, kLightColor])),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 160),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                CircleAvatar(
+            padding: const EdgeInsets.only(top: 160.0),
+            child: Column(
+              children: [
+                const CircleAvatar(
                   radius: 110,
                   backgroundImage: AssetImage('assets/images/asset4.png'),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    name,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Inter',
+                        fontSize: 23,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
               ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              name,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Inter',
-                  fontSize: 23,
-                  fontWeight: FontWeight.w700),
             ),
           ),
           Padding(
@@ -85,53 +87,58 @@ class _UserProfileState extends State<UserProfile> {
                   )),
             ),
           ),
-          Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 30.0, top: 490),
-                child: Icon(
-                  Icons.settings,
-                  color: kTextColor,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 490),
-                child: InkWell(
-                  onTap: () {},
-                  child: const Text(
-                    "Settings",
-                    style: TextStyle(
-                      fontSize: 25,
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 30.0, top: 550, right: 30, bottom: 30),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.settings,
+                      color: kTextColor,
                     ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: const Text(
+                        "Settings",
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.logout,
+                        color: kTextColor,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          FirebaseAuth.instance.signOut();
+                        },
+                        child: const Text(
+                          "LogOut",
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 30.0, top: 550),
-                child: Icon(
-                  Icons.logout,
-                  color: kTextColor,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 550),
-                child: InkWell(
-                  onTap: () {
-                    FirebaseAuth.instance.signOut();
-                  },
-                  child: const Text(
-                    "LogOut",
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
