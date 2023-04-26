@@ -152,11 +152,11 @@ class _LibraryState extends State<Library> {
                     });
               }
               return Padding(
-                padding: const EdgeInsets.only(bottom: 200, left: 150),
+                padding: const EdgeInsets.only(bottom: 200, left: 160),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: const [
-                    CircularProgressIndicator(color: Colors.orange),
+                    CircularProgressIndicator(color: kPrimaryColor),
                   ],
                 ),
               );

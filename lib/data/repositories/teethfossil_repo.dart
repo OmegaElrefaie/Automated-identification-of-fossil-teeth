@@ -75,10 +75,10 @@ class FosssilRepository {
     FirebaseFirestore.instance.collection('Fossils').get();
   }
 
-  Future removeFosssil(String id) async {
+  Future removeFossil(String id) async {
     DocumentReference documentReference =
-      FirebaseFirestore.instance.collection('Fossils').doc(id);
+        FirebaseFirestore.instance.collection('Fossils').doc(id);
 
-  await documentReference.delete();
+    await documentReference.delete();
   }
 }

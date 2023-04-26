@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
+import 'package:graduation_project/data/repositories/teethfossil_repo.dart';
+
+FosssilRepository fossilRepo = FosssilRepository.instance;
 
 class DetailPage extends StatefulWidget {
   // final Map? image;
@@ -55,7 +58,7 @@ class _DetailPageState extends State<DetailPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     try {
-                      // removePlant(widget.plant.id!);
+                      fossilRepo.removeFossil(widget.fossil.id!);
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Deleted')));
                     } catch (e) {
