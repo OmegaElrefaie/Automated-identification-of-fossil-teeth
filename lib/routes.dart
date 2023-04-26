@@ -17,14 +17,15 @@ import 'package:graduation_project/view/user/screens/userprofile.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
 import 'package:graduation_project/view/user/screens/detail_page.dart';
-import 'package:graduation_project/view/user/screens/change_password.dart';
+import 'package:graduation_project/view/Expert/screens/notifications_sending.dart';
 
 final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         // return const Login();
-        return const StartPage();
+        return Headerr();
+        // return const StartPage();
       }),
   GoRoute(
       path: '/login',
@@ -127,5 +128,10 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
         return DetailPage(
           fossil: state.extra as Fossil,
         );
+      }),
+  GoRoute(
+      path: '/notifications_sending',
+      builder: (BuildContext context, GoRouterState state) {
+        return CustomNotification();
       })
 ]);
