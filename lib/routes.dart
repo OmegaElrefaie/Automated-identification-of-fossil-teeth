@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/view/Expert/screens/homeexpert.dart';
+import 'package:graduation_project/view/user/screens/change_password.dart';
 import 'package:graduation_project/view/user/screens/changepassword.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
@@ -28,6 +29,13 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         //return const Login();
         return const Login();
+      }),
+
+  GoRoute(
+      path: '/change_password',
+      builder: (BuildContext context, GoRouterState state) {
+        //return const Login();
+        return const ChangePassword();
       }),
   GoRoute(
       path: '/displayresults',
