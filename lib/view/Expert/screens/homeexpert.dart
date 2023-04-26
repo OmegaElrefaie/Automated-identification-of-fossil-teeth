@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/view/Expert/screens/widget/drawerwidget.dart';
+import 'package:graduation_project/view/Expert/widget/drawerwidget.dart';
 
 class Headerr extends StatefulWidget {
   @override
@@ -18,7 +18,8 @@ class _HeaderrState extends State<Headerr> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: kPrimaryColor,
+            elevation: 0,
+            backgroundColor: kDarkColor,
           ),
           body: SizedBox(
               height: size.height * 0.30,

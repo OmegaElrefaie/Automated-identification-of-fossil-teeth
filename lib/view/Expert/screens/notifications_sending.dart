@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:graduation_project/constants.dart';
 
 class CustomNotification extends StatefulWidget {
+  const CustomNotification({super.key});
   @override
   _CustomNotificationState createState() => _CustomNotificationState();
 }
@@ -19,33 +22,57 @@ class _CustomNotificationState extends State<CustomNotification> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notification'),
+        title: Align(
+          alignment: Alignment.topLeft,
+          child: InkWell(
+            onTap: () {
+              context.go('/startpage');
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            const Text(
+              "Notifications",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  height: 1.5,
+                  fontFamily: 'Inter',
+                  fontSize: 25.0,
+                  color: kTextColor),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             TextField(
               controller: _titleController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Title',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: _bodyController,
               maxLines: 5,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Body',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
-              child:
-                  _isSubmitting ? CircularProgressIndicator() : Text('Submit'),
+              child: _isSubmitting
+                  ? const CircularProgressIndicator()
+                  : const Text('Submit'),
               onPressed: () async {
                 // Get the title and body values from the text fields
                 String title = _titleController.text.trim();
@@ -53,7 +80,7 @@ class _CustomNotificationState extends State<CustomNotification> {
 
                 if (title.isEmpty || body.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Title and body cannot be empty.'),
                     ),
                   );
@@ -64,18 +91,18 @@ class _CustomNotificationState extends State<CustomNotification> {
                 bool confirmed = await showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Confirm'),
-                    content: Text(
+                    title: const Text('Confirm'),
+                    content: const Text(
                         'Are you sure you want to submit this notification?'),
                     actions: <Widget>[
                       TextButton(
-                        child: Text('Cancel'),
+                        child: const Text('Cancel'),
                         onPressed: () {
                           Navigator.of(context).pop(false);
                         },
                       ),
                       TextButton(
-                        child: Text('Submit'),
+                        child: const Text('Submit'),
                         onPressed: () {
                           Navigator.of(context).pop(true);
                         },
@@ -100,11 +127,12 @@ class _CustomNotificationState extends State<CustomNotification> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text('Notification Saved'),
-                      content: Text('Notification has been sent to all users.'),
+                      title: const Text('Notification Saved'),
+                      content: const Text(
+                          'Notification has been sent to all users.'),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('OK'),
+                          child: const Text('OK'),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

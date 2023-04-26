@@ -69,18 +69,18 @@ class _DrawerrState extends State<Drawerr> {
                 setState(() {
                   selectedIndex = 0;
                 });
-                context.go('/');
+                context.go('/settings');
               }),
           _createDrawerrItem(
               icon: Icons.phone,
-              text: 'Support',
+              text: 'Notifications Sending',
               isSelected: selectedIndex == 2,
               onTap: () {
                 setState(() {
                   selectedIndex = 2;
                 });
 
-                Navigator.pushReplacementNamed(context, "/");
+                context.go('/notifications_sending');
               }),
         ],
       ),
