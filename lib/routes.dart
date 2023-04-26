@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
-import 'package:graduation_project/view/Expert/screens/homeexpert.dart';
+import 'package:graduation_project/view/Expert/screens/chat_expert.dart';
 import 'package:graduation_project/view/user/screens/change_password.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
@@ -14,6 +14,8 @@ import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
 import 'package:graduation_project/view/user/screens/timeline_fossils.dart';
 import 'package:graduation_project/view/user/screens/userprofile.dart';
+import 'view/Expert/screens/settings_expert.dart';
+import 'view/Expert/screens/startpage_expert.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
 import 'package:graduation_project/view/user/screens/detail_page.dart';
@@ -23,8 +25,8 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        // return const Login();
-        return Headerr();
+        return const Login();
+        // return Headerr();
         // return const StartPage();
       }),
   GoRoute(
@@ -110,7 +112,12 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/home_expert',
       builder: (BuildContext context, GoRouterState state) {
-        return Headerr();
+        return const StartPageExpert();
+      }),
+  GoRoute(
+      path: '/settings_expert',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SettingExpert();
       }),
   GoRoute(
       path: '/settings',
