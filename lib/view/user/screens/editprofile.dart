@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
@@ -51,7 +50,8 @@ class _EditProfileState extends State<EditProfile> {
                   children: [
                     InkWell(
                         onTap: () {
-                          context.go('/settings');
+                          // context.go('/settings'); //no navigation bar shows up
+                          context.go('/startpage');
                         },
                         child: const Text(
                           'Settings',

@@ -2,12 +2,13 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:graduation_project/view/Expert/screens/homeexpert.dart';
-import 'package:graduation_project/view/user/screens/changepassword.dart';
+import 'package:graduation_project/view/user/screens/change_password.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
 import 'package:graduation_project/view/user/screens/fossil_map.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
+import 'package:graduation_project/view/user/screens/login.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
@@ -16,7 +17,7 @@ import 'package:graduation_project/view/user/screens/userprofile.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
 import 'package:graduation_project/view/user/screens/detail_page.dart';
-import 'package:graduation_project/view/user/screens/login.dart';
+import 'package:graduation_project/view/user/screens/change_password.dart';
 
 final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
@@ -24,6 +25,19 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         // return const Login();
         return const StartPage();
+      }),
+  GoRoute(
+      path: '/login',
+      builder: (BuildContext context, GoRouterState state) {
+        //return const Login();
+        return const Login();
+      }),
+
+  GoRoute(
+      path: '/change_password',
+      builder: (BuildContext context, GoRouterState state) {
+        //return const Login();
+        return const ChangePassword();
       }),
   GoRoute(
       path: '/displayresults',
@@ -105,7 +119,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/change-password',
       builder: (BuildContext context, GoRouterState state) {
-        return const ChangePasswordScreen();
+        return const ChangePassword();
       }),
   GoRoute(
       path: '/detail_page',

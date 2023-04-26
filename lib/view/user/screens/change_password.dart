@@ -1,15 +1,19 @@
-import 'package:flutter/material.dart';
-import 'footer_change_pass.dart';
-import 'header_change_pass.dart';
+// ignore_for_file: non_constant_identifier_names
 
-class ChangePassBody extends StatefulWidget {
-  const ChangePassBody({super.key});
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../constants.dart';
+
+class ChangePassword extends StatefulWidget {
+  const ChangePassword({super.key});
 
   @override
-  State<ChangePassBody> createState() => _ChangePassBodyState();
+  State<ChangePassword> createState() => _ChangePasswordState();
 }
 
-class _ChangePassBodyState extends State<ChangePassBody> {
+class _ChangePasswordState extends State<ChangePassword> {
   final _formKey = GlobalKey<FormState>();
   bool hide0 = true;
   bool hide1 = true;
@@ -18,10 +22,8 @@ class _ChangePassBodyState extends State<ChangePassBody> {
   final oldPass = TextEditingController();
   final newPass = TextEditingController();
   final confirmPass = TextEditingController();
-
   RegExp regex =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~])');
-
   @override
   void dispose() {
     oldPass.dispose();
@@ -35,19 +37,42 @@ class _ChangePassBodyState extends State<ChangePassBody> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        //// body:  ChangePassBody();
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                const HeaderChangePass(),
-                //TextField == 1
+                const SizedBox(height: 30), //the space before settings
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                      onTap: () {
+                        // Navigator.pop(context); //gives black screen
+                        context.go('/startpage');
+                      },
+                      child: const Text(
+                        'Settings',
+                        style: TextStyle(
+                          color: kTextColor,
+                          fontFamily: 'Inter',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                ),
+                const SizedBox(height: 35), //space before change password text
+                const Text('Change Password',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: kTextColor,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(height: 35),
                 TextFormField(
-                  controller: oldPass, //controller
+                  controller: oldPass,
                   obscureText: hide0,
-
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter a password';
@@ -56,6 +81,7 @@ class _ChangePassBodyState extends State<ChangePassBody> {
                         return 'Enter valid password, password must contain letters, numbers and specail characters';
                       }
                     }
+                    return null;
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -72,13 +98,10 @@ class _ChangePassBodyState extends State<ChangePassBody> {
                       child:
                           Icon(hide0 ? Icons.visibility_off : Icons.visibility),
                     ),
-                    hintText: 'old Password',
+                    hintText: 'Old Password',
                   ),
                 ),
                 const SizedBox(height: 15),
-
-                //TextField == 2
-
                 TextFormField(
                   controller: newPass,
                   obscureText: hide1,
@@ -103,7 +126,7 @@ class _ChangePassBodyState extends State<ChangePassBody> {
                         child: Icon(
                             hide1 ? Icons.visibility_off : Icons.visibility),
                       ),
-                      hintText: 'new Password',
+                      hintText: 'New Password',
                       labelStyle: const TextStyle(
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.bold,
@@ -112,8 +135,6 @@ class _ChangePassBodyState extends State<ChangePassBody> {
                           borderSide: BorderSide(color: Colors.grey))),
                 ),
                 const SizedBox(height: 15),
-
-                //TextField == 3
                 TextFormField(
                   controller: confirmPass,
                   obscureText: hide2,
@@ -125,6 +146,7 @@ class _ChangePassBodyState extends State<ChangePassBody> {
                         return 'Enter valid password, password must contain letters, numbers and specail characters';
                       }
                     }
+                    return null;
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -141,13 +163,38 @@ class _ChangePassBodyState extends State<ChangePassBody> {
                       child:
                           Icon(hide2 ? Icons.visibility_off : Icons.visibility),
                     ),
-                    hintText: 'confirm new Password',
+                    hintText: 'Confirm Password',
                   ),
                 ),
-                const SizedBox(height: 30),
-                Footer(
-                  newPass: newPass,
-                  confirmPass: confirmPass,
+                const SizedBox(height: 28),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50.0, vertical: 15.0),
+                    // ignore: deprecated_member_use
+                    primary: const Color.fromRGBO(216, 139, 74, 1),
+                    shape: const StadiumBorder(),
+                  ),
+                  child: const Text(
+                    "Submit",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Align(
+                  alignment: Alignment.center,
+                  child: InkWell(
+                      onTap: () {},
+                      child: const Text(
+                        'Forgot your password?',
+                        style: TextStyle(
+                          color: kTextColor,
+                          fontSize: 17,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
                 ),
               ],
             ),
