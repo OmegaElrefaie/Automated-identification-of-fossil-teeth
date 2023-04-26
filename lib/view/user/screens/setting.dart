@@ -133,7 +133,7 @@ class _SettingState extends State<Setting> {
               child: InkWell(
                 onTap: () {
                   Auth().logout();
-                  context.go('/');
+                  context.go('/login');
                 },
                 child: const Text(
                   "LogOut",
