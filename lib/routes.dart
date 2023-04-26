@@ -7,6 +7,7 @@ import 'package:graduation_project/view/user/screens/editprofile.dart';
 import 'package:graduation_project/view/user/screens/facts.dart';
 import 'package:graduation_project/view/user/screens/fossil_map.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
+import 'package:graduation_project/view/user/screens/login.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
@@ -21,6 +22,12 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         //return const Login();
         return const StartPage();
+      }),
+  GoRoute(
+      path: '/login',
+      builder: (BuildContext context, GoRouterState state) {
+        //return const Login();
+        return const Login();
       }),
   GoRoute(
       path: '/displayresults',
