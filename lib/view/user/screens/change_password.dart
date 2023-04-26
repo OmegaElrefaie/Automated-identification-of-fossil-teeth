@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../constants.dart';
 
@@ -47,7 +48,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                   alignment: Alignment.topLeft,
                   child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pop();
+                        // Navigator.pop(context); //gives black screen
+                        context.go('/startpage');
                       },
                       child: const Text(
                         'Settings',
@@ -55,6 +57,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           color: kTextColor,
                           fontFamily: 'Inter',
                           fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       )),
                 ),
@@ -64,6 +67,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       fontSize: 30,
                       color: kTextColor,
                       fontFamily: 'Inter',
+                      fontWeight: FontWeight.bold,
                     )),
                 const SizedBox(height: 35),
                 TextFormField(
@@ -188,6 +192,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           color: kTextColor,
                           fontSize: 17,
                           fontFamily: 'Inter',
+                          fontWeight: FontWeight.bold,
                         ),
                       )),
                 ),
