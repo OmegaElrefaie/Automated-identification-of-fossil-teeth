@@ -8,10 +8,11 @@ import '../../../domain/user_model.dart';
 
 // ignore: must_be_immutable
 class Question extends StatefulWidget {
- UserModel user;
-  Question(this.user, {super.key});
+  final UserModel user;
+
+  const Question(this.user, {Key? key}) : super(key: key);
+
   @override
-  // ignore: library_private_types_in_public_api
   _QuestionState createState() => _QuestionState();
 }
 
@@ -150,12 +151,13 @@ class _QuestionState extends State<Question> {
                           setState(() {
                             searchController.text = "";
                           });
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Question2(
-                               currentUser: widget.user, 
-                               friendId: searchResult[index]['id'],
-                                friendName: searchResult[index]['Username'])));
-                            //      friendImage: searchResult[index]['Profilepic'])));
-                                   context.go('/chat');  
+                         GoRouter.of(context).go('/chat', 
+                         extra: {
+                        'currentUser': widget.user,
+                        'friendId': searchResult[index]['id'],
+                        'friendName': searchResult[index]['Username'],
+                          });
+                            //      friendImage: searchResult[index]['Profilepic'])));  
                       }, icon: const Icon(Icons.message_rounded)),
                     );
                   }))
