@@ -8,6 +8,7 @@ import 'package:graduation_project/view/user/screens/facts.dart';
 import 'package:graduation_project/view/user/screens/fossil_map.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
 import 'package:graduation_project/view/user/screens/login.dart';
+import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
@@ -66,25 +67,23 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         return const TimeLine_fossils();
       }),
-  // GoRoute(
-  //     path: '/question',
-  //     builder: (BuildContext context, GoRouterState state) {
-  //        return Question();
-  //     }),
+GoRoute(
+  path: '/question',
+  builder: (BuildContext context, GoRouterState state) {
+    final user = UserModel();
+    return Question(user); // pass the user instance as a positional argument
+  }),
   GoRoute(
     path: '/chat',
     builder: (BuildContext context, GoRouterState state) {
+      final currentUser = UserModel();
+      final friendId = state.params['friendId']!;
+      final friendName = state.params['friendName']!;
       return Question2(
-        currentUser: UserModel(
-          id: 'C6rjeHZUimSKyBqUHqV0LChtbBg2',
-          username: 'Hagar',
-          email: 'hagar@gmail.com',
-          //profilepic: 'assets/images/asset3.png',
-        ),
-        friendId: 'z4bQLoimq8a99z2SW6kkslUHd4g1',
-        friendName: 'Sara',
-        // friendImage: 'assets/images/asset3.png',
-      );
+         currentUser: currentUser,
+         friendId: friendId,
+         friendName: friendName,
+         );
     },
   ),
 
