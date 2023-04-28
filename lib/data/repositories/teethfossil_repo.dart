@@ -26,11 +26,8 @@ class FosssilRepository {
 
   Future<String> getFossilId() async {
     List<String> fossilId = [];
-    final snapShot = await FirebaseFirestore.instance
-        .collection('Fossils')
-        .limit(1)
-        .get()
-        .catchError((onError) {
+    final snapShot =
+        await db.collection('Fossils').limit(1).get().catchError((onError) {
       Get.snackbar(
         "Error",
         "An error occurred while retrieving data",
@@ -50,10 +47,8 @@ class FosssilRepository {
   Future<String> getFossilName() async {
     String fossilname;
     String fossilid = await getFossilId();
-    DocumentSnapshot fossil = await FirebaseFirestore.instance
-        .collection('Fossils')
-        .doc(fossilid)
-        .get();
+    DocumentSnapshot fossil =
+        await db.collection('Fossils').doc(fossilid).get();
 
     fossilname = fossil.get('Name');
     return fossilname;
@@ -62,23 +57,20 @@ class FosssilRepository {
   Future<String> getImageUrl() async {
     String imageUrl;
     String fossilid = await getFossilId();
-    DocumentSnapshot fossil = await FirebaseFirestore.instance
-        .collection('Fossils')
-        .doc(fossilid)
-        .get();
+    DocumentSnapshot fossil =
+        await db.collection('Fossils').doc(fossilid).get();
 
     imageUrl = fossil.get('ImageUrl');
     return imageUrl;
   }
 
-  Future fetchAllFosssil() async {
-    FirebaseFirestore.instance.collection('Fossils').get();
+  Future fetchAllFossils() async {
+    db.collection('Fossils').get();
   }
 
-  Future removeFosssil(String id) async {
-    DocumentReference documentReference =
-      FirebaseFirestore.instance.collection('Fossils').doc(id);
+  Future removeFossil(String id) async {
+    DocumentReference documentReference = db.collection('Fossils').doc(id);
 
-  await documentReference.delete();
+    await documentReference.delete();
   }
 }

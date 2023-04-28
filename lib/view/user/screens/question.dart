@@ -5,7 +5,6 @@ import 'package:graduation_project/view/user/screens/chat.dart';
 import '../../../constants.dart';
 import '../../../domain/user_model.dart';
 
-
 // ignore: must_be_immutable
 class Question extends StatefulWidget {
   final UserModel user;
@@ -18,35 +17,41 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   TextEditingController searchController = TextEditingController();
-  List<Map> searchResult =[];
+  List<Map> searchResult = [];
   bool isLoading = false;
 
-  void onSearch()async{
+  void onSearch() async {
     setState(() {
       searchResult = [];
       isLoading = true;
     });
-    await FirebaseFirestore.instance.collection('Users').where("Username",isEqualTo: searchController.text).get().then((value){
-       if(value.docs.isEmpty){
-         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("No User Found")));
-            setState(() {
-      isLoading = false;
-    });
-    return;
-       }
-       for (var user in value.docs) {
-          if(user.data()['Email'] != widget.user.email){
-               searchResult.add(user.data());
-          }
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .where("Username", isEqualTo: searchController.text)
+        .get()
+        .then((value) {
+      if (value.docs.isEmpty) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("No User Found")));
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
+      for (var user in value.docs) {
+        if (user.data()['Email'] != widget.user.email) {
+          searchResult.add(user.data());
         }
-     setState(() {
-      isLoading = false;
-    });
+      }
+      setState(() {
+        isLoading = false;
+      });
     });
   }
+
   @override
   Widget build(BuildContext context) {
-   //  Question();
+    //  Question();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(17.0),
@@ -151,13 +156,12 @@ class _QuestionState extends State<Question> {
                           setState(() {
                             searchController.text = "";
                           });
-                         GoRouter.of(context).go('/chat', 
-                         extra: {
-                        'currentUser': widget.user,
-                        'friendId': searchResult[index]['id'],
-                        'friendName': searchResult[index]['Username'],
-                          });
-                            //      friendImage: searchResult[index]['Profilepic'])));  
+                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Question2(
+                               currentUser: widget.user, 
+                               friendId: searchResult[index]['id'],
+                                friendName: searchResult[index]['Username'])));
+                            //      friendImage: searchResult[index]['Profilepic'])));
+                                   context.go('/chat');  
                       }, icon: const Icon(Icons.message_rounded)),
                     );
                   }))
