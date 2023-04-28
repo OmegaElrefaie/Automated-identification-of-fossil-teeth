@@ -1,4 +1,5 @@
 //import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/domain/user_model.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
@@ -11,16 +12,16 @@ class Question2 extends StatelessWidget {
   final UserModel currentUser;
   final String friendId;
   final String friendName;
-  //final String friendImage;
+
   const Question2({
-    super.key,
+    Key? key,
     required this.friendId,
     required this.friendName,
-    // required this.friendImage,
     required this.currentUser,
-  });
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -33,11 +34,7 @@ class Question2 extends StatelessWidget {
               children: <Widget>[
                 IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Question(currentUser)));
-                    //Navigator.pop(context);
+                        context.go('/question');
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -121,7 +118,7 @@ class Question2 extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }),
           )),
-          MessageTextField(currentUser.id ?? "", friendId),
+         MessageTextField(currentUser.id?.toString() ?? "", friendId),
         ],
       ),
     );
