@@ -80,10 +80,11 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       }),
   GoRoute(
     path: '/chat',
+    name: "chat",
     builder: (BuildContext context, GoRouterState state) {
       final userId = UserRepository.instance.getFirebaseUid();
-      final friendId = state.params['friendId']!;
-      final friendName = state.params['friendName']!;
+      final friendId = state.queryParams['friendId']!;
+      final friendName = state.queryParams['friendName']!;
       return Question2(
         userId: userId,
         friendId: friendId,
