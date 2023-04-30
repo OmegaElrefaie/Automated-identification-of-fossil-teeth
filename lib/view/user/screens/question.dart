@@ -110,7 +110,8 @@ class _QuestionState extends State<Question> {
               height: 80,
               child: ElevatedButton(
                 onPressed: () {
-                  context.go('/chat');
+                  ///TODO Handle experts data view
+                  //context.go('/chat');
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -161,7 +162,8 @@ class _QuestionState extends State<Question> {
                                   searchController.text = "";
                                 });
 
-                                GoRouter.of(context).goNamed('/chat', params: {
+                                GoRouter.of(context)
+                                    .goNamed('/chat', queryParams: {
                                   'friendId':
                                       userIdsSearchResult.elementAt(index),
                                   'friendName': searchResult[index]['Username'],
