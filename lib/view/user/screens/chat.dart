@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Question2 extends StatelessWidget {
-  final UserModel currentUser;
+  final String userId;
   final String friendId;
   final String friendName;
 
@@ -17,11 +17,10 @@ class Question2 extends StatelessWidget {
     Key? key,
     required this.friendId,
     required this.friendName,
-    required this.currentUser,
+    required this.userId,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -34,7 +33,7 @@ class Question2 extends StatelessWidget {
               children: <Widget>[
                 IconButton(
                   onPressed: () {
-                        context.go('/question');
+                    context.go('/question');
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -90,7 +89,7 @@ class Question2 extends StatelessWidget {
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("Users")
-                    .doc(currentUser.id)
+                    .doc(userId)
                     .collection('messages')
                     .doc(friendId)
                     .collection('chats')
@@ -108,8 +107,8 @@ class Question2 extends StatelessWidget {
                         reverse: true,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          bool isMe = snapshot.data.docs[index]['senderId'] ==
-                              currentUser.id;
+                          bool isMe =
+                              snapshot.data.docs[index]['senderId'] == userId;
                           return SingleMessage(
                               message: snapshot.data.docs[index]['message'],
                               isMe: isMe);
@@ -118,7 +117,7 @@ class Question2 extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }),
           )),
-         MessageTextField(currentUser.id?.toString() ?? "", friendId),
+          MessageTextField(userId, friendId),
         ],
       ),
     );

@@ -52,7 +52,7 @@ class UserRepository {
   //     print(e.toString());
   //   }
 //}
-
+  ///function malhash lazma khales bet2ra bs
   Future<String> getUserId() async {
     List<String> userId = [];
     final snapShot = await FirebaseFirestore.instance
@@ -75,6 +75,10 @@ class UserRepository {
     }
 
     return userId[0];
+  }
+
+  String getFirebaseUid() {
+    return FirebaseAuth.instance.currentUser?.uid ?? "";
   }
 
   Future<String> getUserName() async {
