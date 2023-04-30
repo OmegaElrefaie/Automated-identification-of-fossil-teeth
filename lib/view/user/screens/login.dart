@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
+import 'package:graduation_project/domain/user_model.dart';
+import 'package:graduation_project/view/Expert/screens/chat_expert.dart';
+import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
 
 UserRepository userRepo = UserRepository.instance;
@@ -57,6 +60,14 @@ class _LoginState extends State<Login> {
     });
   }
 
+  Future<void> userRole() async {
+    if (await userRepo.getUserType() == 'User') {
+      context.go('/startpage');
+    } else {
+      context.go('/home_expert');
+    }
+  }
+
   Future<void> initializeUser(User? authUser) async {
     if (authUser == null) {
       if (kDebugMode) {
@@ -64,7 +75,8 @@ class _LoginState extends State<Login> {
       }
       context.go('/');
     } else {
-      context.go('/startpage');
+      userRole();
+      // context.go('/startpage');
       if (kDebugMode) {
         print('user is signed in');
       }
@@ -73,7 +85,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.put(LogInController());
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
@@ -195,31 +206,6 @@ class _LoginState extends State<Login> {
                       width: 400,
                       child: ElevatedButton(
                         onPressed: () async {
-                          if (formKey.currentState!.validate()) {
-                            await handleLogIn();
-                          }
-                        },
-                        style: ButtonStyle(
-                            backgroundColor:
-                                getColor(kPrimaryColor, kTextColor),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)))),
-                        child: const Text(
-                          'Log In',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Inter',
-                              fontSize: 15),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      height: 40,
-                      width: 400,
-                      child: ElevatedButton(
-                        onPressed: () async {
                           // if (formKey.currentState!.validate()) {}
                           googleLogIn();
                         },
@@ -251,7 +237,32 @@ class _LoginState extends State<Login> {
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 40,
+                      width: 400,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            await handleLogIn();
+                          }
+                        },
+                        style: ButtonStyle(
+                            backgroundColor:
+                                getColor(kPrimaryColor, kTextColor),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)))),
+                        child: const Text(
+                          'Log In',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Inter',
+                              fontSize: 15),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

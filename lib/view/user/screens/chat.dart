@@ -1,4 +1,5 @@
 //import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/domain/user_model.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
@@ -8,17 +9,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Question2 extends StatelessWidget {
-  final UserModel currentUser;
+  final String userId;
   final String friendId;
   final String friendName;
-  //final String friendImage;
+
   const Question2({
-    super.key,
+    Key? key,
     required this.friendId,
     required this.friendName,
-    // required this.friendImage,
-    required this.currentUser,
-  });
+    required this.userId,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +33,7 @@ class Question2 extends StatelessWidget {
               children: <Widget>[
                 IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Question(currentUser)));
-                    //Navigator.pop(context);
+                    context.go('/question');
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -93,7 +89,7 @@ class Question2 extends StatelessWidget {
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("Users")
-                    .doc(currentUser.id)
+                    .doc(userId)
                     .collection('messages')
                     .doc(friendId)
                     .collection('chats')
@@ -111,8 +107,8 @@ class Question2 extends StatelessWidget {
                         reverse: true,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          bool isMe = snapshot.data.docs[index]['senderId'] ==
-                              currentUser.id;
+                          bool isMe =
+                              snapshot.data.docs[index]['senderId'] == userId;
                           return SingleMessage(
                               message: snapshot.data.docs[index]['message'],
                               isMe: isMe);
@@ -121,7 +117,7 @@ class Question2 extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }),
           )),
-          MessageTextField(currentUser.id ?? "", friendId),
+          MessageTextField(userId, friendId),
         ],
       ),
     );

@@ -48,8 +48,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   alignment: Alignment.topLeft,
                   child: InkWell(
                       onTap: () {
-                        // Navigator.pop(context); //gives black screen
-                        context.go('/startpage');
+                        context.go('/settings');
                       },
                       child: const Text(
                         'Settings',
