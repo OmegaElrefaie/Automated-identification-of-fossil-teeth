@@ -1,8 +1,6 @@
 //import 'package:go_router/go_router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/domain/user_model.dart';
-import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/widgets/message_textfield.dart';
 import 'package:graduation_project/view/user/widgets/single_message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -54,16 +52,16 @@ class Question2 extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
-                        "Dr. Hesham Sallam",
-                        style: TextStyle(
+                        friendName,
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
-                      Text(
+                      const Text(
                         "Online",
                         style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0), fontSize: 13),
