@@ -5,11 +5,12 @@ import 'package:graduation_project/domain/user_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
+
 UserRepository userRepo = UserRepository.instance;
 
 class SideDrawer extends StatefulWidget {
-   SideDrawer({super.key});
-    UserModel user = UserModel(); 
+  SideDrawer({super.key});
+  UserModel user = UserModel();
 
   @override
   State<SideDrawer> createState() => _SideDrawerState();
@@ -116,7 +117,8 @@ class _SideDrawerState extends State<SideDrawer> {
                   selectedIndex = 1;
                 });
                 //context.go('/question');
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Question(widget.user)));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Question()));
               }),
           _createDrawerItem(
               icon: Icons.map_rounded,

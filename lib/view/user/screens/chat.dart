@@ -1,15 +1,13 @@
 //import 'package:go_router/go_router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/domain/user_model.dart';
-import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/widgets/message_textfield.dart';
 import 'package:graduation_project/view/user/widgets/single_message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Question2 extends StatelessWidget {
-  final UserModel currentUser;
+  final String userId;
   final String friendId;
   final String friendName;
 
@@ -17,11 +15,10 @@ class Question2 extends StatelessWidget {
     Key? key,
     required this.friendId,
     required this.friendName,
-    required this.currentUser,
+    required this.userId,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -34,7 +31,7 @@ class Question2 extends StatelessWidget {
               children: <Widget>[
                 IconButton(
                   onPressed: () {
-                        context.go('/question');
+                    context.go('/question');
                   },
                   icon: const Icon(
                     Icons.arrow_back,
@@ -55,16 +52,16 @@ class Question2 extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
-                        "Dr. Hesham Sallam",
-                        style: TextStyle(
+                        friendName,
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
-                      Text(
+                      const Text(
                         "Online",
                         style: TextStyle(
                             color: Color.fromARGB(255, 0, 0, 0), fontSize: 13),
@@ -90,7 +87,7 @@ class Question2 extends StatelessWidget {
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("Users")
-                    .doc(currentUser.id)
+                    .doc(userId)
                     .collection('messages')
                     .doc(friendId)
                     .collection('chats')
@@ -108,8 +105,8 @@ class Question2 extends StatelessWidget {
                         reverse: true,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          bool isMe = snapshot.data.docs[index]['senderId'] ==
-                              currentUser.id;
+                          bool isMe =
+                              snapshot.data.docs[index]['senderId'] == userId;
                           return SingleMessage(
                               message: snapshot.data.docs[index]['message'],
                               isMe: isMe);
@@ -118,7 +115,7 @@ class Question2 extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }),
           )),
-         MessageTextField(currentUser.id?.toString() ?? "", friendId),
+          MessageTextField(userId, friendId),
         ],
       ),
     );

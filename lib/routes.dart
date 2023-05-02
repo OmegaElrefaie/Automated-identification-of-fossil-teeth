@@ -15,6 +15,7 @@ import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
 import 'package:graduation_project/view/user/screens/timeline_fossils.dart';
 import 'package:graduation_project/view/user/screens/userprofile.dart';
+import 'data/repositories/user_repo.dart';
 import 'view/Expert/screens/settings_expert.dart';
 import 'view/Expert/screens/startpage_expert.dart';
 import 'view/user/screens/library.dart';
@@ -36,7 +37,6 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
         //return const Login();
         return const Login();
       }),
-
   GoRoute(
       path: '/change_password',
       builder: (BuildContext context, GoRouterState state) {
@@ -73,26 +73,25 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         return const TimeLine_fossils();
       }),
-GoRoute(
-  path: '/question',
-  builder: (BuildContext context, GoRouterState state) {
-    final user = UserModel();
-    return Question(user); // pass the user instance as a positional argument
-  }),
+  GoRoute(
+      path: '/question',
+      builder: (BuildContext context, GoRouterState state) {
+        return const Question(); // pass the user instance as a positional argument
+      }),
   GoRoute(
     path: '/chat',
+    name: "chat",
     builder: (BuildContext context, GoRouterState state) {
-      final currentUser = UserModel();
-      final friendId = state.params['friendId']!;
-      final friendName = state.params['friendName']!;
+      final userId = UserRepository.instance.getFirebaseUid();
+      final friendId = state.queryParams['friendId']!;
+      final friendName = state.queryParams['friendName']!;
       return Question2(
-         currentUser: currentUser,
-         friendId: friendId,
-         friendName: friendName,
-         );
+        userId: userId,
+        friendId: friendId,
+        friendName: friendName,
+      );
     },
   ),
-
   GoRoute(
       path: '/userprofile',
       builder: (BuildContext context, GoRouterState state) {

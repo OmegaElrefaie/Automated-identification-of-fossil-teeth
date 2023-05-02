@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
 import '../../../constants.dart';
 import '../../../domain/user_model.dart';
 
 // ignore: must_be_immutable
 class Question extends StatefulWidget {
-  final UserModel user;
-
-  const Question(this.user, {Key? key}) : super(key: key);
+  const Question({Key? key}) : super(key: key);
 
   @override
   _QuestionState createState() => _QuestionState();
@@ -18,7 +17,9 @@ class Question extends StatefulWidget {
 class _QuestionState extends State<Question> {
   TextEditingController searchController = TextEditingController();
   List<Map> searchResult = [];
+  Set<String> userIdsSearchResult = {};
   bool isLoading = false;
+  String userId = UserRepository.instance.getFirebaseUid();
 
   void onSearch() async {
     setState(() {
@@ -38,9 +39,10 @@ class _QuestionState extends State<Question> {
         });
         return;
       }
-      for (var user in value.docs) {
-        if (user.data()['Email'] != widget.user.email) {
-          searchResult.add(user.data());
+      for (var userDoc in value.docs) {
+        if (userDoc.id != userId) {
+          userIdsSearchResult.add(userDoc.id);
+          searchResult.add(userDoc.data());
         }
       }
       setState(() {
@@ -57,8 +59,8 @@ class _QuestionState extends State<Question> {
         padding: const EdgeInsets.all(17.0),
         child: Column(
           children: [
-             const SizedBox(height: 60),
-                 Align(
+            const SizedBox(height: 60),
+            Align(
               alignment: Alignment.topLeft,
               child: InkWell(
                 onTap: () {
@@ -70,7 +72,7 @@ class _QuestionState extends State<Question> {
                 ),
               ),
             ),
-             const Text(
+            const Text(
               "Ask experts in the field ",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -80,35 +82,36 @@ class _QuestionState extends State<Question> {
                 color: kTextColor,
               ),
             ),
-             const SizedBox(height: 23),
-             Row(
-               children: [
-                 Expanded(
-                   child: Padding(
-                     padding: const EdgeInsets.all(5.0),
-                     child: TextField(
-                       controller: searchController,
-                       decoration: InputDecoration(
-                         hintText: "Search for user....",
-                         border: OutlineInputBorder(
-                           borderRadius: BorderRadius.circular(10)
-                         )
-                       ),
-                     ),
-                   ),
-                 ),
-                 IconButton(onPressed: (){
-                    onSearch();
-                 }, icon: const Icon(Icons.search_outlined))
-               ],
-             ),
-             const SizedBox(height: 23),
-              SizedBox(
+            const SizedBox(height: 23),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: TextField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                          hintText: "Search for user....",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {
+                      onSearch();
+                    },
+                    icon: const Icon(Icons.search_outlined))
+              ],
+            ),
+            const SizedBox(height: 23),
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 80,
               child: ElevatedButton(
                 onPressed: () {
-                  context.go('/chat');  
+                  ///TODO Handle experts data view
+                  //context.go('/chat');
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -140,36 +143,42 @@ class _QuestionState extends State<Question> {
                 ),
               ),
             ),
-              //const SizedBox(height: 10),
-             if(searchResult.isNotEmpty)
-                Expanded(child: ListView.builder(
-                  itemCount: searchResult.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context,index){
-                    return ListTile(
-                      // leading: CircleAvatar(
-                      //   child: Image.network(searchResult[index]['image']),
-                      // ),
-                      title: Text(searchResult[index]['Username']),
-                      subtitle: Text(searchResult[index]['Email']),
-                      trailing: IconButton(onPressed: (){
-                          setState(() {
-                            searchController.text = "";
-                          });
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=>Question2(
-                               currentUser: widget.user, 
-                               friendId: searchResult[index]['id'],
-                                friendName: searchResult[index]['Username'])));
-                            //      friendImage: searchResult[index]['Profilepic'])));
-                                   context.go('/chat');  
-                      }, icon: const Icon(Icons.message_rounded)),
-                    );
-                  }))
-             else if(isLoading == true)
-                const Center(child: CircularProgressIndicator(),)
+            //const SizedBox(height: 10),
+            if (searchResult.isNotEmpty)
+              Expanded(
+                  child: ListView.builder(
+                      itemCount: searchResult.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          // leading: CircleAvatar(
+                          //   child: Image.network(searchResult[index]['image']),
+                          // ),
+                          title: Text(searchResult[index]['Username']),
+                          subtitle: Text(searchResult[index]['Email']),
+                          trailing: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  searchController.text = "";
+                                });
+
+                                GoRouter.of(context)
+                                    .goNamed('/chat', queryParams: {
+                                  'friendId':
+                                      userIdsSearchResult.elementAt(index),
+                                  'friendName': searchResult[index]['Username'],
+                                });
+                              },
+                              icon: const Icon(Icons.message_rounded)),
+                        );
+                      }))
+            else if (isLoading == true)
+              const Center(
+                child: CircularProgressIndicator(),
+              )
           ],
         ),
-      ),  
+      ),
     );
   }
 }
