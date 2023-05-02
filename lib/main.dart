@@ -4,13 +4,11 @@ import 'package:graduation_project/view/user/widgets/notifications.dart';
 import 'routes.dart';
 import 'constants.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:image_picker/image_picker.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
-// import 'package:tflite_flutter/tflite_flutter.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Future.delayed(const Duration(seconds: 2));
   // await FirebaseMessaging.instance.getInitialMessage();
   FlutterNativeSplash.remove();
   final x = App_Notification();
