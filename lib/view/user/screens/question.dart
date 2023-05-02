@@ -78,7 +78,7 @@ class _QuestionState extends State<Question> {
               style: TextStyle(
                 height: 2.5,
                 fontFamily: 'Inter',
-                fontSize: 30.0,
+                fontSize: 25.0,
                 color: kTextColor,
               ),
             ),
@@ -163,7 +163,7 @@ class _QuestionState extends State<Question> {
                                 });
 
                                 GoRouter.of(context)
-                                    .goNamed('/chat', queryParams: {
+                                    .goNamed('chat', queryParams: {
                                   'friendId':
                                       userIdsSearchResult.elementAt(index),
                                   'friendName': searchResult[index]['Username'],
