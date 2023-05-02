@@ -19,6 +19,7 @@ import 'package:graduation_project/view/user/screens/userprofile.dart';
 import 'data/repositories/user_repo.dart';
 import 'view/Expert/screens/settings_expert.dart';
 import 'view/Expert/screens/startpage_expert.dart';
+import 'view/user/screens/about_us.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
 import 'package:graduation_project/view/user/screens/detail_page.dart';
@@ -144,6 +145,11 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/notifications_sending',
       builder: (BuildContext context, GoRouterState state) {
-        return CustomNotification();
+        return const CustomNotification();
+      }),
+  GoRoute(
+      path: '/about_us',
+      builder: (BuildContext context, GoRouterState state) {
+        return AboutUsScreen();
       })
 ]);

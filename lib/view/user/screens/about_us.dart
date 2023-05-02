@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../constants.dart';
 
@@ -13,9 +14,8 @@ class AboutUsScreen extends StatelessWidget {
         backgroundColor: kPrimaryColor,
         title: Text('About Us'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => context.go("/startpage")),
       ),
       body: SingleChildScrollView(
         child: Column(
