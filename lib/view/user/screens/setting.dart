@@ -159,6 +159,8 @@ class _SettingState extends State<Setting> {
           context.go('/editprofile');
         } else if (title == 'Change password') {
           context.go('/change_password');
+        } else if (title == 'About us') {
+          context.go('/about_us');
         }
       },
       child: Padding(
