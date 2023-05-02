@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:graduation_project/view/Expert/screens/chat_expert.dart';
+import 'package:graduation_project/view/user/screens/about_us.dart';
 import 'package:graduation_project/view/user/screens/change_password.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
@@ -30,6 +31,12 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
         return const Login();
         // return Headerr();
         // return const StartPage();
+      }),
+  GoRoute(
+      path: '/about_us',
+      builder: (BuildContext context, GoRouterState state) {
+        //return const Login();
+        return AboutUsScreen();
       }),
   GoRoute(
       path: '/login',
