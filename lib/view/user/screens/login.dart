@@ -73,7 +73,7 @@ class _LoginState extends State<Login> {
       if (kDebugMode) {
         print('user is signed out');
       }
-      context.go('/');
+      context.go('/login');
     } else {
       userRole();
       // context.go('/startpage');
@@ -88,6 +88,12 @@ class _LoginState extends State<Login> {
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            color: kDarkColor,
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              context.go('/');
+            }),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,

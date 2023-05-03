@@ -43,7 +43,7 @@ class _SignupState extends State<Signup> {
         if (authUser != null) {
           print('user created');
           userRepo.createUser(user, authUser.uid);
-          context.go('/');
+          context.go('/login');
         }
       });
     } on FirebaseAuthException catch (e) {

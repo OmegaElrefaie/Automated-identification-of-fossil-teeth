@@ -79,7 +79,7 @@ class _UserProfileState extends State<UserProfile> {
               alignment: Alignment.topLeft,
               child: InkWell(
                   onTap: () {
-                    context.go('/startpage');
+                    context.pop();
                   },
                   child: const Icon(
                     Icons.arrow_back,

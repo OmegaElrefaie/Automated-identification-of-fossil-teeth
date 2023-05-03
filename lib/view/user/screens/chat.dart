@@ -31,7 +31,7 @@ class Question2 extends StatelessWidget {
               children: <Widget>[
                 IconButton(
                   onPressed: () {
-                    context.go('/question');
+                    context.pop();
                   },
                   icon: const Icon(
                     Icons.arrow_back,

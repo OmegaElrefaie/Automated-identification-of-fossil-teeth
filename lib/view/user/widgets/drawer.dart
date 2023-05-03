@@ -106,7 +106,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 0;
                 });
-                context.go('/facts');
+                context.pushNamed('facts');
               }),
           _createDrawerItem(
               icon: Icons.history,
@@ -116,9 +116,9 @@ class _SideDrawerState extends State<SideDrawer> {
                 setState(() {
                   selectedIndex = 1;
                 });
-                //context.go('/question');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Question()));
+                context.pushNamed('question');
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => const Question()));
               }),
           _createDrawerItem(
               icon: Icons.map_rounded,
@@ -129,7 +129,7 @@ class _SideDrawerState extends State<SideDrawer> {
                   selectedIndex = 2;
                 });
 
-                context.go('/fossil_map');
+                context.pushNamed('fossil_map');
               }),
           _createDrawerItem(
               icon: Icons.timeline_rounded,
@@ -140,7 +140,7 @@ class _SideDrawerState extends State<SideDrawer> {
                   selectedIndex = 3;
                 });
 
-                context.go('/timeline_fossils');
+                context.pushNamed('timeline_fossils');
               }),
         ],
       ),
