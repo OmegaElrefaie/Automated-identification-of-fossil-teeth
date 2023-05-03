@@ -15,6 +15,7 @@ import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/domain/user_model.dart';
 import 'package:graduation_project/view/user/screens/timeline_fossils.dart';
 import 'package:graduation_project/view/user/screens/userprofile.dart';
+import 'package:graduation_project/welcome_screen.dart';
 import 'data/repositories/user_repo.dart';
 import 'view/Expert/screens/settings_expert.dart';
 import 'view/Expert/screens/startpage_expert.dart';
@@ -28,54 +29,62 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const Login();
-        // return Headerr();
-        // return const StartPage();
+        // return const Login();
+        return const WelcomeScreen();
       }),
   GoRoute(
       path: '/login',
+      name: "login",
       builder: (BuildContext context, GoRouterState state) {
         //return const Login();
         return const Login();
       }),
   GoRoute(
       path: '/change_password',
+      name: "change_password",
       builder: (BuildContext context, GoRouterState state) {
         //return const Login();
         return const ChangePassword();
       }),
   GoRoute(
       path: '/displayresults',
+      name: "displayresults",
       builder: (BuildContext context, GoRouterState state) {
         return const DisplayResults();
       }),
   GoRoute(
       path: '/library',
+      name: "library",
       builder: (BuildContext context, GoRouterState state) {
         return const Library();
       }),
   GoRoute(
       path: '/signup',
+      name: "signup",
       builder: (BuildContext context, GoRouterState state) {
         return const Signup();
       }),
   GoRoute(
       path: '/facts',
+      name: "facts",
       builder: (BuildContext context, GoRouterState state) {
         return const Fact();
       }),
   GoRoute(
       path: '/fossil_map',
+      name: "fossil_map",
       builder: (BuildContext context, GoRouterState state) {
         return const FossilMap();
       }),
   GoRoute(
       path: '/timeline_fossils',
+      name: "timeline_fossils",
       builder: (BuildContext context, GoRouterState state) {
         return const TimeLine_fossils();
       }),
   GoRoute(
       path: '/question',
+      name: "question",
       builder: (BuildContext context, GoRouterState state) {
         return const Question(); // pass the user instance as a positional argument
       }),
@@ -95,41 +104,49 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   ),
   GoRoute(
       path: '/userprofile',
+      name: "userprofile",
       builder: (BuildContext context, GoRouterState state) {
         return const UserProfile();
       }),
   GoRoute(
       path: '/editprofile',
+      name: "editprofile",
       builder: (BuildContext context, GoRouterState state) {
         return const EditProfile();
       }),
   GoRoute(
       path: '/startpage',
+      name: "startpage",
       builder: (BuildContext context, GoRouterState state) {
         return const StartPage();
       }),
   GoRoute(
       path: '/home_expert',
+      name: "home_expert",
       builder: (BuildContext context, GoRouterState state) {
         return const StartPageExpert();
       }),
   GoRoute(
       path: '/settings_expert',
+      name: "settings_expert",
       builder: (BuildContext context, GoRouterState state) {
         return const SettingExpert();
       }),
   GoRoute(
       path: '/settings',
+      name: "settings",
       builder: (BuildContext context, GoRouterState state) {
         return const Setting();
       }),
   GoRoute(
       path: '/change-password',
+      name: "change-password",
       builder: (BuildContext context, GoRouterState state) {
         return const ChangePassword();
       }),
   GoRoute(
       path: '/detail_page',
+      name: "detail_page",
       builder: (BuildContext context, GoRouterState state) {
         return DetailPage(
           fossil: state.extra as Fossil,
@@ -137,11 +154,13 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       }),
   GoRoute(
       path: '/notifications_sending',
+      name: "notification_sending",
       builder: (BuildContext context, GoRouterState state) {
         return const CustomNotification();
       }),
   GoRoute(
       path: '/about_us',
+      name: "about_us",
       builder: (BuildContext context, GoRouterState state) {
         return AboutUsScreen();
       })
