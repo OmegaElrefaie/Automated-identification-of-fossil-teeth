@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:graduation_project/view/Expert/screens/home_expert.dart';
+import 'package:graduation_project/view/expert/screens/home_expert.dart';
 import 'package:graduation_project/view/user/screens/home.dart';
 import 'package:graduation_project/view/user/screens/library.dart';
 import 'package:graduation_project/view/user/screens/setting.dart';

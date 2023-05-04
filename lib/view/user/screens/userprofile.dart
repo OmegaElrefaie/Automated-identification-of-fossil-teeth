@@ -15,6 +15,7 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   String name = '';
+  String image = '';
   bool isloaded = false;
   @override
   void initState() {
@@ -24,6 +25,7 @@ class _UserProfileState extends State<UserProfile> {
 
   Future<void> getData() async {
     name = await userRepo.getUserName();
+    image = await userRepo.getUserPhoto();
     if (name.isNotEmpty) {
       setState(() {
         isloaded = true;
@@ -35,10 +37,25 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: kDarkColor,
+        title: Align(
+          alignment: Alignment.topLeft,
+          child: InkWell(
+              onTap: () {
+                context.pop();
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
+        ),
+      ),
       body: Stack(
         children: [
           Container(
-            height: size.height * 0.40,
+            height: size.height * 0.30,
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(47),
@@ -49,7 +66,7 @@ class _UserProfileState extends State<UserProfile> {
                     colors: [kDarkColor, kLightColor])),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 160.0),
+            padding: const EdgeInsets.only(top: 80.0),
             child: Column(
               children: [
                 const CircleAvatar(
@@ -73,23 +90,23 @@ class _UserProfileState extends State<UserProfile> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30, top: 100),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: InkWell(
-                  onTap: () {
-                    context.pop();
-                  },
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: kTextColor,
-                  )),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 30, top: 100),
+          //   child: Align(
+          //     alignment: Alignment.topLeft,
+          //     child: InkWell(
+          //         onTap: () {
+          //           context.pop();
+          //         },
+          //         child: const Icon(
+          //           Icons.arrow_back,
+          //           color: Colors.white,
+          //         )),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(
-                left: 30.0, top: 550, right: 30, bottom: 30),
+                left: 30.0, top: 450, right: 30, bottom: 30),
             child: Column(
               children: [
                 Row(

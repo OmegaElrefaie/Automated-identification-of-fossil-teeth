@@ -6,7 +6,7 @@ import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/domain/user_model.dart';
-import 'package:graduation_project/view/Expert/screens/chat_expert.dart';
+import 'package:graduation_project/view/expert/screens/chat_expert.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
 
