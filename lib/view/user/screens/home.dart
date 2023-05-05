@@ -70,7 +70,8 @@ class HomePage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    context.go('/displayresults');
+                    // context.go('/displayresults');
+                    context.pushNamed('instructions');
                   },
                   child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
