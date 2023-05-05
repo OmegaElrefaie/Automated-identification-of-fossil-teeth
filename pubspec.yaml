@@ -62,6 +62,8 @@ dependencies:
   timelines: ^0.1.0
   animated_icon: ^0.0.4
   animated_text_kit: ^4.2.2
+  smooth_page_indicator: ^1.1.0
+  video_player: ^2.6.1
 
 
 flutter_native_splash:
@@ -117,7 +119,9 @@ flutter:
     - assets/images/Wahasuchus_egyptensis.png
     - assets/images/Qatranimys_safroutus.jpg
     - assets/images/splash.png
-
+    - assets/videos/instruction1.mp4
+    - assets/images/turn-off.png
+    - assets/images/instruction2.jpeg
 
     
 
