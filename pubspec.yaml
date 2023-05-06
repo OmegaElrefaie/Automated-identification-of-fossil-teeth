@@ -60,6 +60,10 @@ dependencies:
   google_maps_flutter: ^2.2.5
   loading_animation_widget: ^1.2.0+4
   timelines: ^0.1.0
+  animated_icon: ^0.0.4
+  animated_text_kit: ^4.2.2
+  smooth_page_indicator: ^1.1.0
+  video_player: ^2.6.1
 
 
 flutter_native_splash:
@@ -114,7 +118,10 @@ flutter:
     - assets/images/Mansourasaurus.jpg
     - assets/images/Wahasuchus_egyptensis.png
     - assets/images/Qatranimys_safroutus.jpg
-
+    - assets/images/splash.png
+    - assets/videos/instruction1.mp4
+    - assets/images/turn-off.png
+    - assets/images/instruction2.jpeg
 
     
 
@@ -136,11 +143,11 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-VariableFont_slnt,wght.ttf
-    # - family: Trajan Pro
-    #   fonts:
-    #     - asset: fonts/TrajanPro.ttf
-    #     - asset: fonts/TrajanPro_Bold.ttf
-    #       weight: 700
+    - family: PathwayExtreme
+      fonts:
+        - asset: assets\fonts\PathwayExtreme-VariableFont_opsz,wdth,wght.ttf
+        - asset: assets\fonts\PathwayExtreme-Italic-VariableFont_opsz,wdth,wght.ttf
+      
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,152 +1,71 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/constants.dart';
 
-import '../../../constants.dart';
+class FactsScreen extends StatefulWidget {
+  const FactsScreen({super.key});
 
-class Fact extends StatefulWidget {
-  const Fact({super.key});
   @override
-
-  // ignore: library_private_types_in_public_api
-  _FactState createState() => _FactState();
+  State<FactsScreen> createState() => _FactsScreenState();
 }
 
-class _FactState extends State<Fact> {
+class _FactsScreenState extends State<FactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.all(17),
-        children: [
-          const SizedBox(height: 55),
-          Align(
-            alignment: Alignment.topLeft,
-            child: InkWell(
-                onTap: () {
-                  context.go('/startpage');
+      appBar: AppBar(
+        leading: Align(
+          alignment: Alignment.center,
+          child: InkWell(
+            onTap: () {
+              context.go('/start_page');
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        elevation: 0,
+        title: const Text(
+          'Facts',
+          style:
+              TextStyle(color: Colors.white, fontFamily: 'Inter', fontSize: 25),
+        ),
+      ),
+      body: Center(
+        child: FutureBuilder(
+          future: FirebaseFirestore.instance.collection('Facts').get(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  QueryDocumentSnapshot<Map<String, dynamic>> document =
+                      snapshot.data!.docs[index];
+
+                  return ListTile(
+                    leading: Text(document['text']),
+                  );
                 },
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: kTextColor,
-                )),
-          ),
-          const Text(
-            "Facts ",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                height: 1.5,
-                fontFamily: 'Inter',
-                fontSize: 35.0,
-                color: kTextColor),
-          ),
-          fact1(),
-          fact2(),
-          fact3(),
-          fact4(),
-        ],
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Column(
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  const CircularProgressIndicator(
+                    color: kPrimaryColor,
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
-
-  Widget fact1() => Card(
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.circular(12),
-        // ),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                'The first dinosaur fossil was found around 1815.',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              // SizedBox(height: 4),
-              // Text(
-              //   'This card is rounded',
-              //   style: TextStyle(fontSize: 20),
-              // ),
-            ],
-          ),
-        ),
-      );
-
-  Widget fact2() => Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Ink.image(
-                  image: const NetworkImage(
-                    'https://image.cnbcfm.com/api/v1/image/106849039-1614858338482-gettyimages-634465411-dsgf001080.jpeg?v=1614858433&w=1600&h=900',
-                  ),
-                  height: 240,
-                  fit: BoxFit.cover,
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-              child: const Text(
-                'Finders keepers? You could go to jail for finding and keeping a fossil.',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            const SizedBox(height: 15),
-          ],
-        ),
-      );
-
-  Widget fact3() => Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Ink.image(
-                  image: const NetworkImage(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEqkvdVtxzAYeBo_JHQzz7yQ50nbKNNnzBngixI1fvBDL-i7tOTvQ8TklWIs16i7ieVNY&usqp=CAU',
-                  ),
-                  height: 240,
-                  fit: BoxFit.cover,
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-              child: const Text(
-                'Finders keepers? You could go to jail for finding and keeping a fossil.',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            const SizedBox(height: 15),
-          ],
-        ),
-      );
-
-  Widget fact4() => Card(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                'The first dinosaur fossil was found around 1815.',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
 }

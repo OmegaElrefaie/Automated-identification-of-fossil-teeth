@@ -64,7 +64,7 @@ class _QuestionState extends State<Question> {
               alignment: Alignment.topLeft,
               child: InkWell(
                 onTap: () {
-                  context.go('/startpage');
+                  context.pop();
                 },
                 child: const Icon(
                   Icons.arrow_back,
@@ -104,48 +104,48 @@ class _QuestionState extends State<Question> {
                     icon: const Icon(Icons.search_outlined))
               ],
             ),
-            const SizedBox(height: 23),
-            SingleChildScrollView(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 80,
-                child: ElevatedButton(
-                  onPressed: () {
-                    ///TODO Handle experts data view
-                    //context.go('/chat');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: const Color.fromARGB(255, 251, 252, 251),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage: AssetImage('assets/images/asset1.png'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Dr. Hesham Sallam",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 20.0,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            //const SizedBox(height: 10),
+
+            // SingleChildScrollView(
+            //   child: SizedBox(
+            //     width: MediaQuery.of(context).size.width,
+            //     height: 80,
+            //     child: ElevatedButton(
+            //       onPressed: () {
+            //         ///TODO Handle experts data view
+            //         //context.go('/chat');
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         foregroundColor: Colors.white,
+            //         backgroundColor: const Color.fromARGB(255, 251, 252, 251),
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(10),
+            //         ),
+            //       ),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.start,
+            //         children: const [
+            //           CircleAvatar(
+            //             radius: 30,
+            //             backgroundImage: AssetImage('assets/images/asset1.png'),
+            //           ),
+            //           Padding(
+            //             padding: EdgeInsets.all(8.0),
+            //             child: Text(
+            //               "Dr. Hesham Sallam",
+            //               textAlign: TextAlign.center,
+            //               style: TextStyle(
+            //                 fontFamily: 'Inter',
+            //                 fontSize: 20.0,
+            //                 color: Color.fromARGB(255, 0, 0, 0),
+            //               ),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
             if (searchResult.isNotEmpty)
               Expanded(
                   child: ListView.builder(
@@ -159,19 +159,22 @@ class _QuestionState extends State<Question> {
                           title: Text(searchResult[index]['Username']),
                           subtitle: Text(searchResult[index]['Email']),
                           trailing: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  searchController.text = "";
-                                });
+                            onPressed: () {
+                              setState(() {
+                                searchController.text = "";
+                              });
 
-                                GoRouter.of(context)
-                                    .goNamed('chat', queryParams: {
-                                  'friendId':
-                                      userIdsSearchResult.elementAt(index),
-                                  'friendName': searchResult[index]['Username'],
-                                });
-                              },
-                              icon: const Icon(Icons.message_rounded)),
+                              context.pushNamed('chat', queryParams: {
+                                'friendId':
+                                    userIdsSearchResult.elementAt(index),
+                                'friendName': searchResult[index]['Username'],
+                              });
+                            },
+                            icon: IconButton(
+                                color: kPrimaryColor,
+                                icon: const Icon(Icons.chat_bubble_rounded),
+                                onPressed: () {}),
+                          ),
                         );
                       }))
             else if (isLoading == true)

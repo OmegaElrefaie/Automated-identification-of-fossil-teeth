@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.only(left: 270),
             child: FloatingActionButton(
                 onPressed: () {
-                  context.go('/userprofile');
+                  context.pushNamed('userprofile');
                 },
                 backgroundColor: kPrimaryColor,
                 child: const CircleAvatar(
@@ -70,7 +70,8 @@ class HomePage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    context.go('/displayresults');
+                    // context.go('/displayresults');
+                    context.pushNamed('instructions');
                   },
                   child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),

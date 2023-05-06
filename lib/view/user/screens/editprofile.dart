@@ -54,7 +54,8 @@ class _EditProfileState extends State<EditProfile> {
                   children: [
                     InkWell(
                         onTap: () {
-                          context.go('/startpage'); //no navigation bar shows up
+                          context.pop(Alignment
+                              .bottomLeft); //no navigation bar shows up
                         },
                         child: const Text(
                           'Settings',

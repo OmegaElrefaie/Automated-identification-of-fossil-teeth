@@ -201,11 +201,11 @@ class _SettingState extends State<Setting> {
     return GestureDetector(
       onTap: () {
         if (title == 'Edit profile') {
-          context.go('/editprofile');
+          context.pushNamed('editprofile');
         } else if (title == 'Change password') {
-          context.go('/change_password');
+          context.pushNamed('change_password');
         } else if (title == 'About us') {
-          context.go('/about_us');
+          context.pushNamed('about_us');
         }
       },
       child: Padding(

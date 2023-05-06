@@ -105,6 +105,18 @@ class UserRepository {
     return email;
   }
 
+  Future<String> getUserPhoto() async {
+    String image;
+    String myuserid = await getUserId();
+    DocumentSnapshot user = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(myuserid)
+        .get();
+
+    image = user.get('ImageUrl');
+    return image;
+  }
+
   Future<String> getUserType() async {
     String userType;
     String myuserid = await getUserId();

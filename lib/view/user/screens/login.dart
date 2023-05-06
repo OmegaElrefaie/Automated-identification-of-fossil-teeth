@@ -6,7 +6,7 @@ import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/domain/user_model.dart';
-import 'package:graduation_project/view/Expert/screens/chat_expert.dart';
+import 'package:graduation_project/view/expert/screens/chat_expert.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
 
@@ -73,7 +73,7 @@ class _LoginState extends State<Login> {
       if (kDebugMode) {
         print('user is signed out');
       }
-      context.go('/');
+      context.go('/login');
     } else {
       userRole();
       // context.go('/startpage');
@@ -88,6 +88,12 @@ class _LoginState extends State<Login> {
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            color: kDarkColor,
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              context.go('/');
+            }),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,

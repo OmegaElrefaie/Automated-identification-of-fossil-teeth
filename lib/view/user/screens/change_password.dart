@@ -48,7 +48,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   alignment: Alignment.topLeft,
                   child: InkWell(
                       onTap: () {
-                        context.go('/startpage');
+                        context.pop();
                       },
                       child: const Text(
                         'Settings',
