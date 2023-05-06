@@ -116,4 +116,33 @@ class UserRepository {
     userType = user.get('Type');
     return userType;
   }
+
+  Future<void> updateUserName(String newUserName) async {
+    print('in');
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final userRef = FirebaseFirestore.instance.collection('Users').doc(userId);
+
+    await userRef.update({
+      'Username': newUserName,
+    });
+
+    print('out');
+  }
+
+  Future<void> deleteAccount() async {
+    // Get the current user ID
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+    try {
+      // Delete the user's account
+
+      // Delete the user's document from Firestore
+      await FirebaseFirestore.instance.collection('Users').doc(userId).delete();
+
+      await FirebaseAuth.instance.currentUser!.delete();
+    } catch (e) {
+      // Handle any errors that may occur during the deletion process
+      print('Error deleting account: $e');
+    }
+  }
 }
