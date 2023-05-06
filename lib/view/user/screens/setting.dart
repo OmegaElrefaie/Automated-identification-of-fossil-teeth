@@ -150,17 +150,42 @@ class _SettingState extends State<Setting> {
             const SizedBox(height: 25),
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () {
-                  userRepo.deleteAccount();
-                  context.go('/signup');
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Confirm Action"),
+                        content: Text(
+                            "Are you sure you want to perform this action?"),
+                        actions: [
+                          ElevatedButton(
+                            child: Text("Cancel"),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          ElevatedButton(
+                            child: Text("Confirm"),
+                            onPressed: () {
+                              context.go('/startpage');
+                              userRepo.deleteAccount();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
-                child: const Text(
-                  "Delete Account",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(190, 0, 0, 1)),
+                child: InkWell(
+                  child: const Text(
+                    "Delete Account",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(190, 0, 0, 1)),
+                  ),
                 ),
               ),
             ),
