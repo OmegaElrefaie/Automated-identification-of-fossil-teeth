@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
 
 const double profileHeight = 155;
 
@@ -11,6 +12,8 @@ class EditProfile extends StatefulWidget {
   @override
   State<EditProfile> createState() => _EditProfileState();
 }
+
+UserRepository userRepo = UserRepository.instance;
 
 class _EditProfileState extends State<EditProfile> {
   final _picker = ImagePicker();
@@ -24,6 +27,7 @@ class _EditProfileState extends State<EditProfile> {
 
   // ignore: non_constant_identifier_names
   bool isHiddenPassword_TFF1 = true;
+  final newNickname = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -110,7 +114,7 @@ class _EditProfileState extends State<EditProfile> {
               child: Padding(
                 padding: const EdgeInsets.all(25),
                 child: TextFormField(
-                  // controller: newNickname,
+                  controller: newNickname,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter some text';
@@ -129,44 +133,22 @@ class _EditProfileState extends State<EditProfile> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 380),
-              child: Padding(
-                padding: const EdgeInsets.all(25),
-                child: TextFormField(
-                  obscureText: isHiddenPassword_TFF1,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isHiddenPassword_TFF1 = !isHiddenPassword_TFF1;
-                        });
-                      },
-                      child: Icon(isHiddenPassword_TFF1
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                    ),
-                    hintText: 'Confirm Password',
-                  ),
-                ),
-              ),
-            ),
-            Container(
               margin: const EdgeInsets.only(top: 500, left: 115),
               width: 160,
               height: 55,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await userRepo.updateUserName(newNickname.text);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Username updated successfully'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+
+                  // Clear the text field
+                  newNickname.clear();
+                },
                 style: ElevatedButton.styleFrom(
                   // ignore: deprecated_member_use
                   primary: const Color.fromRGBO(216, 139, 74, 1),
