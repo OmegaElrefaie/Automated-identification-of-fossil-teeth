@@ -3,6 +3,7 @@ import '../../../constants.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
 
 UserRepository userRepo = UserRepository.instance;
 
@@ -128,6 +129,8 @@ class _SettingState extends State<Setting> {
             BuildAccountOption(context, "Privacy policy"),
             BuildAccountOption(context, "Terms and conditions"),
             const SizedBox(height: 15),
+            const Divider(height: 2, thickness: 1),
+            const SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: InkWell(
@@ -136,11 +139,28 @@ class _SettingState extends State<Setting> {
                   context.go('/login');
                 },
                 child: const Text(
-                  "LogOut",
+                  "Log Out",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 25),
+            Padding(
+              padding: const EdgeInsets.only(left: 25.0),
+              child: InkWell(
+                onTap: () {
+                  userRepo.deleteAccount();
+                  context.go('/signup');
+                },
+                child: const Text(
+                  "Delete Account",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(190, 0, 0, 1)),
                 ),
               ),
             ),
