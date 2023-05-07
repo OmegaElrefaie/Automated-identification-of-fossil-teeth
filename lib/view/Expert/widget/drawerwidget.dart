@@ -92,6 +92,17 @@ class _DrawerrState extends State<Drawerr> {
                 });
                 context.pushNamed('adding_facts');
               }),
+          _createDrawerrItem(
+              icon: Icons.timeline_rounded,
+              text: 'Manage Maps',
+              isSelected: selectedIndex == 3,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 3;
+                });
+
+                context.pushNamed('manage_maps');
+              }),
         ],
       ),
     );
