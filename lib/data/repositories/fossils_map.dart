@@ -1,0 +1,1 @@
+//a repositry to access and edit the fossils_map table on firestore
