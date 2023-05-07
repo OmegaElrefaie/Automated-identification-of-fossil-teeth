@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
+import 'package:graduation_project/view/Expert/screens/manage_maps.dart';
 import 'package:graduation_project/view/expert/screens/chat_expert.dart';
 import 'package:graduation_project/view/user/screens/about_us.dart';
 import 'package:graduation_project/view/user/screens/change_password.dart';
@@ -32,8 +33,9 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         // return const Login();
-        return const WelcomeScreen();
-        // return const StartPage();
+        // return const WelcomeScreen();
+        return const StartPage();
+
         // return Instructions();
       }),
   GoRoute(
@@ -61,6 +63,13 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       name: "login",
       builder: (BuildContext context, GoRouterState state) {
         return const Login();
+      }),
+  GoRoute(
+      path: '/manage_maps',
+      name: "manage_maps",
+      builder: (BuildContext context, GoRouterState state) {
+        //return const Login();
+        return const FoosilMapInputScreen();
       }),
   GoRoute(
       path: '/change_password',
