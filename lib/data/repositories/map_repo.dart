@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/map_model.dart';
 
-// Map repository
-MapRepository factRepo = MapRepository.instance;
-
 class MapRepository {
   static final MapRepository _instance = MapRepository._internal();
   FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -19,21 +16,21 @@ class MapRepository {
         snapshot.docs.map((doc) => MapModel.fromMap(doc.data())).toList());
   }
 
-  Future<void> addMap(MapModel map) {
-    return _db.collection('Maps').add(map.toMap());
+  Future<String> addMap(MapModel map) async {
+    final docRef = _db.collection('Maps').doc();
+    await docRef.set(map.toMap());
+    return docRef.id;
   }
 
-  // Future<void> updateMap(MapModel map) {
-  //   return _db
-  //       .collection('Maps')
-  //       .doc(map.id)
-  //       .update(map.toMap());
-  // }
+  Future<void> updateMap(MapModel map) {
+    final docRef = _db.collection('Maps').doc();
+
+    return _db.collection('Maps').doc(docRef.id.toString()).update(map.toMap());
+  }
 
   Future<void> deleteMap(String id) {
     return _db.collection('Maps').doc(id).delete();
   }
 
-  // Add the instance getter here
   static MapRepository get instance => _instance;
 }
