@@ -35,6 +35,8 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
         // return const Login();
         // return const WelcomeScreen();
         return const StartPage();
+        //return const FoosilMapInputScreen();
+        // return const FossilMap();
 
         // return Instructions();
       }),
