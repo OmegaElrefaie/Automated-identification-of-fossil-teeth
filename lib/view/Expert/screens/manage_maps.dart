@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../data/repositories/map_repo.dart';
 import '../../../domain/map_model.dart';
@@ -26,6 +27,10 @@ class _FoosilMapInputScreenState extends State<FoosilMapInputScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add a new Foosil Map'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.go('/startpage'),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
