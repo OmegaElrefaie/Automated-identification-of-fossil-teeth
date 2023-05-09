@@ -4,7 +4,7 @@ import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/teethfossil_repo.dart';
-
+import '../../../data/repositories/user_repo.dart';
 FosssilRepository fossilRepo = FosssilRepository.instance;
 
 class Library extends StatefulWidget {
@@ -15,6 +15,41 @@ class Library extends StatefulWidget {
 }
 
 class _LibraryState extends State<Library> {
+    TextEditingController searchController = TextEditingController();
+      List<Map> searchResult = [];
+      Set<String> fossilIdsSearchResult = {};
+      bool isLoading = false;
+      String fossilId = UserRepository.instance.getFirebaseUid();
+
+      void onSearch() async {
+    setState(() {
+      searchResult = [];
+      isLoading = true;
+    });
+    await FirebaseFirestore.instance
+        .collection('Fossils')
+        .where("Name", isEqualTo: searchController.text)
+        .get()
+        .then((value) {
+      if (value.docs.isEmpty) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("No Teethfossil Found")));
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
+      for (var fossilDoc in value.docs) {
+        if (fossilDoc.id != fossilId) {
+         fossilIdsSearchResult.add(fossilDoc.id);
+          searchResult.add(fossilDoc.data());
+        }
+      }
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
   final List<Map<String, dynamic>> images = [
     {
       'id': 'i1',
@@ -48,38 +83,17 @@ class _LibraryState extends State<Library> {
     },
   ];
 
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController imageurlController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(children: [
-      Positioned(
-        top: 60,
-        left: 0,
-        right: 0,
-        child: Container(
-          alignment: Alignment.center,
-          height: 54,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-              border: Border.all(
-                  width: 2, color: const Color.fromARGB(255, 199, 198, 198))),
-          child: TextField(
-            decoration: InputDecoration(
-                hintText: "Search",
-                hintStyle: TextStyle(
-                  color: Colors.black.withOpacity(0.5),
-                  fontFamily: "Inter",
-                ),
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none),
-          ),
-        ),
-      ),
+        body: Stack(
+          children: [
       Padding(
-        padding: const EdgeInsets.only(top: 120.0),
+        padding: const EdgeInsets.only(top: 170.0),
         child: FutureBuilder(
             future:
                 //  fossilRepo.fetchAllFosssil(),
@@ -102,6 +116,7 @@ class _LibraryState extends State<Library> {
                           id: document.id,
                           name: document['Name'],
                           imageUrl: document['ImageUrl']);
+                          
                       return Card(
                         shape: const RoundedRectangleBorder(
                           side: BorderSide(
@@ -179,6 +194,58 @@ class _LibraryState extends State<Library> {
                     color: kTextColor, fontFamily: 'Inter', fontSize: 30),
               ),
             ),
+           const SizedBox(height: 5),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                          hintText: "Search for Teethfossil ...",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50))),
+                    ),
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {
+                      onSearch();
+                    },
+                    icon: const Icon(Icons.search_outlined))
+              ],
+            ),
+             const SizedBox(height: 0),
+            if (searchResult.isNotEmpty)
+              Expanded(
+                  child: ListView.builder(
+                      itemCount: searchResult.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: ListTile(
+                            title: Text(searchResult[index]['Name']),
+                            trailing: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  searchController.text = "";
+                                });
+                              },
+                              icon: IconButton(
+                                  color: kPrimaryColor,
+                                  icon: const Icon(Icons.arrow_forward_ios_outlined),
+                                  onPressed: () {},
+                                  ),
+                            ),
+                          ),
+                        );
+                      }))
+            else if (isLoading == true)
+              const Center(
+                child: CircularProgressIndicator(),
+              ),
           ],
         ),
       ),
