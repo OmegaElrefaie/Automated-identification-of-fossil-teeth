@@ -16,7 +16,7 @@ class Facts extends StatelessWidget {
             alignment: Alignment.center,
             child: InkWell(
               onTap: () {
-                context.go('/startpage');
+                context.pop();
               },
               child: const Icon(
                 Icons.arrow_back,
