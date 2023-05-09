@@ -69,7 +69,7 @@ class _DrawerrState extends State<Drawerr> {
                 setState(() {
                   selectedIndex = 0;
                 });
-                context.go('/settings_expert');
+                context.pushNamed('settings_expert');
               }),
           _createDrawerrItem(
               icon: Icons.notifications,
@@ -80,7 +80,28 @@ class _DrawerrState extends State<Drawerr> {
                   selectedIndex = 2;
                 });
 
-                context.go('/notifications_sending');
+                context.pushNamed('notifications_sending');
+              }),
+          _createDrawerrItem(
+              icon: Icons.search_outlined,
+              text: 'Add Fact',
+              isSelected: selectedIndex == 3,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 3;
+                });
+                context.pushNamed('adding_facts');
+              }),
+          _createDrawerrItem(
+              icon: Icons.timeline_rounded,
+              text: 'Manage Maps',
+              isSelected: selectedIndex == 3,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 3;
+                });
+
+                context.pushNamed('manage_maps');
               }),
         ],
       ),

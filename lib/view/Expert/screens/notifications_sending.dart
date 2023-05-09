@@ -42,7 +42,7 @@ class _CustomNotificationState extends State<CustomNotification> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               const Text(
-                "Notifications",
+                "Add Notifications",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     height: 1.5,

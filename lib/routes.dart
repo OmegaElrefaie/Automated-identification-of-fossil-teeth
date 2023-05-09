@@ -1,14 +1,15 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
-import 'package:graduation_project/view/Expert/screens/chat_expert.dart';
+import 'package:graduation_project/view/Expert/screens/manage_maps.dart';
+import 'package:graduation_project/view/expert/screens/chat_expert.dart';
 import 'package:graduation_project/view/user/screens/about_us.dart';
 import 'package:graduation_project/view/user/screens/change_password.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
-import 'package:graduation_project/view/user/screens/facts.dart';
 import 'package:graduation_project/view/user/screens/fossil_map.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
+import 'package:graduation_project/view/user/screens/instructions.dart';
 import 'package:graduation_project/view/user/screens/login.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
@@ -18,33 +19,58 @@ import 'package:graduation_project/view/user/screens/timeline_fossils.dart';
 import 'package:graduation_project/view/user/screens/userprofile.dart';
 import 'package:graduation_project/welcome_screen.dart';
 import 'data/repositories/user_repo.dart';
-import 'view/Expert/screens/settings_expert.dart';
-import 'view/Expert/screens/startpage_expert.dart';
-import 'view/user/screens/about_us.dart';
+import 'view/expert/screens/adding_facts_screen.dart';
+import 'view/expert/screens/settings_expert.dart';
+import 'view/expert/screens/startpage_expert.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
 import 'package:graduation_project/view/user/screens/detail_page.dart';
-import 'package:graduation_project/view/Expert/screens/notifications_sending.dart';
+import 'package:graduation_project/view/expert/screens/notifications_sending.dart';
+import 'package:graduation_project/view/user/screens/facts01.dart';
 
 final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         // return const Login();
+
         return const WelcomeScreen();
+        // return const StartPage();
+        // return Instructions();
+        // return const Facts();
       }),
   GoRoute(
-      path: '/about_us',
-      builder: (BuildContext context, GoRouterState state) {
-        //return const Login();
-        return AboutUsScreen();
+      path: '/instructions',
+      name: "instructions",
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return CustomTransitionPage(
+            key: state.pageKey,
+            child: Instructions(),
+            transitionDuration: const Duration(milliseconds: 500),
+            transitionsBuilder:
+                ((context, animation, secondaryAnimation, child) {
+              animation = CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.ease,
+                  reverseCurve: Curves.bounceOut);
+              return ScaleTransition(
+                scale: animation,
+                child: child,
+              );
+            }));
       }),
   GoRoute(
       path: '/login',
       name: "login",
       builder: (BuildContext context, GoRouterState state) {
-        //return const Login();
         return const Login();
+      }),
+  GoRoute(
+      path: '/manage_maps',
+      name: "manage_maps",
+      builder: (BuildContext context, GoRouterState state) {
+        //return const Login();
+        return const FoosilMapInputScreen();
       }),
   GoRoute(
       path: '/change_password',
@@ -75,7 +101,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/facts',
       name: "facts",
       builder: (BuildContext context, GoRouterState state) {
-        return const Fact();
+        return const Facts();
       }),
   GoRoute(
       path: '/fossil_map',
@@ -170,5 +196,11 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       name: "about_us",
       builder: (BuildContext context, GoRouterState state) {
         return AboutUsScreen();
+      }),
+  GoRoute(
+      path: '/adding_facts',
+      name: "adding_facts",
+      builder: (BuildContext context, GoRouterState state) {
+        return const AddingFacts();
       })
 ]);

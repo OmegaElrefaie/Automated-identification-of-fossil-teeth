@@ -52,7 +52,7 @@ class UserRepository {
   //     print(e.toString());
   //   }
 //}
-  ///function malhash lazma khales bet2ra bs
+
   Future<String> getUserId() async {
     List<String> userId = [];
     final snapShot = await FirebaseFirestore.instance
@@ -105,6 +105,18 @@ class UserRepository {
     return email;
   }
 
+  Future<String> getUserPhoto() async {
+    String image;
+    String myuserid = await getUserId();
+    DocumentSnapshot user = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(myuserid)
+        .get();
+
+    image = user.get('Profilepic');
+    return image;
+  }
+
   Future<String> getUserType() async {
     String userType;
     String myuserid = await getUserId();
@@ -115,5 +127,34 @@ class UserRepository {
 
     userType = user.get('Type');
     return userType;
+  }
+
+  Future<void> updateUserName(String newUserName) async {
+    print('in');
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final userRef = FirebaseFirestore.instance.collection('Users').doc(userId);
+
+    await userRef.update({
+      'Username': newUserName,
+    });
+
+    print('out');
+  }
+
+  Future<void> deleteAccount() async {
+    // Get the current user ID
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+    try {
+      // Delete the user's account
+
+      // Delete the user's document from Firestore
+      await FirebaseFirestore.instance.collection('Users').doc(userId).delete();
+
+      await FirebaseAuth.instance.currentUser!.delete();
+    } catch (e) {
+      // Handle any errors that may occur during the deletion process
+      print('Error deleting account: $e');
+    }
   }
 }
