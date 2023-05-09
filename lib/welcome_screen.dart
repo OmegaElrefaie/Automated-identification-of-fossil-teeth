@@ -4,6 +4,7 @@ import 'package:graduation_project/constants.dart';
 import 'package:animated_icon/animate_icon.dart';
 import 'package:animated_icon/animate_icons.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -85,8 +86,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           isRepeatingAnimation: true,
                           repeatForever: true,
                           displayFullTextOnTap: true,
-                          onTap: () {
-                            context.pushNamed('login');
+                          onTap: () async {
+                            await SessionManager().get('id').then((value) {
+                              if (value == null)
+                                context.pushNamed('login');
+                              else
+                                context.pushNamed('startpage');
+                            });
                           },
                         )
                       ],

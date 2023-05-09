@@ -5,9 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
-import 'package:graduation_project/domain/user_model.dart';
-import 'package:graduation_project/view/expert/screens/chat_expert.dart';
-import 'package:graduation_project/view/user/screens/startpage.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
 
 UserRepository userRepo = UserRepository.instance;
@@ -26,14 +24,14 @@ class _LoginState extends State<Login> {
   bool isHiddenPassword = true;
   final formKey = GlobalKey<FormState>();
 
-  // @override
-  // void initState() {
-  //   super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-  //   FirebaseAuth.instance.authStateChanges().listen((event) {
-  //     updateUserState(event);
-  //   });
-  // }
+    // FirebaseAuth.instance.authStateChanges().listen((event) {
+    //   updateUserState(event);
+    // });
+  }
 
   // updateUserState(event) {
   //   setState(() {
@@ -49,8 +47,11 @@ class _LoginState extends State<Login> {
     Auth()
         .signInUsingEmailPassword(
             context: context, email: email, password: password)
-        .then((authUser) {
+        .then((authUser) async {
       initializeUser(authUser);
+      if (authUser != null) {
+        await SessionManager().set('id', authUser.uid);
+      }
     });
   }
 
@@ -79,6 +80,7 @@ class _LoginState extends State<Login> {
       // context.go('/startpage');
       if (kDebugMode) {
         print('user is signed in');
+        print('id is ...');
       }
     }
   }
