@@ -3,10 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/view/user/screens/library.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
+import '../../../domain/fossil_model.dart';
+
+import '../../../data/repositories/teethfossil_repo.dart';
+FosssilRepository FossilRepo = FosssilRepository.instance;
+Future<String>? imageUrl;
 
 class DisplayResults extends StatefulWidget {
   const DisplayResults({super.key});
@@ -39,7 +45,8 @@ class _DisplayResultsState extends State<DisplayResults> {
       });
     }
   }
-
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController imageurlController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -187,7 +194,15 @@ class _DisplayResultsState extends State<DisplayResults> {
                   style: TextStyle(
                       color: Colors.white, fontFamily: 'Inter', fontSize: 20),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  //  () async {
+                  //     await FossilRepo.createFossil(
+                  //        name: nameController.text,
+                  //        imageUrl: imageUrl.toString(),
+                  //        userId: userId,
+                  //        id: '',
+                  // );};
+                },
               ),
             ),
           ],
