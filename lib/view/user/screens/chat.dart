@@ -1,10 +1,13 @@
 //import 'package:go_router/go_router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/view/user/widgets/message_textfield.dart';
 import 'package:graduation_project/view/user/widgets/single_message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+UserRepository userRepo = UserRepository.instance;
 
 class Question2 extends StatelessWidget {
   final String userId;
@@ -41,10 +44,10 @@ class Question2 extends StatelessWidget {
                 const SizedBox(
                   width: 2,
                 ),
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/asset1.png'),
-                  maxRadius: 35,
-                ),
+                // const CircleAvatar(
+                //   backgroundImage: AssetImage('assets/images/asset1.png'),
+                //   maxRadius: 35,
+                // ),
                 const SizedBox(
                   width: 12,
                 ),
@@ -97,7 +100,7 @@ class Question2 extends StatelessWidget {
                   if (snapshot.hasData) {
                     if (snapshot.data.docs.length < 1) {
                       return const Center(
-                        child: Text("No questions yet"),
+                        child: Text("Start chatting"),
                       );
                     }
                     return ListView.builder(

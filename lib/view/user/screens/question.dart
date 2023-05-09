@@ -5,8 +5,8 @@ import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
 import '../../../constants.dart';
 import '../../../domain/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-// ignore: must_be_immutable
 class Question extends StatefulWidget {
   const Question({Key? key}) : super(key: key);
 
@@ -55,34 +55,33 @@ class _QuestionState extends State<Question> {
   Widget build(BuildContext context) {
     //  Question();
     return Scaffold(
+      appBar: AppBar(
+        leading: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
+          child: InkWell(
+            onTap: () {
+              context.pop();
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        elevation: 0,
+        title: const Text(
+          'Chat',
+          style:
+              TextStyle(color: Colors.white, fontFamily: 'Inter', fontSize: 22),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(17.0),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           children: [
-            const SizedBox(height: 60),
-            Align(
-              alignment: Alignment.topLeft,
-              child: InkWell(
-                onTap: () {
-                  context.pop();
-                },
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: kTextColor,
-                ),
-              ),
-            ),
-            const Text(
-              "Ask experts in the field ",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                height: 2.5,
-                fontFamily: 'Inter',
-                fontSize: 25.0,
-                color: kTextColor,
-              ),
-            ),
-            const SizedBox(height: 23),
+            const SizedBox(height: 15),
             Row(
               children: [
                 Expanded(
@@ -91,9 +90,20 @@ class _QuestionState extends State<Question> {
                     child: TextField(
                       controller: searchController,
                       decoration: InputDecoration(
-                          hintText: "Search for user....",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10))),
+                          hintText: "Search...",
+                          hintStyle: TextStyle(color: Colors.grey.shade600),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Colors.grey.shade600,
+                            size: 20,
+                          ),
+                          filled: true,
+                          fillColor: Colors.grey.shade100,
+                          contentPadding: const EdgeInsets.all(8),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:
+                                  BorderSide(color: Colors.grey.shade100))),
                     ),
                   ),
                 ),
@@ -104,82 +114,90 @@ class _QuestionState extends State<Question> {
                     icon: const Icon(Icons.search_outlined))
               ],
             ),
-
-            // SingleChildScrollView(
-            //   child: SizedBox(
-            //     width: MediaQuery.of(context).size.width,
-            //     height: 80,
-            //     child: ElevatedButton(
-            //       onPressed: () {
-            //         ///TODO Handle experts data view
-            //         //context.go('/chat');
-            //       },
-            //       style: ElevatedButton.styleFrom(
-            //         foregroundColor: Colors.white,
-            //         backgroundColor: const Color.fromARGB(255, 251, 252, 251),
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(10),
-            //         ),
-            //       ),
-            //       child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.start,
-            //         children: const [
-            //           CircleAvatar(
-            //             radius: 30,
-            //             backgroundImage: AssetImage('assets/images/asset1.png'),
-            //           ),
-            //           Padding(
-            //             padding: EdgeInsets.all(8.0),
-            //             child: Text(
-            //               "Dr. Hesham Sallam",
-            //               textAlign: TextAlign.center,
-            //               style: TextStyle(
-            //                 fontFamily: 'Inter',
-            //                 fontSize: 20.0,
-            //                 color: Color.fromARGB(255, 0, 0, 0),
-            //               ),
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
-
-            if (searchResult.isNotEmpty)
+            if (searchResult.isEmpty)
               Expanded(
-                  child: ListView.builder(
-                      itemCount: searchResult.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          // leading: CircleAvatar(
-                          //   child: Image.network(searchResult[index]['image']),
-                          // ),
-                          title: Text(searchResult[index]['Username']),
-                          subtitle: Text(searchResult[index]['Email']),
-                          trailing: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                searchController.text = "";
-                              });
+                  child: FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('Users')
+                          .where('Email',
+                              isNotEqualTo:
+                                  FirebaseAuth.instance.currentUser!.email)
+                          .get(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: (context, index) {
+                                QueryDocumentSnapshot<Map<String, dynamic>>
+                                    document = snapshot.data!.docs[index];
 
-                              context.pushNamed('chat', queryParams: {
-                                'friendId':
-                                    userIdsSearchResult.elementAt(index),
-                                'friendName': searchResult[index]['Username'],
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      searchController.text = "";
+                                    });
+
+                                    context.pushNamed('chat', queryParams: {
+                                      'friendId': document.id,
+                                      'friendName': document['Username'],
+                                    });
+                                    // context.pushNamed('chat', queryParams: {
+                                    //   'friendId':
+                                    //       userIdsSearchResult.elementAt(index),
+                                    //   'friendName': searchResult[index]
+                                    //       ['Username'],
+                                    // });
+                                  },
+                                  child: ListTile(
+                                    leading: CircleAvatar(
+                                      child:
+                                          Image.network(document['Profilepic']),
+                                    ),
+                                    title: Text(document['Username']),
+                                    subtitle: Text(document['Email']),
+                                  ),
+                                );
                               });
-                            },
-                            icon: IconButton(
-                                color: kPrimaryColor,
-                                icon: const Icon(Icons.chat_bubble_rounded),
-                                onPressed: () {}),
-                          ),
-                        );
+                        } else {
+                          return Container(
+                            padding: const EdgeInsets.only(bottom: 50),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                const CircularProgressIndicator(
+                                  color: kPrimaryColor,
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                       }))
-            else if (isLoading == true)
-              const Center(
-                child: CircularProgressIndicator(),
+            else if (searchResult.isNotEmpty)
+              ListView.builder(
+                itemCount: searchResult.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        searchController.text = "";
+                      });
+
+                      context.pushNamed('chat', queryParams: {
+                        'friendId': userIdsSearchResult.elementAt(index),
+                        'friendName': searchResult[index]['Username'],
+                      });
+                    },
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        child: Image.network(searchResult[index]['Profilepic']),
+                      ),
+                      title: Text(searchResult[index]['Username']),
+                      subtitle: Text(searchResult[index]['Email']),
+                    ),
+                  );
+                },
               )
           ],
         ),
