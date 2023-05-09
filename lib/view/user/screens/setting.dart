@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../../../constants.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
@@ -134,6 +135,9 @@ class _SettingState extends State<Setting> {
                 onTap: () {
                   Auth().logout();
                   context.go('/login');
+                  setState(() async {
+                    await SessionManager().destroy();
+                  });
                 },
                 child: const Text(
                   "LogOut",
