@@ -3,15 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graduation_project/view/user/screens/detail_page.dart';
-import 'package:graduation_project/view/user/screens/library.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
-import '../../../domain/fossil_model.dart';
-
 import '../../../data/repositories/teethfossil_repo.dart';
+
+UserRepository userRepo = UserRepository.instance;
 
 FosssilRepository FossilRepo = FosssilRepository.instance;
 Future<String>? imageUrl;
@@ -56,8 +55,12 @@ class _DisplayResultsState extends State<DisplayResults> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () {
-            context.go('/startpage');
+          onPressed: () async {
+            if (await userRepo.getUserType() == 'User') {
+              context.go('/startpage');
+            } else {
+              context.go('/startpage_expert');
+            }
           },
           color: Colors.white,
         ),

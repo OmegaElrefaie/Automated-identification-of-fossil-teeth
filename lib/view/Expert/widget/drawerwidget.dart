@@ -63,13 +63,13 @@ class _DrawerrState extends State<Drawerr> {
           ),
           _createDrawerrItem(
               icon: Icons.settings,
-              text: 'Settings',
+              text: 'Chat',
               isSelected: selectedIndex == 0,
               onTap: () {
                 setState(() {
                   selectedIndex = 0;
                 });
-                context.pushNamed('settings_expert');
+                context.pushNamed('chat');
               }),
           _createDrawerrItem(
               icon: Icons.notifications,

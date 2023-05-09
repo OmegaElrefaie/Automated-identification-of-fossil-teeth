@@ -36,22 +36,6 @@ class _SettingExpertState extends State<SettingExpert> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.topLeft,
-          child: InkWell(
-            onTap: () {
-              context.go('/home_expert');
-            },
-            child: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: kDarkColor,
-      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: ListView(

@@ -202,5 +202,11 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       name: "adding_facts",
       builder: (BuildContext context, GoRouterState state) {
         return const AddingFacts();
+      }),
+  GoRoute(
+      path: '/startpage_expert',
+      name: "startpage_expert",
+      builder: (BuildContext context, GoRouterState state) {
+        return const StartPageExpert();
       })
 ]);

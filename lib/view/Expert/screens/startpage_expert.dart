@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:graduation_project/view/expert/screens/home_expert.dart';
+import 'package:graduation_project/view/expert/screens/settings_expert.dart';
 import 'package:graduation_project/view/user/screens/home.dart';
 import 'package:graduation_project/view/user/screens/library.dart';
 import 'package:graduation_project/view/user/screens/setting.dart';
@@ -28,7 +29,7 @@ class _StartPageExpertState extends State<StartPageExpert> {
     return [
       const SafeArea(child: HomePageExpert()),
       const SafeArea(child: Library()),
-      SafeArea(child: Headerr()),
+      SafeArea(child: SettingExpert()),
     ];
   }
 
@@ -85,13 +86,13 @@ class _StartPageExpertState extends State<StartPageExpert> {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(
-          Icons.chat_rounded,
+          Icons.settings,
           color: Colors.white,
         ),
-        title: "Chat",
+        title: "Settings",
         activeColorPrimary: kPrimaryColor,
         activeColorSecondary: Colors.white,
-        inactiveIcon: const Icon(Icons.chat_rounded, color: Colors.grey),
+        inactiveIcon: const Icon(Icons.settings, color: Colors.grey),
       ),
     ];
   }
