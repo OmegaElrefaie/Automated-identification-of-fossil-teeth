@@ -1,7 +1,10 @@
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:flutter/material.dart';
+
 
 class FosssilRepository {
   static final FosssilRepository instance = FosssilRepository._();
@@ -9,20 +12,43 @@ class FosssilRepository {
 
   FosssilRepository._();
 
-  Future createFossil(Fossil fossil, String uid) async {
-    final docFossil = db.collection('Fossils');
+  File? image;
+  Future<String>? imageurl;
 
-    fossil.id = uid;
-    final json = fossil.toJson();
-
-    await docFossil.doc(uid).set(json).catchError((error, stackTrace) {
-      Get.snackbar("Error", "Something went wrong. Try again",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.redAccent,
-          colorText: const Color.fromARGB(255, 255, 255, 255));
-      return error("Error");
+  Future<String> uploadImage() async {
+    Future<String>? url;
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child("images${DateTime.now()}");
+    UploadTask uploadTask = ref.putFile(image!);
+    uploadTask.whenComplete(() {
+      url = ref.getDownloadURL();
+    }).catchError((onError) {
+      print(onError);
     });
+    print(url);
+    return url!;
+    
   }
+
+  Future<void> createFossil(Fossil fossil, String userId, String name, String imageUrl) async {
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userId)
+          .collection('Fossils')
+          .doc(fossil.id);
+      
+      final data = {'name': name, 'imageUrl': imageUrl};
+      await docRef.set(data);
+      await docRef.update(fossil.toJson());
+      
+      print('Fossil added successfully!');
+    } catch (e) {
+      print('Failed to add fossil: $e');
+    }
+    
+  }
+
 
   Future<String> getFossilId() async {
     List<String> fossilId = [];
@@ -74,3 +100,4 @@ class FosssilRepository {
     await documentReference.delete();
   }
 }
+
