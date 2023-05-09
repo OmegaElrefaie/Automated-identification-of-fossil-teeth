@@ -52,7 +52,7 @@ class UserRepository {
   //     print(e.toString());
   //   }
 //}
-  ///function malhash lazma khales bet2ra bs
+
   Future<String> getUserId() async {
     List<String> userId = [];
     final snapShot = await FirebaseFirestore.instance
@@ -113,7 +113,7 @@ class UserRepository {
         .doc(myuserid)
         .get();
 
-    image = user.get('ImageUrl');
+    image = user.get('Profilepic');
     return image;
   }
 
