@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
+import 'package:graduation_project/view/user/screens/detail_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:graduation_project/constants.dart';
@@ -34,6 +35,7 @@ class _DisplayResultsState extends State<DisplayResults> {
     if (pickedImage != null) {
       setState(() {
         _imageFile = File(pickedImage.path);
+
         _predict();
         resolutions = [];
       });
