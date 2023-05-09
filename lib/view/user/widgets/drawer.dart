@@ -109,7 +109,7 @@ class _SideDrawerState extends State<SideDrawer> {
                 context.pushNamed('facts');
               }),
           _createDrawerItem(
-              icon: Icons.history,
+              icon: Icons.chat_bubble_outline_rounded,
               text: 'Chat',
               isSelected: selectedIndex == 1,
               onTap: () {
