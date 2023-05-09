@@ -6,7 +6,6 @@ import 'package:graduation_project/view/user/screens/about_us.dart';
 import 'package:graduation_project/view/user/screens/change_password.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
 import 'package:graduation_project/view/user/screens/editprofile.dart';
-import 'package:graduation_project/view/user/screens/facts.dart';
 import 'package:graduation_project/view/user/screens/fossil_map.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
 import 'package:graduation_project/view/user/screens/instructions.dart';
@@ -26,15 +25,18 @@ import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
 import 'package:graduation_project/view/user/screens/detail_page.dart';
 import 'package:graduation_project/view/expert/screens/notifications_sending.dart';
+import 'package:graduation_project/view/user/screens/facts01.dart';
 
 final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         // return const Login();
+
         return const WelcomeScreen();
         // return const StartPage();
         // return Instructions();
+        // return const Facts();
       }),
   GoRoute(
       path: '/instructions',
@@ -91,7 +93,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/facts',
       name: "facts",
       builder: (BuildContext context, GoRouterState state) {
-        return const FactsScreen();
+        return const Facts();
       }),
   GoRoute(
       path: '/fossil_map',
