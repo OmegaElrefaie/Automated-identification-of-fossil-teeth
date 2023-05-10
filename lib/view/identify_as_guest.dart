@@ -4,25 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
+import 'package:graduation_project/view/user/screens/instructions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
 import '../../../data/repositories/teethfossil_repo.dart';
 
-UserRepository userRepo = UserRepository.instance;
-
-FosssilRepository FossilRepo = FosssilRepository.instance;
 Future<String>? imageUrl;
 
-class DisplayResults extends StatefulWidget {
-  const DisplayResults({super.key});
+class Identify extends StatefulWidget {
+  const Identify({super.key});
 
   @override
-  State<DisplayResults> createState() => _DisplayResultsState();
+  State<Identify> createState() => _IdentifyState();
 }
 
-class _DisplayResultsState extends State<DisplayResults> {
+class _IdentifyState extends State<Identify> {
   File? _imageFile;
 
   final _picker = ImagePicker();
@@ -55,12 +53,8 @@ class _DisplayResultsState extends State<DisplayResults> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () async {
-            if (await userRepo.getUserType() == 'User') {
-              context.go('/startpage');
-            } else {
-              context.go('/startpage_expert');
-            }
+          onPressed: () {
+            context.go('/welcome_screen');
           },
           color: Colors.white,
         ),
@@ -195,49 +189,6 @@ class _DisplayResultsState extends State<DisplayResults> {
                       )
                     ],
                   ),
-            SizedBox(
-              height: 40,
-              width: 100,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-                child: const Text(
-                  'Save',
-                  style: TextStyle(
-                      color: Colors.white, fontFamily: 'Inter', fontSize: 20),
-                ),
-                onPressed: () {
-                  //  () async {
-                  //     await FossilRepo.createFossil(
-                  //        name: nameController.text,
-                  //        imageUrl: imageUrl.toString(),
-                  //        userId: userId,
-                  //        id: '',
-                  // );};
-                },
-              ),
-              // child: ElevatedButton(
-              //   style: ButtonStyle(
-              //       backgroundColor: getColor(kPrimaryColor, kTextColor)),
-              //   child: const Text(
-              //     'Save',
-              //     style: TextStyle(
-              //         color: Colors.white, fontFamily: 'Inter', fontSize: 20),
-              //   ),
-              //   onPressed: () {
-              //     //  () async {
-              //     //     await FossilRepo.createFossil(
-              //     //        name: nameController.text,
-              //     //        imageUrl: imageUrl.toString(),
-              //     //        userId: userId,
-              //     //        id: '',
-              //     // );};
-              //   },
-              // ),
-            ),
           ],
         ),
       ),

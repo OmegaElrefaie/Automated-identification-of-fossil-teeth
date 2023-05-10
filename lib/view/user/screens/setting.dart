@@ -17,7 +17,7 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   bool s1 = false;
-
+  String imageUrl = '';
   String name = '';
   bool isloaded = false;
   @override
@@ -28,6 +28,7 @@ class _SettingState extends State<Setting> {
 
   Future<void> getData() async {
     name = await userRepo.getUserName();
+    imageUrl = await userRepo.getUserPhoto();
     if (name.isNotEmpty) {
       setState(() {
         isloaded = true;
@@ -39,7 +40,7 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
           children: [
             Padding(
@@ -59,9 +60,9 @@ class _SettingState extends State<Setting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/asset4.png'),
+                  backgroundImage: NetworkImage(imageUrl),
                 ),
                 const SizedBox(
                   width: 20,
@@ -108,7 +109,7 @@ class _SettingState extends State<Setting> {
               },
               title: const Text(
                 'Push notification',
-                style: TextStyle(fontSize: 22),
+                style: TextStyle(fontSize: 20),
               ),
             ),
             const Divider(height: 2, thickness: 1),

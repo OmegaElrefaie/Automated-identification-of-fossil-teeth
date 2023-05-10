@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../../../constants.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
 
 UserRepository userRepo = UserRepository.instance;
 
-class SettingExpert extends StatefulWidget {
-  const SettingExpert({super.key});
+class SettingsExpert extends StatefulWidget {
+  const SettingsExpert({super.key});
 
   @override
-  State<SettingExpert> createState() => _SettingExpertState();
+  State<SettingsExpert> createState() => _SettingsExpertState();
 }
 
-class _SettingExpertState extends State<SettingExpert> {
+class _SettingsExpertState extends State<SettingsExpert> {
   bool s1 = false;
-
+  String imageUrl = '';
   String name = '';
   bool isloaded = false;
   @override
@@ -26,6 +28,7 @@ class _SettingExpertState extends State<SettingExpert> {
 
   Future<void> getData() async {
     name = await userRepo.getUserName();
+    imageUrl = await userRepo.getUserPhoto();
     if (name.isNotEmpty) {
       setState(() {
         isloaded = true;
@@ -36,24 +39,8 @@ class _SettingExpertState extends State<SettingExpert> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.topLeft,
-          child: InkWell(
-            onTap: () {
-              context.go('/home_expert');
-            },
-            child: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: kDarkColor,
-      ),
       body: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
           children: [
             Padding(
@@ -73,9 +60,9 @@ class _SettingExpertState extends State<SettingExpert> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/asset4.png'),
+                  backgroundImage: NetworkImage(imageUrl),
                 ),
                 const SizedBox(
                   width: 20,
@@ -122,7 +109,7 @@ class _SettingExpertState extends State<SettingExpert> {
               },
               title: const Text(
                 'Push notification',
-                style: TextStyle(fontSize: 22),
+                style: TextStyle(fontSize: 20),
               ),
             ),
             const Divider(height: 2, thickness: 1),
@@ -144,18 +131,65 @@ class _SettingExpertState extends State<SettingExpert> {
             BuildAccountOption(context, "Privacy policy"),
             BuildAccountOption(context, "Terms and conditions"),
             const SizedBox(height: 15),
+            const Divider(height: 2, thickness: 1),
+            const SizedBox(height: 15),
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: InkWell(
                 onTap: () {
                   Auth().logout();
                   context.go('/login');
+                  setState(() async {
+                    await SessionManager().destroy();
+                  });
                 },
                 child: const Text(
-                  "LogOut",
+                  "Log Out",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 25),
+            Padding(
+              padding: const EdgeInsets.only(left: 25.0),
+              child: GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Confirm Action"),
+                        content: Text(
+                            "Are you sure you want to perform this action?"),
+                        actions: [
+                          ElevatedButton(
+                            child: Text("Cancel"),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          ElevatedButton(
+                            child: Text("Confirm"),
+                            onPressed: () {
+                              context.go('/startpage');
+                              userRepo.deleteAccount();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: InkWell(
+                  child: const Text(
+                    "Delete Account",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(190, 0, 0, 1)),
                   ),
                 ),
               ),
@@ -172,9 +206,11 @@ class _SettingExpertState extends State<SettingExpert> {
     return GestureDetector(
       onTap: () {
         if (title == 'Edit profile') {
-          context.go('/editprofile');
+          context.pushNamed('editprofile');
         } else if (title == 'Change password') {
-          context.go('/change_password');
+          context.pushNamed('change_password');
+        } else if (title == 'About us') {
+          context.pushNamed('about_us');
         }
       },
       child: Padding(

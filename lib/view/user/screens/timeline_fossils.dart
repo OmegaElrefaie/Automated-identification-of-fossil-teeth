@@ -64,7 +64,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
         title: const Text('The process of fossilization'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/startpage'),
+          onPressed: () => context.pop(),
         ),
       ),
       body: Stack(children: [

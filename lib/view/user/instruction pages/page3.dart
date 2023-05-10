@@ -9,7 +9,7 @@ class Page3 extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: const EdgeInsets.only(left: 40, right: 40, top: 5, bottom: 50),
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

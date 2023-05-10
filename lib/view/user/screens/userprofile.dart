@@ -40,16 +40,19 @@ class _UserProfileState extends State<UserProfile> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: kDarkColor,
-        title: Align(
-          alignment: Alignment.topLeft,
+        leading: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
           child: InkWell(
-              onTap: () {
-                context.pop();
-              },
-              child: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              )),
+            onTap: () {
+              context.pop();
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
       body: Stack(
@@ -69,9 +72,9 @@ class _UserProfileState extends State<UserProfile> {
             padding: const EdgeInsets.only(top: 80.0),
             child: Column(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 110,
-                  backgroundImage: AssetImage('assets/images/asset4.png'),
+                  backgroundImage: NetworkImage(image),
                 ),
                 const SizedBox(
                   height: 10,

@@ -41,18 +41,25 @@ class UserRepository {
     // });
   }
 
-  // Future<UserModel?> fetchUserData(String uid) async {
-  //  try { return await db.collection('Users').get().then((snapshot) {
-  //     Map<String, dynamic> user =
-  //         jsonDecode(jsonEncode(snapshot)) as Map<String, dynamic>;
-  //     user['uid'] = uid;
-  //     return UserModel.fromJson(user);
-  //   });
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-//}
-  ///function malhash lazma khales bet2ra bs
+//   Future<UserModel?> fetchUserData(String uid) async {
+//    try { return await db.collection('Users').get().then((snapshot) {
+//       Map<String, dynamic> user =
+//           jsonDecode(jsonEncode(snapshot)) as Map<String, dynamic>;
+//       user['uid'] = uid;
+//       return UserModel.fromJson(user);
+//     });
+//     } catch (e) {
+//       print(e.toString());
+//     }
+// }
+
+  // Future<List<UserModel>> fetchAllUsers() async {
+  //   final snapshot = await db.collection('Users').get();
+  //   final userData =
+  //       snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
+  //   return userData;
+  // }
+
   Future<String> getUserId() async {
     List<String> userId = [];
     final snapShot = await FirebaseFirestore.instance
@@ -113,7 +120,7 @@ class UserRepository {
         .doc(myuserid)
         .get();
 
-    image = user.get('ImageUrl');
+    image = user.get('Profilepic');
     return image;
   }
 

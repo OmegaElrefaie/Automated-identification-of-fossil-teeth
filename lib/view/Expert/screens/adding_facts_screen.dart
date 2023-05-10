@@ -23,11 +23,13 @@ class _AddingFactsState extends State<AddingFacts> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Align(
-          alignment: Alignment.topLeft,
+        leading: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
           child: InkWell(
             onTap: () {
-              context.go('/home_expert');
+              context.pop();
             },
             child: const Icon(
               Icons.arrow_back,

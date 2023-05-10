@@ -72,7 +72,7 @@ class _SignupState extends State<Signup> {
         actions: [
           InkWell(
             onTap: () {
-              context.go('/');
+              context.go('/login');
             },
             child: const Padding(
               padding: EdgeInsets.only(right: 20.0),

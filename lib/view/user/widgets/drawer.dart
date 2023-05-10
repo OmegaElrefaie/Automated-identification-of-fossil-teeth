@@ -21,6 +21,7 @@ int selectedIndex = 0;
 class _SideDrawerState extends State<SideDrawer> {
   String name = '';
   String email = '';
+  String imageUrl = '';
   bool isloaded = false;
   @override
   void initState() {
@@ -31,9 +32,8 @@ class _SideDrawerState extends State<SideDrawer> {
   Future<void> getData() async {
     name = await userRepo.getUserName();
     email = await userRepo.getUserEmail();
+    imageUrl = await userRepo.getUserPhoto();
     if (name.isNotEmpty) {
-      // ignore: avoid_print
-      print('name is $name');
       setState(() {
         isloaded = true;
       });
@@ -50,9 +50,9 @@ class _SideDrawerState extends State<SideDrawer> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/asset4.png'),
+                  backgroundImage: NetworkImage(imageUrl),
                 ),
                 const SizedBox(
                   width: 20,
@@ -109,8 +109,8 @@ class _SideDrawerState extends State<SideDrawer> {
                 context.pushNamed('facts');
               }),
           _createDrawerItem(
-              icon: Icons.history,
-              text: 'Q/A',
+              icon: Icons.chat_bubble_outline_rounded,
+              text: 'Chat',
               isSelected: selectedIndex == 1,
               onTap: () {
                 setState(() {

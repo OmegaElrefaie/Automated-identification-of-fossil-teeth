@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:graduation_project/view/expert/screens/home_expert.dart';
+import 'package:graduation_project/view/expert/screens/settings_expert.dart';
 import 'package:graduation_project/view/user/screens/home.dart';
 import 'package:graduation_project/view/user/screens/library.dart';
 import 'package:graduation_project/view/user/screens/setting.dart';
@@ -11,9 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 import '../widget/drawerwidget.dart';
-import 'chat_expert.dart';
 
 class StartPageExpert extends StatefulWidget {
   const StartPageExpert({super.key});
@@ -28,7 +27,7 @@ class _StartPageExpertState extends State<StartPageExpert> {
     return [
       const SafeArea(child: HomePageExpert()),
       const SafeArea(child: Library()),
-      SafeArea(child: Headerr()),
+      SafeArea(child: SettingsExpert()),
     ];
   }
 
@@ -85,13 +84,13 @@ class _StartPageExpertState extends State<StartPageExpert> {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(
-          Icons.chat_rounded,
+          Icons.settings,
           color: Colors.white,
         ),
-        title: "Chat",
+        title: "Settings",
         activeColorPrimary: kPrimaryColor,
         activeColorSecondary: Colors.white,
-        inactiveIcon: const Icon(Icons.chat_rounded, color: Colors.grey),
+        inactiveIcon: const Icon(Icons.settings, color: Colors.grey),
       ),
     ];
   }
