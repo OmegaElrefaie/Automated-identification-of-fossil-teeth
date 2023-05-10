@@ -163,7 +163,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/settings_expert',
       name: "settings_expert",
       builder: (BuildContext context, GoRouterState state) {
-        return const SettingExpert();
+        return const SettingsExpert();
       }),
   GoRoute(
       path: '/settings',

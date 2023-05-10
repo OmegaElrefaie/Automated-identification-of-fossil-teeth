@@ -1,8 +1,9 @@
-// ignore_for_file: implementation_imports
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
+
+UserRepository userRepo = UserRepository.instance;
 
 class Drawerr extends StatefulWidget {
   const Drawerr({super.key});
@@ -11,11 +12,33 @@ class Drawerr extends StatefulWidget {
   State<Drawerr> createState() => _DrawerrState();
 }
 
+int selectedIndex = 0;
+
 class _DrawerrState extends State<Drawerr> {
+  String name = '';
+  String email = '';
+  String imageUrl = '';
+  bool isloaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    name = await userRepo.getUserName();
+    email = await userRepo.getUserEmail();
+    imageUrl = await userRepo.getUserPhoto();
+    if (name.isNotEmpty) {
+      setState(() {
+        isloaded = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
-
     return Drawer(
       child: ListView(
         children: [
@@ -24,20 +47,20 @@ class _DrawerrState extends State<Drawerr> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/asset1.png'),
+                  backgroundImage: NetworkImage(imageUrl),
                 ),
                 const SizedBox(
                   width: 20,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Padding(
                       padding: EdgeInsets.only(top: 50),
                       child: Text(
-                        'Dr Hesham Sallam',
+                        name,
                         style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Inter',
@@ -48,7 +71,7 @@ class _DrawerrState extends State<Drawerr> {
                     Padding(
                       padding: EdgeInsets.only(top: 8.0),
                       child: Text(
-                        'HeshamSallam@gmail.com',
+                        email,
                         style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Inter',
@@ -69,26 +92,26 @@ class _DrawerrState extends State<Drawerr> {
                 setState(() {
                   selectedIndex = 0;
                 });
-                context.pushNamed('chat');
+                context.pushNamed('question');
               }),
           _createDrawerrItem(
               icon: Icons.notifications,
               text: 'Notifications Editing',
-              isSelected: selectedIndex == 2,
+              isSelected: selectedIndex == 1,
               onTap: () {
                 setState(() {
-                  selectedIndex = 2;
+                  selectedIndex = 1;
                 });
 
-                context.pushNamed('notifications_sending');
+                context.pushNamed('notification_sending');
               }),
           _createDrawerrItem(
               icon: Icons.search_outlined,
               text: 'Add Fact',
-              isSelected: selectedIndex == 3,
+              isSelected: selectedIndex == 2,
               onTap: () {
                 setState(() {
-                  selectedIndex = 3;
+                  selectedIndex = 2;
                 });
                 context.pushNamed('adding_facts');
               }),
