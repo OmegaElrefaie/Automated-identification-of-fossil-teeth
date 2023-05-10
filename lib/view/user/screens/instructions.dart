@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/view/user/instruction pages/page1.dart';
@@ -38,8 +39,13 @@ class _InstructionsState extends State<Instructions> {
         backgroundColor: Colors.white,
         leading: Align(
           child: InkWell(
-            onTap: () {
-              context.go('/displayresults');
+            onTap: () async {
+              await SessionManager().get('id').then((value) {
+                if (value == null)
+                  context.go('/identify');
+                else
+                  context.pushNamed('displayresults');
+              });
             },
             child: const Icon(
               Icons.close_rounded,
@@ -47,31 +53,9 @@ class _InstructionsState extends State<Instructions> {
             ),
           ),
         ),
-        title: Align(
-          alignment: Alignment.bottomRight,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Checkbox(
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.resolveWith(getColor),
-                value: isChecked,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isChecked = value!;
-                  });
-                },
-              ),
-              Text(
-                'do not show again',
-                style: TextStyle(color: kTextColor, fontSize: 11),
-              ),
-            ],
-          ),
-        ),
       ),
       backgroundColor: Colors.white,
-      body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      body: Column(children: [
         SizedBox(
             height: 500,
             child: PageView(
@@ -90,7 +74,30 @@ class _InstructionsState extends State<Instructions> {
               dotColor: Colors.grey.shade500,
               spacing: 15,
               verticalOffset: 5),
-        )
+        ),
+        SizedBox(height: 10),
+        Align(
+          alignment: Alignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Checkbox(
+                checkColor: Colors.white,
+                fillColor: MaterialStateProperty.resolveWith(getColor),
+                value: isChecked,
+                onChanged: (bool? value) {
+                  setState(() {
+                    isChecked = value!;
+                  });
+                },
+              ),
+              Text(
+                'do not show again',
+                style: TextStyle(color: kTextColor, fontSize: 11),
+              ),
+            ],
+          ),
+        ),
       ]),
     );
   }

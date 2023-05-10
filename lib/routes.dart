@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:graduation_project/view/Expert/screens/manage_maps.dart';
 import 'package:graduation_project/view/expert/screens/chat_expert.dart';
+import 'package:graduation_project/view/identify_as_guest.dart';
 import 'package:graduation_project/view/user/screens/about_us.dart';
 import 'package:graduation_project/view/user/screens/change_password.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
@@ -33,7 +34,6 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         // return const Login();
-
         return const WelcomeScreen();
         // return const StartPage();
         // return Instructions();
@@ -66,6 +66,12 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
         return const Login();
       }),
   GoRoute(
+      path: '/welcome_screen',
+      name: "welcome_screen",
+      builder: (BuildContext context, GoRouterState state) {
+        return const WelcomeScreen();
+      }),
+  GoRoute(
       path: '/manage_maps',
       name: "manage_maps",
       builder: (BuildContext context, GoRouterState state) {
@@ -84,6 +90,12 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       name: "displayresults",
       builder: (BuildContext context, GoRouterState state) {
         return const DisplayResults();
+      }),
+  GoRoute(
+      path: '/identify',
+      name: "identify",
+      builder: (BuildContext context, GoRouterState state) {
+        return const Identify();
       }),
   GoRoute(
       path: '/library',
