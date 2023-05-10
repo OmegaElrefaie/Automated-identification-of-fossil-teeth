@@ -12,9 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 import '../widget/drawerwidget.dart';
-import 'chat_expert.dart';
 
 class StartPageExpert extends StatefulWidget {
   const StartPageExpert({super.key});
@@ -29,7 +27,7 @@ class _StartPageExpertState extends State<StartPageExpert> {
     return [
       const SafeArea(child: HomePageExpert()),
       const SafeArea(child: Library()),
-      SafeArea(child: SettingExpert()),
+      SafeArea(child: SettingsExpert()),
     ];
   }
 
