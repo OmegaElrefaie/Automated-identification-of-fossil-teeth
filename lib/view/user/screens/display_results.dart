@@ -64,6 +64,20 @@ class _DisplayResultsState extends State<DisplayResults> {
           },
           color: Colors.white,
         ),
+        title: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.centerRight,
+          child: InkWell(
+            onTap: () {
+              context.pushNamed('instructions');
+            },
+            child: const Icon(
+              Icons.question_mark_rounded,
+              color: Colors.white,
+            ),
+          ),
+        ),
         elevation: 0,
         backgroundColor: kDarkColor,
       ),
@@ -87,15 +101,6 @@ class _DisplayResultsState extends State<DisplayResults> {
                         spreadRadius: 2,
                         blurRadius: 1)
                   ]),
-              // child: Obx(() => imageController.imagePath.value == ''
-              //     ? const Icon(
-              //         Icons.photo_camera_back,
-              //         size: 50,
-              //       )
-              //     : Image.file(
-              //         File(imageController.imagePath.value),
-              //         fit: BoxFit.cover,
-              //       ))),
               child: (_imageFile != null)
                   ? Image.file(
                       File(_imageFile!.path),
@@ -161,7 +166,7 @@ class _DisplayResultsState extends State<DisplayResults> {
             // ),
             const Center(
               child: Text(
-                'Specie:',
+                'Output',
                 style: TextStyle(fontSize: 18),
               ),
             ),
@@ -194,8 +199,11 @@ class _DisplayResultsState extends State<DisplayResults> {
               height: 40,
               width: 100,
               child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: getColor(kPrimaryColor, kTextColor)),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
                 child: const Text(
                   'Save',
                   style: TextStyle(
@@ -211,6 +219,24 @@ class _DisplayResultsState extends State<DisplayResults> {
                   // );};
                 },
               ),
+              // child: ElevatedButton(
+              //   style: ButtonStyle(
+              //       backgroundColor: getColor(kPrimaryColor, kTextColor)),
+              //   child: const Text(
+              //     'Save',
+              //     style: TextStyle(
+              //         color: Colors.white, fontFamily: 'Inter', fontSize: 20),
+              //   ),
+              //   onPressed: () {
+              //     //  () async {
+              //     //     await FossilRepo.createFossil(
+              //     //        name: nameController.text,
+              //     //        imageUrl: imageUrl.toString(),
+              //     //        userId: userId,
+              //     //        id: '',
+              //     // );};
+              //   },
+              // ),
             ),
           ],
         ),
