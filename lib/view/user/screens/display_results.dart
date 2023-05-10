@@ -11,8 +11,8 @@ import 'package:graduation_project/view/user/widgets/getcolor.dart';
 import '../../../data/repositories/teethfossil_repo.dart';
 
 UserRepository userRepo = UserRepository.instance;
-
 FosssilRepository FossilRepo = FosssilRepository.instance;
+
 Future<String>? imageUrl;
 
 class DisplayResults extends StatefulWidget {
@@ -209,14 +209,16 @@ class _DisplayResultsState extends State<DisplayResults> {
                   style: TextStyle(
                       color: Colors.white, fontFamily: 'Inter', fontSize: 20),
                 ),
-                onPressed: () {
-                  //  () async {
-                  //     await FossilRepo.createFossil(
-                  //        name: nameController.text,
-                  //        imageUrl: imageUrl.toString(),
-                  //        userId: userId,
-                  //        id: '',
-                  // );};
+                onPressed: ()async {
+                 
+                    print( resolutions.first['label']);
+                    final userId = UserRepository.instance.getFirebaseUid();
+                      await FossilRepo.createFossil(
+                         name: resolutions.first['label'],
+                         imageUrl: imageUrl.toString(),
+                         userId: userId,
+                         id: '',
+                  );
                 },
               ),
               // child: ElevatedButton(
