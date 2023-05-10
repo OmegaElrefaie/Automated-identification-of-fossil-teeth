@@ -92,11 +92,6 @@ class _QuestionState extends State<Question> {
                       decoration: InputDecoration(
                           hintText: "Search...",
                           hintStyle: TextStyle(color: Colors.grey.shade600),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Colors.grey.shade600,
-                            size: 20,
-                          ),
                           filled: true,
                           fillColor: Colors.grey.shade100,
                           contentPadding: const EdgeInsets.all(8),
