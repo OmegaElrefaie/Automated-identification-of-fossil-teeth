@@ -35,7 +35,7 @@ class _Page1State extends State<Page1> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: const EdgeInsets.only(left: 40, right: 40, bottom: 50),
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

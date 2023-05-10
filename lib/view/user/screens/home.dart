@@ -108,9 +108,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // context.pushNamed('instructions');
                     if (isChecked == true) {
-                      // context.go('/displayresults');
                       context.pushNamed('displayresults');
                     } else {
                       context.pushNamed('instructions');
