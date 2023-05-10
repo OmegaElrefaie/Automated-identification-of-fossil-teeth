@@ -5,6 +5,9 @@ import 'package:animated_icon/animate_icon.dart';
 import 'package:animated_icon/animate_icons.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:graduation_project/data/repositories/user_repo.dart';
+
+UserRepository userRepo = UserRepository.instance;
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -14,6 +17,14 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  Future<void> userRole() async {
+    if (await userRepo.getUserType() == 'User') {
+      context.go('/startpage');
+    } else {
+      context.go('/home_expert');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +102,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               if (value == null)
                                 context.pushNamed('login');
                               else
-                                context.pushNamed('startpage');
+                                userRole();
+                              // context.pushNamed('startpage');
                             });
                           },
                         )
