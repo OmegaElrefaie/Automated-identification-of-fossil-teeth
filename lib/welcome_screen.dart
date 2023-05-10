@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:animated_icon/animate_icon.dart';
 import 'package:animated_icon/animate_icons.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/view/user/screens/instructions.dart';
@@ -32,7 +31,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(
-            bottom: 50.0,
+            bottom: 30.0,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -149,8 +148,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          GestureDetector(
-                            onTap: () async {
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                side: BorderSide(color: kPrimaryColor)),
+                            onPressed: () async {
                               await SessionManager().get('id').then((value) {
                                 if (value == null)
                                   context.pushNamed('login');
@@ -167,8 +168,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   fontSize: 15),
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                side: BorderSide(color: kPrimaryColor)),
+                            onPressed: () {
                               context.go('/signup');
                             },
                             child: const Text(
