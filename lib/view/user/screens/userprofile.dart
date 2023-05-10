@@ -40,17 +40,20 @@ class _UserProfileState extends State<UserProfile> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: kDarkColor,
-        // title: Align(
-        //   alignment: Alignment.topLeft,
-        //   child: InkWell(
-        //       onTap: () {
-        //         context.pop();
-        //       },
-        //       child: const Icon(
-        //         Icons.arrow_back,
-        //         color: Colors.white,
-        //       )),
-        // ),
+        leading: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
+          child: InkWell(
+            onTap: () {
+              context.pop();
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
       body: Stack(
         children: [

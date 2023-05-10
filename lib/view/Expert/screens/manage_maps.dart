@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../data/repositories/map_repo.dart';
 import '../../../domain/map_model.dart';
 
-MapRepository MapRepo = MapRepository.instance;
+MapRepository mapRepo = MapRepository.instance;
 
 class FoosilMapInputScreen extends StatefulWidget {
   const FoosilMapInputScreen({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class _FoosilMapInputScreenState extends State<FoosilMapInputScreen> {
         title: Text('Add a new Foosil Map'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/startpage'),
+          onPressed: () => context.pop(),
         ),
       ),
       body: Padding(
@@ -132,7 +132,7 @@ class _FoosilMapInputScreenState extends State<FoosilMapInputScreen> {
                     print(_long);
                     print(_imageUrl);
 
-                    await MapRepo.addMap(map);
+                    await mapRepo.addMap(map);
 
                     Navigator.pop(context);
                   }

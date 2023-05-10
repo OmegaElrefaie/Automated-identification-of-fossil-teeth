@@ -23,7 +23,7 @@ class _FossilMapState extends State<FossilMap> {
         title: const Text('Fossils Map'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.go('/startpage'),
+          onPressed: () => context.pop(),
         ),
       ),
       body: StreamBuilder<List<MapModel>>(
