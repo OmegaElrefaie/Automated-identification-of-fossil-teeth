@@ -30,24 +30,42 @@ class FosssilRepository {
     
   }
 
-  Future<void> createFossil(Fossil fossil, String userId, String name, String imageUrl) async {
-    try {
-      final docRef = FirebaseFirestore.instance
+  // Future<void> createFossil(Fossil fossil, String userId, String name, String imageUrl) async {
+  //   try {
+      // final docRef = FirebaseFirestore.instance
+      //     .collection('Users')
+      //     .doc(userId)
+      //     .collection('Fossils')
+      //     .doc(fossil.id);
+      
+  //     final data = {'name': name, 'imageUrl': imageUrl};
+  //     await docRef.set(data);
+  //     await docRef.update(fossil.toJson());
+      
+  //     print('Fossil added successfully!');
+  //   } catch (e) {
+  //     print('Failed to add fossil: $e');
+  //   } 
+  // }
+  Future createFossil({
+  required String name,
+  required String imageUrl,
+  required String id,
+  required String userId,
+}) async {
+  final FossilInstance = FirebaseFirestore.instance
           .collection('Users')
           .doc(userId)
           .collection('Fossils')
-          .doc(fossil.id);
-      
-      final data = {'name': name, 'imageUrl': imageUrl};
-      await docRef.set(data);
-      await docRef.update(fossil.toJson());
-      
-      print('Fossil added successfully!');
-    } catch (e) {
-      print('Failed to add fossil: $e');
-    }
-    
-  }
+          .doc(id);
+
+  final Data = {
+    'name': name,
+    'image': imageUrl,
+
+  };
+  await FossilInstance.set(Data);
+}
 
 
   Future<String> getFossilId() async {
@@ -100,4 +118,3 @@ class FosssilRepository {
     await documentReference.delete();
   }
 }
-
