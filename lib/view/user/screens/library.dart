@@ -28,7 +28,7 @@ class _LibraryState extends State<Library> {
     });
     await FirebaseFirestore.instance
         .collection('Fossils')
-        .where("Name", isEqualTo: searchController.text)
+        .where("name", isEqualTo: searchController.text)
         .get()
         .then((value) {
       if (value.docs.isEmpty) {
@@ -114,8 +114,8 @@ class _LibraryState extends State<Library> {
                           snapshot.data!.docs[index];
                       Fossil myFossil = Fossil(
                           id: document.id,
-                          name: document['Name'],
-                          imageUrl: document['ImageUrl']);
+                          name: document['name'],
+                          imageUrl: document['imageUrl']);
                           
                       return Card(
                         shape: const RoundedRectangleBorder(
@@ -146,7 +146,7 @@ class _LibraryState extends State<Library> {
                                     // child: Hero(
                                     //   tag: myFossil.id,
                                     child: Image.network(
-                                      myFossil.imageUrl!,
+                                      myFossil.imageUrl,
                                       fit: BoxFit.cover,
                                     ),
                                     // ),
@@ -226,7 +226,7 @@ class _LibraryState extends State<Library> {
                         return Padding(
                           padding: const EdgeInsets.all(0),
                           child: ListTile(
-                            title: Text(searchResult[index]['Name']),
+                            title: Text(searchResult[index]['name']),
                             trailing: IconButton(
                               onPressed: () {
                                 setState(() {
