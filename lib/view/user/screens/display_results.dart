@@ -1,19 +1,21 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
+import 'package:graduation_project/view/identify_as_guest.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:graduation_project/view/user/widgets/getcolor.dart';
 import '../../../data/repositories/teethfossil_repo.dart';
 
-UserRepository userRepo = UserRepository.instance;
-FosssilRepository FossilRepo = FosssilRepository.instance;
-
 Future<String>? imageUrl;
+UserRepository userRepo = UserRepository.instance;
+FosssilRepository fossilRepo = FosssilRepository.instance;
 
 class DisplayResults extends StatefulWidget {
   const DisplayResults({super.key});
@@ -23,28 +25,45 @@ class DisplayResults extends StatefulWidget {
 }
 
 class _DisplayResultsState extends State<DisplayResults> {
-  File? _imageFile;
+  File? imageFile;
+  Future<String>? imageurl;
 
-  final _picker = ImagePicker();
+  final picker = ImagePicker();
   List resolutions = [];
   bool isLoading = false;
 
-  final picker = ImagePicker();
+
 
   @override
   void initState() {
     super.initState();
   }
-
-  Future<void> _openImagePicker({required ImageSource imageSource}) async {
-    final XFile? pickedImage = await _picker.pickImage(source: imageSource);
+  Future<String> uploadImage() async {
+   Future<String>? url;
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child("images" + DateTime.now().toString());
+    UploadTask uploadTask = ref.putFile(imageFile!);
+    uploadTask.whenComplete(() async {
+    url = ref.getDownloadURL();  
+    }).catchError((onError){
+      print(onError);
+    });
+    print(url);
+    return url!;
+  }
+  Future<void> openImagePicker({required ImageSource imageSource}) async {
+    try{
+    final XFile? pickedImage = await picker.pickImage(source: imageSource);
     if (pickedImage != null) {
       setState(() {
-        _imageFile = File(pickedImage.path);
-
+        imageFile = File(pickedImage.path);
+    
         _predict();
         resolutions = [];
       });
+    }
+    } on PlatformException catch (e) {
+      throw Exception(e.message);
     }
   }
 
@@ -101,9 +120,9 @@ class _DisplayResultsState extends State<DisplayResults> {
                         spreadRadius: 2,
                         blurRadius: 1)
                   ]),
-              child: (_imageFile != null)
+              child: (imageFile != null)
                   ? Image.file(
-                      File(_imageFile!.path),
+                      File(imageFile!.path),
                       fit: BoxFit.cover,
                     )
                   : Container(),
@@ -121,10 +140,13 @@ class _DisplayResultsState extends State<DisplayResults> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ElevatedButton(
-                                    onPressed: () async {
-                                      _openImagePicker(
-                                          imageSource: ImageSource.gallery);
-
+                                    onPressed: () async { 
+                                     await openImagePicker(
+                                        imageSource: ImageSource.gallery);
+                                         imageUrl = uploadImage();
+                                         print(imageUrl);
+                                     
+                                      
                                       Navigator.pop(context);
                                     },
                                     child: const Text('Gallery')),
@@ -133,9 +155,10 @@ class _DisplayResultsState extends State<DisplayResults> {
                                 ),
                                 ElevatedButton(
                                     onPressed: () {
-                                      _openImagePicker(
+                                      openImagePicker(
                                           imageSource: ImageSource.camera);
-
+                                          // imageurl = uploadImage();
+                                        
                                       Navigator.pop(context);
                                     },
                                     child: const Text('Camera')),
@@ -209,12 +232,12 @@ class _DisplayResultsState extends State<DisplayResults> {
                   style: TextStyle(
                       color: Colors.white, fontFamily: 'Inter', fontSize: 20),
                 ),
-                onPressed: ()async {
-                 
-                    print( resolutions.first['label']);
+                onPressed: () async {
+                  
                    final userId = UserRepository.instance.getFirebaseUid();
                    final id = UserRepository.instance.getFirebaseUid();
-                      await FossilRepo.createFossil(
+                   //final imageUrl = await getImageUrl();   
+                      await fossilRepo.createFossil(
                          name: resolutions.first['label'],
                          imageUrl: imageUrl.toString(),
                          userId: userId,
@@ -273,6 +296,6 @@ class _DisplayResultsState extends State<DisplayResults> {
       labels: "assets/tensorflow/labels.txt",
       // useGpuDelegate: true,
     );
-    recognizeImage(_imageFile!);
+    recognizeImage(imageFile!);
   }
 }
