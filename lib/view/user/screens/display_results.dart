@@ -48,7 +48,7 @@ class _DisplayResultsState extends State<DisplayResults> {
     }
   }
 
-  final TextEditingController nameController = TextEditingController();
+  //final TextEditingController nameController = TextEditingController();
   final TextEditingController imageurlController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -212,12 +212,13 @@ class _DisplayResultsState extends State<DisplayResults> {
                 onPressed: ()async {
                  
                     print( resolutions.first['label']);
-                    final userId = UserRepository.instance.getFirebaseUid();
+                   final userId = UserRepository.instance.getFirebaseUid();
+                   final id = UserRepository.instance.getFirebaseUid();
                       await FossilRepo.createFossil(
                          name: resolutions.first['label'],
                          imageUrl: imageUrl.toString(),
                          userId: userId,
-                         id: '',
+                         id: id,
                   );
                 },
               ),
