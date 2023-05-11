@@ -12,23 +12,24 @@ class FosssilRepository {
 
   FosssilRepository._();
 
-  File? image;
-  Future<String>? imageurl;
 
-  Future<String> uploadImage() async {
-    Future<String>? url;
-    FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("images${DateTime.now()}");
-    UploadTask uploadTask = ref.putFile(image!);
-    uploadTask.whenComplete(() {
-      url = ref.getDownloadURL();
-    }).catchError((onError) {
-      print(onError);
-    });
-    print(url);
-    return url!;
+  // File? image;
+  // Future<String>? imageurl;
+
+  // Future<String> uploadImage() async {
+  //   Future<String>? url;
+  //   FirebaseStorage storage = FirebaseStorage.instance;
+  //   Reference ref = storage.ref().child("images" + DateTime.now().toString());
+  //   UploadTask uploadTask = ref.putFile(image!);
+  //   uploadTask.whenComplete(() {
+  //     url = ref.getDownloadURL();
+  //   }).catchError((onError) {
+  //     print(onError);
+  //   });
+  //   print(url);
+  //   return url!;
     
-  }
+  // }
 
   // Future<void> createFossil(Fossil fossil, String userId, String name, String imageUrl) async {
   //   try {
@@ -62,7 +63,6 @@ class FosssilRepository {
   final Data = {
     'name': name,
     'image': imageUrl,
-
   };
   await FossilInstance.set(Data);
 }
@@ -90,21 +90,21 @@ class FosssilRepository {
 
   Future<String> getFossilName() async {
     String fossilname;
-    String fossilid = await getFossilId();
+    String id = await getFossilId();
     DocumentSnapshot fossil =
-        await db.collection('Fossils').doc(fossilid).get();
+        await db.collection('Fossils').doc(id).get();
 
-    fossilname = fossil.get('Name');
+    fossilname = fossil.get('name');
     return fossilname;
   }
 
   Future<String> getImageUrl() async {
     String imageUrl;
-    String fossilid = await getFossilId();
+    String id = await getFossilId();
     DocumentSnapshot fossil =
-        await db.collection('Fossils').doc(fossilid).get();
+        await db.collection('Fossils').doc(id).get();
 
-    imageUrl = fossil.get('ImageUrl');
+    imageUrl = fossil.get('imageUrl');
     return imageUrl;
   }
 
