@@ -30,7 +30,7 @@ class _DetailPageState extends State<DetailPage> {
             padding: const EdgeInsets.only(top: 10.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
-              child: Image.network(widget.fossil.imageUrl!),
+              child: Image.network(widget.fossil.imageUrl),
             ),
           ),
           const SizedBox(
