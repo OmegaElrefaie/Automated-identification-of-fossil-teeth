@@ -1,7 +1,7 @@
 class Fossil {
    String? id;
    String? name;
-  final String? imageUrl;
+   String imageUrl;
 
   Fossil({
     required this.id,
