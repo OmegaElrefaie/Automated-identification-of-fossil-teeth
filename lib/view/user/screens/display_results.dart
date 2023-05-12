@@ -38,35 +38,40 @@ class _DisplayResultsState extends State<DisplayResults> {
   void initState() {
     super.initState();
   }
-  Future<String> uploadImage() async {
-   Future<String>? url;
+Future<String> uploadImage() async {
+  try {
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref = storage.ref().child("images" + DateTime.now().toString());
     UploadTask uploadTask = ref.putFile(imageFile!);
-    uploadTask.whenComplete(() async {
-    url = ref.getDownloadURL();  
-    }).catchError((onError){
-      print(onError);
-    });
+    TaskSnapshot taskSnapshot = await uploadTask;
+    String url = await taskSnapshot.ref.getDownloadURL();
     print(url);
-    return url!;
+    return url;
+  } catch (e) {
+    print(e);
+    return '';
   }
+}
   Future<void> openImagePicker({required ImageSource imageSource}) async {
-    try{
+  try {
     final XFile? pickedImage = await picker.pickImage(source: imageSource);
     if (pickedImage != null) {
       setState(() {
         imageFile = File(pickedImage.path);
-    
+        isLoading = true;
         _predict();
         resolutions = [];
       });
+      String url = await uploadImage();
+      setState(() {
+        imageUrl = Future.value(url);
+        isLoading = false;
+      });
     }
-    } on PlatformException catch (e) {
-      throw Exception(e.message);
-    }
+  } on PlatformException catch (e) {
+    throw Exception(e.message);
   }
-
+}
   //final TextEditingController nameController = TextEditingController();
   final TextEditingController imageurlController = TextEditingController();
   @override
@@ -143,12 +148,19 @@ class _DisplayResultsState extends State<DisplayResults> {
                                     onPressed: () async { 
                                      await openImagePicker(
                                         imageSource: ImageSource.gallery);
-                                         imageUrl = uploadImage();
+                                         Future<String>? url =  uploadImage();
+
+                                       setState(() {
+                                      imageUrl = url;
+                                      });
+
                                          print(imageUrl);
-                                     
-                                      
+
+
                                       Navigator.pop(context);
                                     },
+
+
                                     child: const Text('Gallery')),
                                 const SizedBox(
                                   height: 20,
@@ -232,37 +244,18 @@ class _DisplayResultsState extends State<DisplayResults> {
                   style: TextStyle(
                       color: Colors.white, fontFamily: 'Inter', fontSize: 20),
                 ),
-                onPressed: () async {
-                  
-                   final userId = UserRepository.instance.getFirebaseUid();
-                   final id = UserRepository.instance.getFirebaseUid();
-                   //final imageUrl = await getImageUrl();   
-                      await fossilRepo.createFossil(
-                         name: resolutions.first['label'],
-                         imageUrl: imageUrl.toString(),
-                         userId: userId,
-                         id: id,
-                  );
-                },
+              onPressed: () async {                 
+              final userId = UserRepository.instance.getFirebaseUid();
+              final id = UserRepository.instance.getFirebaseUid();
+              final imageUrl = await uploadImage();   
+              await fossilRepo.createFossil(
+                   name: resolutions.first['label'],
+                   imageUrl: imageUrl.toString(),
+                   userId: userId,
+                   id: id,
+                );
+              },
               ),
-              // child: ElevatedButton(
-              //   style: ButtonStyle(
-              //       backgroundColor: getColor(kPrimaryColor, kTextColor)),
-              //   child: const Text(
-              //     'Save',
-              //     style: TextStyle(
-              //         color: Colors.white, fontFamily: 'Inter', fontSize: 20),
-              //   ),
-              //   onPressed: () {
-              //     //  () async {
-              //     //     await FossilRepo.createFossil(
-              //     //        name: nameController.text,
-              //     //        imageUrl: imageUrl.toString(),
-              //     //        userId: userId,
-              //     //        id: '',
-              //     // );};
-              //   },
-              // ),
             ),
           ],
         ),
