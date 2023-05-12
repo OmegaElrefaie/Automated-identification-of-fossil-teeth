@@ -198,7 +198,7 @@ Future<String> uploadImage() async {
             // ),
             const Center(
               child: Text(
-                'Output',
+                'Classification results',
                 style: TextStyle(fontSize: 18),
               ),
             ),

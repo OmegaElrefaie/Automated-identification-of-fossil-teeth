@@ -134,16 +134,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                             )),
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(height: 50),
                       const Text(
-                        'OR',
+                        '- OR -',
                         style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'PathwayExtreme',
                             fontSize: 15),
                       ),
                       const SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
