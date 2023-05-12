@@ -89,6 +89,7 @@ class _LibraryState extends State<Library> {
   
   @override
   Widget build(BuildContext context) {
+   final userId = UserRepository.instance.getFirebaseUid();
     return Scaffold(
         body: Stack(
           children: [
@@ -97,7 +98,11 @@ class _LibraryState extends State<Library> {
         child: FutureBuilder(
             future:
                 //  fossilRepo.fetchAllFosssil(),
-                FirebaseFirestore.instance.collection('Fossils').get(),
+                FirebaseFirestore.instance
+               .collection('Users')
+               .doc(userId)
+               .collection('Fossils')
+               .get(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return GridView.builder(
