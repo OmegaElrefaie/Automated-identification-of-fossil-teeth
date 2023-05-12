@@ -47,12 +47,7 @@ class Facts extends StatelessWidget {
                   itemBuilder: (context, index) {
                     QueryDocumentSnapshot<Map<String, dynamic>> document =
                         snapshot.data!.docs[index];
-                    // User myplant = User(
-                    //     id: document.id,
-                    //     email: document['email'],
-                    //     username: document['name'],
-                    //     dob: document['Date of birth'],
-                    //     profilepic: document['profile picture']);
+                  
                     return ListTile(
                       leading: Container(
                           padding: EdgeInsets.only(top: 20),
