@@ -17,15 +17,12 @@ class MapRepository {
   }
 
   Future<String> addMap(MapModel map) async {
-    final docRef = _db.collection('Maps').doc();
-    await docRef.set(map.toMap());
+    final docRef = _db
+        .collection('Maps')
+        .doc(); //returns a refrence to the new document created with unique id.
+    await docRef.set(map
+        .toMap()); //an object from MapModel is being converted using toMap to store on firestore.
     return docRef.id;
-  }
-
-  Future<void> updateMap(MapModel map) {
-    final docRef = _db.collection('Maps').doc();
-
-    return _db.collection('Maps').doc(docRef.id.toString()).update(map.toMap());
   }
 
   Future<void> deleteMap(String id) {
