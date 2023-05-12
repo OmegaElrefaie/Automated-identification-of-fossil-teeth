@@ -26,7 +26,10 @@ class _LibraryState extends State<Library> {
       searchResult = [];
       isLoading = true;
     });
+    final userId = UserRepository.instance.getFirebaseUid();
     await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userId)
         .collection('Fossils')
         .where("name", isEqualTo: searchController.text)
         .get()
