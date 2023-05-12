@@ -62,7 +62,7 @@ class FosssilRepository {
 
   final Data = {
     'name': name,
-    'image': imageUrl,
+    'imageUrl': imageUrl,
   };
   await FossilInstance.set(Data);
 }
