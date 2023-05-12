@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:get/get.dart';
 import 'package:graduation_project/domain/user_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
-import 'package:graduation_project/view/user/screens/question.dart';
 
 UserRepository userRepo = UserRepository.instance;
 
+// ignore: must_be_immutable
 class SideDrawer extends StatefulWidget {
   SideDrawer({super.key});
   UserModel user = UserModel();

@@ -66,16 +66,7 @@ class UserRepository {
         .collection('Users')
         .where('Email', isEqualTo: FirebaseAuth.instance.currentUser!.email)
         .limit(1)
-        .get()
-        .catchError((onError) {
-      Get.snackbar(
-        "Error",
-        "An error occurred while retrieving data",
-        colorText: Colors.white,
-        backgroundColor: Colors.redAccent,
-        barBlur: 10,
-      );
-    });
+        .get();
 
     for (var user in snapShot.docs) {
       userId.add(user.id);

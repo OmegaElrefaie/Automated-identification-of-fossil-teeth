@@ -3,13 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
-import 'package:graduation_project/data/repositories/user_repo.dart';
-import 'package:graduation_project/view/user/screens/instructions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/view/user/widgets/getcolor.dart';
-import '../../../data/repositories/teethfossil_repo.dart';
 
 Future<String>? imageUrl;
 
@@ -216,7 +212,7 @@ class _IdentifyState extends State<Identify> {
   }
 
   _predict() async {
-    final res = await Tflite.loadModel(
+    await Tflite.loadModel(
       model: "assets/tensorflow/model_unquant.tflite",
       labels: "assets/tensorflow/labels.txt",
       // useGpuDelegate: true,

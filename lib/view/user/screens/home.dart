@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:graduation_project/constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
-import 'package:graduation_project/view/user/screens/fossil_map.dart';
 import 'package:graduation_project/domain/map_model.dart';
 import '../../../data/repositories/map_repo.dart';
 import 'package:graduation_project/view/user/screens/instructions.dart';
