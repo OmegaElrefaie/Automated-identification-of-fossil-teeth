@@ -7,11 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
-import 'package:graduation_project/view/identify_as_guest.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:graduation_project/view/user/widgets/getcolor.dart';
 import '../../../data/repositories/teethfossil_repo.dart';
 
 Future<String>? imageUrl;
@@ -33,46 +31,47 @@ class _DisplayResultsState extends State<DisplayResults> {
   List resolutions = [];
   bool isLoading = false;
 
-
-
   @override
   void initState() {
     super.initState();
   }
-Future<String> uploadImage() async {
-  try {
-    FirebaseStorage storage = FirebaseStorage.instance;
-    Reference ref = storage.ref().child("images" + DateTime.now().toString());
-    UploadTask uploadTask = ref.putFile(imageFile!);
-    TaskSnapshot taskSnapshot = await uploadTask;
-    String url = await taskSnapshot.ref.getDownloadURL();
-    print(url);
-    return url;
-  } catch (e) {
-    print(e);
-    return '';
-  }
-}
-  Future<void> openImagePicker({required ImageSource imageSource}) async {
-  try {
-    final XFile? pickedImage = await picker.pickImage(source: imageSource);
-    if (pickedImage != null) {
-      setState(() {
-        imageFile = File(pickedImage.path);
-        isLoading = true;
-        _predict();
-        resolutions = [];
-      });
-      String url = await uploadImage();
-      setState(() {
-        imageUrl = Future.value(url);
-        isLoading = false;
-      });
+
+  Future<String> uploadImage() async {
+    try {
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref = storage.ref().child("images" + DateTime.now().toString());
+      UploadTask uploadTask = ref.putFile(imageFile!);
+      TaskSnapshot taskSnapshot = await uploadTask;
+      String url = await taskSnapshot.ref.getDownloadURL();
+      print(url);
+      return url;
+    } catch (e) {
+      print(e);
+      return '';
     }
-  } on PlatformException catch (e) {
-    throw Exception(e.message);
   }
-}
+
+  Future<void> openImagePicker({required ImageSource imageSource}) async {
+    try {
+      final XFile? pickedImage = await picker.pickImage(source: imageSource);
+      if (pickedImage != null) {
+        setState(() {
+          imageFile = File(pickedImage.path);
+          isLoading = true;
+          _predict();
+          resolutions = [];
+        });
+        String url = await uploadImage();
+        setState(() {
+          imageUrl = Future.value(url);
+          isLoading = false;
+        });
+      }
+    } on PlatformException catch (e) {
+      throw Exception(e.message);
+    }
+  }
+
   //final TextEditingController nameController = TextEditingController();
   final TextEditingController imageurlController = TextEditingController();
   @override
@@ -146,14 +145,14 @@ Future<String> uploadImage() async {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ElevatedButton(
-                                    onPressed: () async { 
-                                     await openImagePicker(
-                                        imageSource: ImageSource.gallery);
-                                         Future<String>? url =  uploadImage();
-                                       setState(() {
-                                      imageUrl = url;
+                                    onPressed: () async {
+                                      await openImagePicker(
+                                          imageSource: ImageSource.gallery);
+                                      Future<String>? url = uploadImage();
+                                      setState(() {
+                                        imageUrl = url;
                                       });
-                                         print(imageUrl);
+                                      print(imageUrl);
                                       Navigator.pop(context);
                                     },
                                     child: const Text('Gallery')),
@@ -164,14 +163,14 @@ Future<String> uploadImage() async {
                                     onPressed: () {
                                       openImagePicker(
                                           imageSource: ImageSource.camera);
-                                             Future<String>? url =  uploadImage();
-                                           setState(() {
-                                              imageUrl = url;
-                                           });    
+                                      Future<String>? url = uploadImage();
+                                      setState(() {
+                                        imageUrl = url;
+                                      });
                                       Navigator.pop(context);
                                     },
                                     child: const Text('Camera')),
-                           ]),
+                              ]),
                         ),
                       ],
                     ),
@@ -241,19 +240,19 @@ Future<String> uploadImage() async {
                   style: TextStyle(
                       color: Colors.white, fontFamily: 'Inter', fontSize: 20),
                 ),
-              onPressed: () async {                 
-              final userId = UserRepository.instance.getFirebaseUid();
-              final imageUrl = await uploadImage();   
-              await FirebaseFirestore.instance
-              .collection('Users')
-              .doc(userId)
-              .collection('Fossils')
-              .add({
-              'name': resolutions.first['label'],
-              'imageUrl': imageUrl.toString(),  
-              });
-                // context.go('/library');
-              },
+                onPressed: () async {
+                  final userId = UserRepository.instance.getFirebaseUid();
+                  final imageUrl = await uploadImage();
+                  await FirebaseFirestore.instance
+                      .collection('Users')
+                      .doc(userId)
+                      .collection('Fossils')
+                      .add({
+                    'name': resolutions.first['label'],
+                    'imageUrl': imageUrl.toString(),
+                  });
+                  // context.go('/library');
+                },
               ),
             ),
           ],
@@ -283,7 +282,7 @@ Future<String> uploadImage() async {
   }
 
   _predict() async {
-    final res = await Tflite.loadModel(
+    await Tflite.loadModel(
       model: "assets/tensorflow/model_unquant.tflite",
       labels: "assets/tensorflow/labels.txt",
       // useGpuDelegate: true,

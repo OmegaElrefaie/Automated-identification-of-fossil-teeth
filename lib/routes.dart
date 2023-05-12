@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:graduation_project/view/Expert/screens/manage_maps.dart';
-import 'package:graduation_project/view/expert/screens/chat_expert.dart';
 import 'package:graduation_project/view/identify_as_guest.dart';
 import 'package:graduation_project/view/user/screens/about_us.dart';
 import 'package:graduation_project/view/user/screens/change_password.dart';
@@ -15,7 +14,6 @@ import 'package:graduation_project/view/user/screens/login.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
-import 'package:graduation_project/domain/user_model.dart';
 import 'package:graduation_project/view/user/screens/timeline_fossils.dart';
 import 'package:graduation_project/view/user/screens/userprofile.dart';
 import 'package:graduation_project/welcome_screen.dart';
@@ -33,11 +31,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        // return const Login();
         return const WelcomeScreen();
-        // return const StartPage();
-        // return Instructions();
-        // return const Facts();
       }),
   GoRoute(
       path: '/instructions',

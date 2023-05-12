@@ -1,12 +1,8 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:graduation_project/view/expert/screens/home_expert.dart';
 import 'package:graduation_project/view/expert/screens/settings_expert.dart';
-import 'package:graduation_project/view/user/screens/home.dart';
 import 'package:graduation_project/view/user/screens/library.dart';
-import 'package:graduation_project/view/user/screens/setting.dart';
-import 'package:graduation_project/view/user/widgets/drawer.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
