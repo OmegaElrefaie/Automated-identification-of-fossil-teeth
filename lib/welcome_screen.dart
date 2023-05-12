@@ -70,7 +70,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 35,
+                        height: 5,
                       ),
                       AnimateIcon(
                         key: UniqueKey(),
@@ -81,7 +81,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         color: Colors.black12,
                         animateIcon: AnimateIcons.downArrow,
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 5),
                       const Text(
                         'Identify as Guest',
                         style: TextStyle(
@@ -134,16 +134,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                             )),
                       ),
-                      SizedBox(height: 50),
+                      SizedBox(height: 60),
                       const Text(
                         '- OR -',
                         style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'PathwayExtreme',
-                            fontSize: 15),
+                          color: Colors.black,
+                          fontFamily: 'PathwayExtreme',
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
