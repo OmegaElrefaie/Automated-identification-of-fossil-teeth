@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -246,14 +247,16 @@ Future<String> uploadImage() async {
                 ),
               onPressed: () async {                 
               final userId = UserRepository.instance.getFirebaseUid();
-              final id = UserRepository.instance.getFirebaseUid();
               final imageUrl = await uploadImage();   
-              await fossilRepo.createFossil(
-                   name: resolutions.first['label'],
-                   imageUrl: imageUrl.toString(),
-                   userId: userId,
-                   id: id,
-                );
+              await FirebaseFirestore.instance
+              .collection('Users')
+              .doc(userId)
+              .collection('Fossils')
+              .add({
+              'name': resolutions.first['label'],
+              'imageUrl': imageUrl.toString(),  
+              });
+                // context.go('/library');
               },
               ),
             ),
