@@ -87,6 +87,7 @@ class Question2 extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25))),
+                    // listens to changes in the Firestore
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("Users")

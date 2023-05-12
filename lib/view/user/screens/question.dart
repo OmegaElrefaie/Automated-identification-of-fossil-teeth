@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
-import 'package:graduation_project/view/user/screens/chat.dart';
 import '../../../constants.dart';
-import '../../../domain/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Question extends StatefulWidget {
@@ -16,8 +14,8 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   TextEditingController searchController = TextEditingController();
-  List<Map> searchResult = [];
-  Set<String> userIdsSearchResult = {};
+  List<Map> searchResult = []; //store search results
+  Set<String> userIdsSearchResult = {}; //store the IDs of the users in the search results
   bool isLoading = false;
   String userId = UserRepository.instance.getFirebaseUid();
 
@@ -39,10 +37,11 @@ class _QuestionState extends State<Question> {
         });
         return;
       }
+      //check if id is different from the current users id 
       for (var userDoc in value.docs) {
         if (userDoc.id != userId) {
-          userIdsSearchResult.add(userDoc.id);
-          searchResult.add(userDoc.data());
+          userIdsSearchResult.add(userDoc.id); //display the search results
+          searchResult.add(userDoc.data()); 
         }
       }
       setState(() {
