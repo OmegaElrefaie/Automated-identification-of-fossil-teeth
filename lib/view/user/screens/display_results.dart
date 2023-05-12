@@ -150,18 +150,12 @@ Future<String> uploadImage() async {
                                      await openImagePicker(
                                         imageSource: ImageSource.gallery);
                                          Future<String>? url =  uploadImage();
-
                                        setState(() {
                                       imageUrl = url;
                                       });
-
                                          print(imageUrl);
-
-
                                       Navigator.pop(context);
                                     },
-
-
                                     child: const Text('Gallery')),
                                 const SizedBox(
                                   height: 20,
@@ -170,12 +164,14 @@ Future<String> uploadImage() async {
                                     onPressed: () {
                                       openImagePicker(
                                           imageSource: ImageSource.camera);
-                                          // imageurl = uploadImage();
-                                        
+                                             Future<String>? url =  uploadImage();
+                                           setState(() {
+                                              imageUrl = url;
+                                           });    
                                       Navigator.pop(context);
                                     },
                                     child: const Text('Camera')),
-                              ]),
+                           ]),
                         ),
                       ],
                     ),
@@ -202,7 +198,7 @@ Future<String> uploadImage() async {
             // ),
             const Center(
               child: Text(
-                'Output',
+                'Classification results',
                 style: TextStyle(fontSize: 18),
               ),
             ),
