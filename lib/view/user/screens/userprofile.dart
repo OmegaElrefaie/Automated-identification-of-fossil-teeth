@@ -146,6 +146,10 @@ class _UserProfileState extends State<UserProfile> {
                       InkWell(
                         onTap: () {
                           FirebaseAuth.instance.signOut();
+                          //signs out the currently authenticated user
+                          //by clearing their credentials from the device
+                          //and the backend, and updates the authentication
+                          //state of the app accordingly
                         },
                         child: const Text(
                           "LogOut",
