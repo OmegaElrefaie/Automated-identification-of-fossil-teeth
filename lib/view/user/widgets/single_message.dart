@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
-import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 
 class SingleMessage extends StatelessWidget {
   final String message;
-  final bool isMe;
+  final bool isMe;    //check wether the message is sent by the user or not.
   const SingleMessage({super.key, required this.message, required this.isMe});
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,5 @@
-import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:graduation_project/domain/fossil_model.dart';
 import 'package:flutter/material.dart';
 
 
@@ -48,6 +45,8 @@ class FosssilRepository {
   //     print('Failed to add fossil: $e');
   //   } 
   // }
+    
+     // creates a new fossil document in the Firestore database.
   Future createFossil({
   required String name,
   required String imageUrl,
@@ -71,6 +70,7 @@ class FosssilRepository {
   Future<String> getFossilId() async {
     List<String> fossilId = [];
     final snapShot =
+        // ignore: body_might_complete_normally_catch_error
         await db.collection('Fossils').limit(1).get().catchError((onError) {
       Get.snackbar(
         "Error",

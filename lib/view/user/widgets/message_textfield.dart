@@ -38,7 +38,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
                   Expanded(
                       child: TextField(
                     autofocus: false,
-                    maxLines: null,
+                    maxLines: null, // Allows the input field to accept multiple lines of text.
                     controller: _controller,
                     decoration: const InputDecoration(
                         hintText: "Type your Message...",
@@ -51,7 +51,9 @@ class _MessageTextFieldState extends State<MessageTextField> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      String message = _controller.text;
+                      //Stores the user input message from the controller into a string variable.
+                      String message = _controller.text; 
+                      //Clears the input field after the message is sent.
                       _controller.clear();
                       await FirebaseFirestore.instance
                           .collection('Users')
@@ -75,7 +77,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
                           'last_msg': message,
                         });
                       });
-
+   //perform these write operations and update the database with the new messages.
                       await FirebaseFirestore.instance
                           .collection('Users')
                           .doc(widget.friendId)
