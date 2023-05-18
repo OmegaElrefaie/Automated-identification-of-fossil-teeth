@@ -1,4 +1,4 @@
-# graduation_project
+# Fossil Scratcher
 
 A new Flutter project.
 
