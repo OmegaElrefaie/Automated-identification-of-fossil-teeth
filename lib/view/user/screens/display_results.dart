@@ -197,7 +197,7 @@ class _DisplayResultsState extends State<DisplayResults> {
             // ),
             const Center(
               child: Text(
-                'Classification results',
+                'Classification result:',
                 style: TextStyle(fontSize: 18),
               ),
             ),

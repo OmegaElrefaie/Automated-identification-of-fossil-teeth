@@ -156,7 +156,7 @@ class _IdentifyState extends State<Identify> {
             // ),
             const Center(
               child: Text(
-                'Output',
+                'Classification result:',
                 style: TextStyle(fontSize: 18),
               ),
             ),
