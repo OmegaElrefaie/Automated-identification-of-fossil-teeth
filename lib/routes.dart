@@ -6,7 +6,7 @@ import 'package:graduation_project/view/identify_as_guest.dart';
 import 'package:graduation_project/view/user/screens/about_us.dart';
 import 'package:graduation_project/view/user/screens/change_password.dart';
 import 'package:graduation_project/view/user/screens/display_results.dart';
-import 'package:graduation_project/view/user/screens/editprofile.dart';
+import 'package:graduation_project/view/user/screens/edit_profile.dart';
 import 'package:graduation_project/view/user/screens/fossil_map.dart';
 import 'package:graduation_project/view/user/screens/chat.dart';
 import 'package:graduation_project/view/user/screens/instructions.dart';
