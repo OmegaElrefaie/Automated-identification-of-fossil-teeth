@@ -182,7 +182,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
                     onPressed: _onNextPressed,
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      primary: const Color((0xFFD88B4A)),
+                      backgroundColor: const Color((0xFFD88B4A)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
