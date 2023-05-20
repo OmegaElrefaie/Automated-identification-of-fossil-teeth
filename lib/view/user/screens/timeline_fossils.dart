@@ -130,9 +130,7 @@ class _TimeLine_fossilsState extends State<TimeLine_fossils> {
                               width: 25.0,
                               height: 25.0,
                               child: GestureDetector(
-                                onTap: () {
-                                  context.go('/time1');
-                                },
+                                onTap: () {},
                                 child: Container(
                                   width: 25.0,
                                   height: 25.0,
