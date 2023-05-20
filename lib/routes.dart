@@ -15,7 +15,7 @@ import 'package:graduation_project/view/user/screens/question.dart';
 import 'package:graduation_project/view/user/screens/startpage.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/view/user/screens/timeline_fossils.dart';
-import 'package:graduation_project/view/user/screens/userprofile.dart';
+import 'package:graduation_project/view/user/screens/user_profile.dart';
 import 'package:graduation_project/welcome_screen.dart';
 import 'data/repositories/user_repo.dart';
 import 'view/expert/screens/adding_facts_screen.dart';
