@@ -200,7 +200,6 @@ class _SettingsExpertState extends State<SettingsExpert> {
     );
   }
 
-  // ignore: non_constant_identifier_names
   GestureDetector BuildAccountOption(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {

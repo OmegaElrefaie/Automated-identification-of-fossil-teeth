@@ -47,7 +47,7 @@ class Facts extends StatelessWidget {
                   itemBuilder: (context, index) {
                     QueryDocumentSnapshot<Map<String, dynamic>> document =
                         snapshot.data!.docs[index];
-                  
+
                     return ListTile(
                       leading: Container(
                           padding: EdgeInsets.only(top: 20),
@@ -60,7 +60,6 @@ class Facts extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 50),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       const CircularProgressIndicator(
                         color: kPrimaryColor,

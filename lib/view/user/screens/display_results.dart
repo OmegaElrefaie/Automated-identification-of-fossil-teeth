@@ -117,7 +117,6 @@ class _DisplayResultsState extends State<DisplayResults> {
                   color: Colors.white,
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
                   border: Border.all(color: Colors.white),
-                  // ignore: prefer_const_literals_to_create_immutables
                   boxShadow: [
                     const BoxShadow(
                         color: Colors.black12,

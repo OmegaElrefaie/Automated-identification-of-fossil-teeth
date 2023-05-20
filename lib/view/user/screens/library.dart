@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/teethfossil_repo.dart';
 import '../../../data/repositories/user_repo.dart';
+
 FosssilRepository fossilRepo = FosssilRepository.instance;
 
 class Library extends StatefulWidget {
@@ -15,13 +16,13 @@ class Library extends StatefulWidget {
 }
 
 class _LibraryState extends State<Library> {
-    TextEditingController searchController = TextEditingController();
-      List<Map> searchResult = [];
-      Set<String> fossilIdsSearchResult = {};
-      bool isLoading = false;
-      String fossilId = UserRepository.instance.getFirebaseUid();
+  TextEditingController searchController = TextEditingController();
+  List<Map> searchResult = [];
+  Set<String> fossilIdsSearchResult = {};
+  bool isLoading = false;
+  String fossilId = UserRepository.instance.getFirebaseUid();
 
-      void onSearch() async {
+  void onSearch() async {
     setState(() {
       searchResult = [];
       isLoading = true;
@@ -35,8 +36,8 @@ class _LibraryState extends State<Library> {
         .get()
         .then((value) {
       if (value.docs.isEmpty) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("No Teethfossil Found")));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("No Teethfossil Found")));
         setState(() {
           isLoading = false;
         });
@@ -44,7 +45,7 @@ class _LibraryState extends State<Library> {
       }
       for (var fossilDoc in value.docs) {
         if (fossilDoc.id != fossilId) {
-         fossilIdsSearchResult.add(fossilDoc.id);
+          fossilIdsSearchResult.add(fossilDoc.id);
           searchResult.add(fossilDoc.data());
         }
       }
@@ -53,6 +54,7 @@ class _LibraryState extends State<Library> {
       });
     });
   }
+
   final List<Map<String, dynamic>> images = [
     {
       'id': 'i1',
@@ -86,26 +88,24 @@ class _LibraryState extends State<Library> {
     },
   ];
 
-
   final TextEditingController nameController = TextEditingController();
   final TextEditingController imageurlController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
-   final userId = UserRepository.instance.getFirebaseUid();
+    final userId = UserRepository.instance.getFirebaseUid();
     return Scaffold(
-        body: Stack(
-          children: [
+        body: Stack(children: [
       Padding(
         padding: const EdgeInsets.only(top: 170.0),
         child: FutureBuilder(
             future:
                 //  fossilRepo.fetchAllFosssil(),
                 FirebaseFirestore.instance
-               .collection('Users')
-               .doc(userId)
-               .collection('Fossils')
-               .get(),
+                    .collection('Users')
+                    .doc(userId)
+                    .collection('Fossils')
+                    .get(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return GridView.builder(
@@ -124,7 +124,7 @@ class _LibraryState extends State<Library> {
                           id: document.id,
                           name: document['name'],
                           imageUrl: document['imageUrl']);
-                          
+
                       return Card(
                         shape: const RoundedRectangleBorder(
                           side: BorderSide(
@@ -193,7 +193,6 @@ class _LibraryState extends State<Library> {
       Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: Column(
-          // ignore: prefer_const_literals_to_create_immutables
           children: [
             const Center(
               child: Text(
@@ -202,7 +201,7 @@ class _LibraryState extends State<Library> {
                     color: kTextColor, fontFamily: 'Inter', fontSize: 30),
               ),
             ),
-           const SizedBox(height: 5),
+            const SizedBox(height: 5),
             Row(
               children: [
                 Expanded(
@@ -224,7 +223,7 @@ class _LibraryState extends State<Library> {
                     icon: const Icon(Icons.search_outlined))
               ],
             ),
-             const SizedBox(height: 0),
+            const SizedBox(height: 0),
             if (searchResult.isNotEmpty)
               Expanded(
                   child: ListView.builder(
@@ -242,10 +241,11 @@ class _LibraryState extends State<Library> {
                                 });
                               },
                               icon: IconButton(
-                                  color: kPrimaryColor,
-                                  icon: const Icon(Icons.arrow_forward_ios_outlined),
-                                  onPressed: () {},
-                                  ),
+                                color: kPrimaryColor,
+                                icon: const Icon(
+                                    Icons.arrow_forward_ios_outlined),
+                                onPressed: () {},
+                              ),
                             ),
                           ),
                         );

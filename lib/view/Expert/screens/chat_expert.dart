@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors, avoid_web_libraries_in_flutter, must_be_immutable, unused_local_variable, unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:graduation_project/constants.dart';
 

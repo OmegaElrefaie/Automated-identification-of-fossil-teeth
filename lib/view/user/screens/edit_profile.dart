@@ -25,7 +25,6 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
-  // ignore: non_constant_identifier_names
   bool isHiddenPassword_TFF1 = true;
   final newNickname = TextEditingController();
   @override
@@ -151,10 +150,8 @@ class _EditProfileState extends State<EditProfile> {
                   newNickname.clear();
                 },
                 style: ElevatedButton.styleFrom(
-                  // ignore: deprecated_member_use
-                  primary: const Color.fromRGBO(216, 139, 74, 1),
-                  // ignore: deprecated_member_use
-                  onPrimary: Colors.white,
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(216, 139, 74, 1),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(35)),
                 ),
@@ -190,7 +187,5 @@ Widget buildProfileImage() => Container(
         ),
       ),
     );
-// ignore: non_constant_identifier_names
 Widget Background() => const CircleAvatar(
     radius: 70, backgroundColor: Color.fromRGBO(255, 255, 255, 0.863));
-// ignore: non_constant_identifier_names

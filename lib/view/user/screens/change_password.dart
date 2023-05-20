@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -170,8 +168,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50.0, vertical: 15.0),
-                    // ignore: deprecated_member_use
-                    primary: const Color.fromRGBO(216, 139, 74, 1),
+                    backgroundColor: const Color.fromRGBO(216, 139, 74, 1),
                     shape: const StadiumBorder(),
                   ),
                   child: const Text(

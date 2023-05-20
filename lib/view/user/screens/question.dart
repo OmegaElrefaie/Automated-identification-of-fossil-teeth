@@ -15,7 +15,8 @@ class Question extends StatefulWidget {
 class _QuestionState extends State<Question> {
   TextEditingController searchController = TextEditingController();
   List<Map> searchResult = []; //store search results
-  Set<String> userIdsSearchResult = {}; //store the IDs of the users in the search results
+  Set<String> userIdsSearchResult =
+      {}; //store the IDs of the users in the search results
   bool isLoading = false;
   String userId = UserRepository.instance.getFirebaseUid();
 
@@ -37,11 +38,11 @@ class _QuestionState extends State<Question> {
         });
         return;
       }
-      //check if id is different from the current users id 
+      //check if id is different from the current users id
       for (var userDoc in value.docs) {
         if (userDoc.id != userId) {
           userIdsSearchResult.add(userDoc.id); //display the search results
-          searchResult.add(userDoc.data()); 
+          searchResult.add(userDoc.data());
         }
       }
       setState(() {
@@ -157,7 +158,6 @@ class _QuestionState extends State<Question> {
                             padding: const EdgeInsets.only(bottom: 50),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              // ignore: prefer_const_literals_to_create_immutables
                               children: [
                                 const CircularProgressIndicator(
                                   color: kPrimaryColor,
