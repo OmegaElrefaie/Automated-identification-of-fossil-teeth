@@ -28,6 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -40,7 +41,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 height: 180,
                 width: 300,
                 child: Image(
-                  image: AssetImage('assets/images/splash.png'),
+                  image: AssetImage('assets/icon/app icon.png'),
                   fit: BoxFit.contain,
                 ),
               ),
