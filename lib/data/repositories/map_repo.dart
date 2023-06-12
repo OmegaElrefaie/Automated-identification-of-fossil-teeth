@@ -16,13 +16,29 @@ class MapRepository {
         snapshot.docs.map((doc) => MapModel.fromMap(doc.data())).toList());
   }
 
+  // Future<String> addMap(MapModel map) async {
+  //   final docRef = _db.collection('Maps').doc();
+  //   await docRef.set(map.toMap());
+  //   return docRef.id;
+
+  // }
   Future<String> addMap(MapModel map) async {
-    final docRef = _db
-        .collection('Maps')
-        .doc(); //returns a refrence to the new document created with unique id.
-    await docRef.set(map
-        .toMap()); //an object from MapModel is being converted using toMap to store on firestore.
-    return docRef.id;
+    final docRef = _db.collection('Maps').doc();
+    try {
+      await docRef.set(map.toMap());
+      return docRef.id;
+    } on FirebaseException catch (e) {
+      switch (e.code) {
+        case 'permission-denied':
+          throw 'Error: You do not have permission to add a new map';
+        case 'invalid-argument':
+          throw 'Error: Invalid argument provided for adding new map';
+        default:
+          throw 'Error: Failed to add new map. Please try again later';
+      }
+    } catch (e) {
+      throw 'Error: Failed to add new map. Please try again later';
+    }
   }
 
   Future<void> deleteMap(String id) {

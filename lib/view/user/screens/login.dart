@@ -27,20 +27,9 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-
-    // FirebaseAuth.instance.authStateChanges().listen((event) {
-    //   updateUserState(event);
-    // });
   }
 
-  // updateUserState(event) {
-  //   setState(() {
-  //     authUser = event;
-  //   });
-  // }
-
-  // final GlobalKey<FormState> formKey = GlobalKey();
-
+//This function called signin function from authentication and sets the user session
   Future handleLogIn() async {
     final email = _emailcontroller.text.trim();
     final password = _passwordcontroller.text.trim();
@@ -61,6 +50,7 @@ class _LoginState extends State<Login> {
     });
   }
 
+//this function checks the signed in user's type
   Future<void> userRole() async {
     if (await userRepo.getUserType() == 'User') {
       context.go('/startpage');
@@ -69,6 +59,7 @@ class _LoginState extends State<Login> {
     }
   }
 
+//this function makes sure the user is logged in or not
   Future<void> initializeUser(User? authUser) async {
     if (authUser == null) {
       if (kDebugMode) {
@@ -110,7 +101,6 @@ class _LoginState extends State<Login> {
         actions: [
           InkWell(
             onTap: () {
-              // Get.toNamed('/signup');
               context.go('/signup');
             },
             child: const Padding(
