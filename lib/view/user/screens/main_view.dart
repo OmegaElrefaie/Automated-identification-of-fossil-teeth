@@ -95,11 +95,6 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: kDarkColor,
-      ),
-      drawer: SideDrawer(),
       body: PersistentTabView(
         context,
         screens: _buildScreen(),
