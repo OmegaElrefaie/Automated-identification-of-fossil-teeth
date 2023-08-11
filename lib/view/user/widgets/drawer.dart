@@ -98,6 +98,17 @@ class _SideDrawerState extends State<SideDrawer> {
             ),
           ),
           _createDrawerItem(
+              icon: Icons.settings,
+              text: 'Settings',
+              isSelected: selectedIndex == 3,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 3;
+                });
+
+                context.pushNamed('setting');
+              }),
+          _createDrawerItem(
               icon: Icons.search_outlined,
               text: 'Facts',
               isSelected: selectedIndex == 0,

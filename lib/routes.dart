@@ -12,7 +12,7 @@ import 'package:graduation_project/view/user/screens/chat.dart';
 import 'package:graduation_project/view/user/screens/instructions.dart';
 import 'package:graduation_project/view/user/screens/login.dart';
 import 'package:graduation_project/view/user/screens/question.dart';
-import 'package:graduation_project/view/user/screens/startpage.dart';
+import 'package:graduation_project/view/user/screens/main_view.dart';
 import 'package:graduation_project/view/user/screens/signup.dart';
 import 'package:graduation_project/view/user/screens/timeline_fossils.dart';
 import 'package:graduation_project/view/user/screens/user_profile.dart';
@@ -120,6 +120,12 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       name: "timeline_fossils",
       builder: (BuildContext context, GoRouterState state) {
         return const TimeLine_fossils();
+      }),
+  GoRoute(
+      path: '/setting',
+      name: "setting",
+      builder: (BuildContext context, GoRouterState state) {
+        return const Setting();
       }),
   GoRoute(
       path: '/question',
