@@ -44,42 +44,31 @@ class _SettingsExpertState extends State<SettingsExpert> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
-              child: Column(
-                children: const [
-                  Center(
-                    child: Text(
-                      'Settings',
-                      style: TextStyle(
-                          color: kTextColor, fontFamily: 'Inter', fontSize: 30),
-                    ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: NetworkImage(imageUrl),
                   ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Inter',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  )
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: NetworkImage(imageUrl),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Inter',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ],
-                )
-              ],
             ),
             const Divider(height: 20, thickness: 1),
             Container(

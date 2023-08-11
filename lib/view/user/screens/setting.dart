@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:graduation_project/view/user/widgets/drawer.dart';
 import '../../../constants.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graduation_project/data/repositories/authentication.dart';
@@ -38,23 +39,18 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Settings"),
+        elevation: 0,
+        backgroundColor: kDarkColor,
+      ),
+      drawer: SideDrawer(),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
-              child: Column(
-                children: const [
-                  Center(
-                    child: Text(
-                      'Settings',
-                      style: TextStyle(
-                          color: kTextColor, fontFamily: 'Inter', fontSize: 30),
-                    ),
-                  ),
-                ],
-              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,

@@ -4,6 +4,7 @@ import 'package:graduation_project/constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:graduation_project/data/repositories/user_repo.dart';
 import 'package:graduation_project/domain/map_model.dart';
+import 'package:graduation_project/view/user/widgets/drawer.dart';
 import '../../../data/repositories/map_repo.dart';
 import 'package:graduation_project/view/user/screens/instructions.dart';
 
@@ -47,6 +48,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+        elevation: 0,
+        backgroundColor: kDarkColor,
+      ),
+      drawer: SideDrawer(),
       body: Stack(
         children: [
           Container(
