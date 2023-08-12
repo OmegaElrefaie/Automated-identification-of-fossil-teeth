@@ -55,7 +55,7 @@ class _LoginState extends State<Login> {
     if (await userRepo.getUserType() == 'User') {
       context.go('/startpage');
     } else {
-      context.go('/home_expert');
+      context.go('/startpage');
     }
   }
 
