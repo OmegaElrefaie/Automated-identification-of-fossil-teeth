@@ -24,7 +24,6 @@ class _StartPageState extends State<StartPage> {
     return [
       const SafeArea(child: HomePage()),
       const SafeArea(child: Library()),
-      const SafeArea(child: Setting()),
     ];
   }
 
@@ -78,16 +77,6 @@ class _StartPageState extends State<StartPage> {
         activeColorPrimary: kPrimaryColor,
         activeColorSecondary: Colors.white,
         inactiveIcon: const Icon(Icons.photo, color: Colors.grey),
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(
-          Icons.settings,
-          color: Colors.white,
-        ),
-        title: "Settings",
-        activeColorPrimary: kPrimaryColor,
-        activeColorSecondary: Colors.white,
-        inactiveIcon: const Icon(Icons.settings, color: Colors.grey),
       ),
     ];
   }
