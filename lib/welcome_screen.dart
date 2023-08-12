@@ -18,11 +18,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   Future<void> userRole() async {
-    if (await userRepo.getUserType() == 'User') {
-      context.go('/startpage');
-    } else {
-      context.go('/home_expert');
-    }
+    context.go('/startpage');
   }
 
   @override

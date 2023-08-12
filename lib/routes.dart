@@ -20,7 +20,6 @@ import 'package:graduation_project/welcome_screen.dart';
 import 'data/repositories/user_repo.dart';
 import 'view/expert/screens/adding_facts_screen.dart';
 import 'view/expert/screens/settings_expert.dart';
-import 'view/expert/screens/startpage_expert.dart';
 import 'view/user/screens/library.dart';
 import 'view/user/screens/setting.dart';
 import 'package:graduation_project/view/user/screens/detail_page.dart';
@@ -209,10 +208,4 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
       builder: (BuildContext context, GoRouterState state) {
         return const AddingFacts();
       }),
-  GoRoute(
-      path: '/startpage_expert',
-      name: "startpage_expert",
-      builder: (BuildContext context, GoRouterState state) {
-        return const StartPageExpert();
-      })
 ]);
