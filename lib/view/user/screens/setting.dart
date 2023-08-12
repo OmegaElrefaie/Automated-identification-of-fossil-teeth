@@ -43,6 +43,12 @@ class _SettingState extends State<Setting> {
         title: Text("Settings"),
         elevation: 0,
         backgroundColor: kDarkColor,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop(); // Navigate back
+          },
+        ),
       ),
       drawer: SideDrawer(),
       body: Container(
