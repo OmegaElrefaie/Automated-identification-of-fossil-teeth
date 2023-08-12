@@ -52,11 +52,7 @@ class _LoginState extends State<Login> {
 
 //this function checks the signed in user's type
   Future<void> userRole() async {
-    if (await userRepo.getUserType() == 'User') {
-      context.go('/startpage');
-    } else {
-      context.go('/startpage');
-    }
+    context.go('/startpage');
   }
 
 //this function makes sure the user is logged in or not
