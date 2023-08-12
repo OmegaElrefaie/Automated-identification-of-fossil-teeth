@@ -166,12 +166,6 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
         return const StartPage();
       }),
   GoRoute(
-      path: '/home_expert',
-      name: "home_expert",
-      builder: (BuildContext context, GoRouterState state) {
-        return const StartPageExpert();
-      }),
-  GoRoute(
       path: '/settings_expert',
       name: "settings_expert",
       builder: (BuildContext context, GoRouterState state) {
