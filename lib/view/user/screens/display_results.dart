@@ -251,6 +251,10 @@ class _DisplayResultsState extends State<DisplayResults> {
                     'imageUrl': imageUrl.toString(),
                   });
                   // context.go('/library');
+                  // Display a confirmation message using ScaffoldMessenger
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Image saved successfully!')),
+                  );
                 },
               ),
             ),
